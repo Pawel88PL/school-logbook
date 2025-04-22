@@ -27,6 +27,20 @@ public class AppDbContext : DbContext
             .HasForeignKey(s => s.ClassId)
             .OnDelete(DeleteBehavior.Restrict);
 
+        // Student → User (optional one-to-one)
+        modelBuilder.Entity<Student>()
+            .HasOne(s => s.User)
+            .WithOne(u => u.Student)
+            .HasForeignKey<Student>(s => s.UserId)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        // Teacher → User (optional one-to-one)
+        modelBuilder.Entity<Teacher>()
+            .HasOne(t => t.User)
+            .WithOne(u => u.Teacher)
+            .HasForeignKey<Teacher>(t => t.UserId)
+            .OnDelete(DeleteBehavior.SetNull);
+
         // Class → HomeroomTeacher (optional one-to-many)
         modelBuilder.Entity<Class>()
             .HasOne(c => c.HomeroomTeacher)

@@ -1,0 +1,78 @@
+2025-04-22 20:20:20.435 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-04-22 20:20:20.455 +02:00 [INF] Application is starting
+2025-04-22 20:20:20.464 +02:00 [INF] User profile is available. Using '/Users/pawelstaniul/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-04-22 20:20:20.493 +02:00 [WRN] The WebRootPath was not found: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/wwwroot. Static files may be unavailable.
+2025-04-22 20:20:20.501 +02:00 [INF] Now listening on: http://localhost:5234
+2025-04-22 20:20:20.502 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-22 20:20:20.502 +02:00 [INF] Hosting environment: Development
+2025-04-22 20:20:20.502 +02:00 [INF] Content root path: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend
+2025-04-22 20:20:21.420 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/swagger/index.html - null null
+2025-04-22 20:20:21.466 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/swagger/index.html - 200 null text/html;charset=utf-8 46.1195ms
+2025-04-22 20:20:21.947 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-22 20:20:21.947 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/swagger/swagger-ui-bundle.js - null null
+2025-04-22 20:20:21.952 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/_framework/aspnetcore-browser-refresh.js - 200 13732 application/javascript; charset=utf-8 4.2539ms
+2025-04-22 20:20:21.980 +02:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-04-22 20:20:21.982 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/swagger/swagger-ui-bundle.js - 200 1096145 text/javascript 34.3897ms
+2025-04-22 20:20:22.082 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/swagger/v1/swagger.json - null null
+2025-04-22 20:20:22.090 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 8.3083ms
+2025-04-22 20:23:24.007 +02:00 [INF] Application is shutting down...
+2025-04-22 20:47:43.325 +02:00 [FTL] Application startup failed: The host was aborted.,    at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at backend.Program.Main(String[] args) in /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/Program.cs:line 43
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at backend.Program.Main(String[] args) in /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/Program.cs:line 43
+2025-04-22 20:51:40.050 +02:00 [FTL] Application startup failed: The host was aborted.,    at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at backend.Program.Main(String[] args) in /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/Program.cs:line 43
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at backend.Program.Main(String[] args) in /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/Program.cs:line 43
+2025-04-22 20:54:49.270 +02:00 [FTL] Application startup failed: The host was aborted.,    at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at backend.Program.Main(String[] args) in /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/Program.cs:line 43
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at backend.Program.Main(String[] args) in /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/Program.cs:line 43
+2025-04-22 20:55:06.522 +02:00 [FTL] Application startup failed: The host was aborted.,    at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at backend.Program.Main(String[] args) in /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/Program.cs:line 43
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at backend.Program.Main(String[] args) in /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/Program.cs:line 43
