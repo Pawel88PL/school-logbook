@@ -75,7 +75,7 @@ namespace backend
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
-                .Filter.ByExcluding(logEvent => logEvent.MessageTemplate.Text.Contains("DbCommand"))
+                //.Filter.ByExcluding(logEvent => logEvent.MessageTemplate.Text.Contains("DbCommand"))
                 .WriteTo.Console()
                 .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
