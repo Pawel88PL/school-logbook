@@ -1,3 +1,4 @@
+using AutoMapper;
 using backend.DTOs;
 using backend.Interfaces.Repositories;
 using backend.Interfaces.Services;
