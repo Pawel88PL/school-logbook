@@ -1,0 +1,17 @@
+2025-04-23 19:02:01.947 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-04-23 19:02:01.973 +02:00 [INF] Application is starting
+2025-04-23 19:02:01.984 +02:00 [INF] User profile is available. Using '/Users/pawelstaniul/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-04-23 19:02:02.019 +02:00 [WRN] The WebRootPath was not found: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/wwwroot. Static files may be unavailable.
+2025-04-23 19:02:02.029 +02:00 [INF] Now listening on: http://localhost:5234
+2025-04-23 19:02:02.031 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-23 19:02:02.031 +02:00 [INF] Hosting environment: Development
+2025-04-23 19:02:02.031 +02:00 [INF] Content root path: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend
+2025-04-23 19:02:02.484 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/swagger/index.html - null null
+2025-04-23 19:02:02.546 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/swagger/index.html - 200 null text/html;charset=utf-8 61.6031ms
+2025-04-23 19:02:02.550 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/swagger/swagger-ui-bundle.js - null null
+2025-04-23 19:02:02.586 +02:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-04-23 19:02:02.588 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/swagger/swagger-ui-bundle.js - 200 1096145 text/javascript 37.2854ms
+2025-04-23 19:02:02.596 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-23 19:02:02.599 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/_framework/aspnetcore-browser-refresh.js - 200 13732 application/javascript; charset=utf-8 2.9297ms
+2025-04-23 19:02:02.710 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/swagger/v1/swagger.json - null null
+2025-04-23 19:02:02.729 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 19.5969ms
