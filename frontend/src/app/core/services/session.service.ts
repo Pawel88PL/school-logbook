@@ -115,7 +115,7 @@ export class SessionService {
         }
       }
 
-      if (this.jwtService.isLoggedIn()) {
+      if (this.authService.isLoggedIn()) {
         this.titleService.setTitle(`Sesja wygaśnie za ${remainingTime} sekund`);
       } else {
         clearInterval(intervalId);

@@ -1,1 +1,58 @@
-<p>navbar works!</p>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark shadow p-0">
+    <div class="container-fluid p-0">
+
+        <!-- Strona Główna -->
+        <a class="navbar-brand" routerLink="/home">
+            STRONA GŁÓWNA
+        </a>
+
+        <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">&#9776;</button>
+
+        <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="authService.isLoggedIn() && authService.isAdmin()"
+                        [routerLink]="'/admin'" (click)="isMenuCollapsed = true">
+                        PANEL ADMINISTRATORA
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav">
+                <div class="normal">
+                    <li class="nav-item">
+                        <a class="nav-link" *ngIf="!authService.isLoggedIn()" [routerLink]="'/login'"
+                            (click)="isMenuCollapsed = true">
+                            ZALOGUJ SIĘ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="user-button" [matMenuTriggerFor]="menu" *ngIf="authService.isLoggedIn()">
+                            {{ userName }}
+                            <i class="bi bi-caret-down-fill"></i>
+                        </button>
+                    </li>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item *ngIf="authService.isLoggedIn()" class="user-button"
+                            (click)="isMenuCollapsed = true; logout()">
+                            WYLOGUJ
+                        </button>
+                    </mat-menu>
+                </div>
+                <div class="media">
+                    <li class="nav-item">
+                        <div class="user-button" *ngIf="authService.isLoggedIn()" (click)="isMenuCollapsed = true">
+                            {{ userName }}
+                        </div>
+                    </li>
+                    <li li class="nav-item">
+                        <button mat-menu-item *ngIf="authService.isLoggedIn()" class="user-button"
+                            (click)="isMenuCollapsed = true; logout()">
+                            WYLOGUJ
+                        </button>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -39,7 +39,7 @@ export class AuthService {
       this.toastr.clear(Number(toastId));
     }
 
-    if (this.jwtService.isAdmin() || this.jwtService.isEmployee()) {
+    if (this.isAdmin() || this.isEmployee()) {
       this.router.navigate(['/gpps-office']);
     } else {
       this.router.navigate(['/user']);
@@ -50,6 +50,33 @@ export class AuthService {
     const token = this.jwtService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<User>(`${this.apiUrl}/logged-user`, { headers });
+  }
+
+  getName(): string | null {
+    const token = this.jwtService.getToken();
+    if (!token) return null;
+    const decodedToken = this.jwtService.decodeToken(token);
+    return decodedToken.unique_name + ' ' + decodedToken.surname;
+  }
+
+  isAdmin(): boolean {
+    const roles = this.jwtService.getUserRole();
+    return roles.includes('Administrator');
+  }
+
+  isEmployee(): boolean {
+    const roles = this.jwtService.getUserRole();
+    return roles.includes('Employee');
+  }
+
+  isTaxpayer(): boolean {
+    const roles = this.jwtService.getUserRole();
+    return roles.includes('Taxpayer');
+  }
+
+  isLoggedIn(): boolean {
+    const token = this.jwtService.getToken();
+    return !!token && !this.jwtService.isTokenExpired();
   }
 
   login(username: string, password: string): Observable<any> {
