@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { FooterComponent } from './shared/components/footer/footer.component';
-import { SessionService } from './core/services/session.service';
+import { SessionService } from './core/auth/session.service';
 import { Title } from '@angular/platform-browser';
 import { filter, map, mergeMap } from 'rxjs';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';

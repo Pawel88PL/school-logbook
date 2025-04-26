@@ -1,0 +1,57 @@
+<div class="custom-container">
+    <h1 class="text-center">
+        <img src="./images/graduate.png" alt="Logo" class="logo" />
+        Cyfrowy dziennik lekcyjny
+    </h1>
+
+    <hr class="my-5" />
+
+
+    <mat-card class="loginForm">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <mat-card-content>
+                <h3 class="text-center mb-4">
+                    Zaloguj się
+                </h3>
+
+                <hr class="mb-5">
+
+                <mat-form-field appearance="outline" class="mb-4">
+                    <mat-label>Adres e-mail</mat-label>
+                    <input matInput type="email" formControlName="username" #emailInput>
+                    <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
+                        Adres e-mail użytkownika jest wymagany
+                    </mat-error>
+                    <mat-error *ngIf="loginForm.get('username')?.hasError('email')">
+                        Niepoprawny format adresu e-mail
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="mb-4">
+                    <mat-label>Hasło</mat-label>
+                    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                    <i class="icon-eye" matSuffix (mousedown)="togglePasswordVisibility(true)"
+                        (mouseup)="togglePasswordVisibility(false)" (mouseleave)="togglePasswordVisibility(false)"
+                        aria-label="Pokaż/ukryj hasło">
+                        <i class="bi" [ngClass]="hidePassword ? 'bi-eye' : 'bi-eye-slash'"></i>
+                    </i>
+                    <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+                        Hasło jest wymagane
+                    </mat-error>
+                    <mat-error *ngIf="loginForm.controls['password'].hasError('minlength')">
+                        Hasło musi zawierać co
+                        najmniej 6 znaków
+                    </mat-error>
+                </mat-form-field>
+
+                <button class="proceed" [disabled]="isInLogginProcess" type="submit">
+                    <span *ngIf="isInLogginProcess" class="loading-spinner"></span>
+                    <span *ngIf="!isInLogginProcess">
+                        <h5>Zaloguj się</h5>
+                    </span>
+                </button>
+
+            </mat-card-content>
+        </form>
+    </mat-card>
+</div>

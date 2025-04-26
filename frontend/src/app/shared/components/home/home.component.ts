@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
 
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService } from '../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-home',

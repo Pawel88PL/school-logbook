@@ -83,3 +83,5 @@ mat-form-field {
     @include mat.dialog-overrides((container-shape: 2px,
             container-max-width: 800px, ));
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

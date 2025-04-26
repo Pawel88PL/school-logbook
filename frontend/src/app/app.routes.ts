@@ -19,7 +19,7 @@ import { StudentScheduleComponent } from './features/student/student-schedule/st
 import { StudentAttendanceComponent } from './features/student/student-attendance/student-attendance.component';
 
 import { HomeComponent } from './shared/components/home/home.component';
-import { LoginComponent } from './shared/components/login/login.component';
+import { LoginComponent } from './features/auth/pages/login/login.component';
 
 export const routes: Routes = [
     {
