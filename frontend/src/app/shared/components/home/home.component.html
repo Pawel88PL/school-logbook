@@ -1,1 +1,40 @@
-<p>home works!</p>
+<div class="custom-container">
+    <h1 class="text-center">
+        <img src="./images/graduate.png" alt="Logo" class="logo" />
+        Cyfrowy dziennik lekcyjny
+    </h1>
+
+    <hr class="my-5" />
+
+    <div class="main-card">
+        <div *ngIf="!authService.isLoggedIn()">
+
+            <h2 class="mb-5">Witaj w aplikacji dziennik lekcyjny</h2>
+
+            <h5 class="mb-5">
+                Aplikacja Cyfrowy dziennik lekcyjny jest narzędziem do zarządzania informacjami o uczniach,
+                nauczycielach i
+                przedmiotach. Umożliwia nauczycielom i uczniom łatwe przeglądanie i aktualizowanie danych, co ułatwia
+                zarządzanie informacjami o postępach uczniów i organizacji zajęć.
+            </h5>
+
+            <mat-card routerLink="/login">
+                <mat-card-content>
+                    <h4 class="text-center">Zaloguj się, aby kontynuować</h4>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="row" *ngIf="authService.isLoggedIn()">
+
+            <h2 class="mb-5">Witaj w aplikacji dziennik lekcyjny</h2>
+
+            <h5 class="mb-5">
+                Aplikacja Cyfrowy dziennik lekcyjny jest narzędziem do zarządzania informacjami o uczniach,
+                nauczycielach i
+                przedmiotach. Umożliwia nauczycielom i uczniom łatwe przeglądanie i aktualizowanie danych, co ułatwia
+                zarządzanie informacjami o postępach uczniów i organizacji zajęć.
+            </h5>
+        </div>
+    </div>
+</div>
