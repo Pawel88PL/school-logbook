@@ -1,15 +1,10 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AdminService } from '../../core/services/admin.service';
-import { AuthService } from '../../core/auth/auth.service';
-import { JwtService } from '../../core/auth/jwt.service';
-import { ToastrService } from 'ngx-toastr';
-
-import { User } from '../../core/models/user-model';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -33,11 +28,9 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 })
 
 
-export class AdminLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AdminLayoutComponent implements OnInit, OnDestroy {
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
-
-  isLoading: boolean = true;
 
   isSmallScreen: boolean = false;
   sidenavOpened: boolean = false;
@@ -50,17 +43,9 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     private breakpointObserver: BreakpointObserver,
   ) { }
 
-
   ngOnInit(): void {
     this.adjustSidenav();
     this.initializeSubscription();
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.scrollToTop();
-      this.isLoading = false;
-    }, 100);
   }
 
   ngOnDestroy(): void {
@@ -82,9 +67,5 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
         this.sidenav.toggle();
       })
     );
-  }
-
-  scrollToTop(): void {
-    window.scrollTo(0, 0);
   }
 }

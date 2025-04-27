@@ -13,6 +13,22 @@ a:hover {
     display: none;
 }
 
+.menu-button {
+    color: white;
+    font-size: 16px !important;
+    background-color: #212529;
+    border: solid 1px #212529;
+    border-radius: 3px;
+    padding: 0 10px;
+    margin: 0 10px;
+}
+
+.menu-button:hover,
+.navbar-toggler:hover {
+    background-color: #484848;
+    border: solid 1px rgb(116, 116, 116);
+}
+
 .navbar {
     font-size: 1.2rem;
 }

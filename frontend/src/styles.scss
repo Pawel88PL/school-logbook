@@ -82,6 +82,17 @@ mat-form-field {
 
     @include mat.dialog-overrides((container-shape: 2px,
             container-max-width: 800px, ));
+
+    @include mat.list-overrides((active-indicator-shape: 5px,
+            active-indicator-color: #212529));
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
