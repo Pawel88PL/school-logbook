@@ -1,0 +1,41 @@
+.content {
+    height: 100%;
+    width: 100%;
+    padding: 18px 10px;
+    margin: auto;
+    min-height: 900px;
+}
+
+h5,
+h6 {
+    margin-bottom: 0;
+}
+
+.sidenav-container {
+    height: 100%;
+    display: flex;
+    margin-top: 30px;
+}
+
+.sidenav {
+    height: 100%;
+    max-width: 280px;
+    background: #000000;
+    padding: 0 10px;
+    margin: auto;
+    border-radius: 0px;
+}
+
+mat-expansion-panel {
+    border-radius: 5px;
+    margin: 10px 0;
+    background: white;
+}
+
+.mat-list-item {
+    border-radius: 3px;
+    background: rgb(221, 221, 221);
+}
+
+
+@media screen and (max-width: 768px) {}

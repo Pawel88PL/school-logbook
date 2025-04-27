@@ -1,1 +1,56 @@
-<p>admin-layout works!</p>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav [mode]="isSmallScreen ? 'over' : 'side'" [opened]="sidenavOpened" class="sidenav">
+        <mat-nav-list *ngIf="!isLoading">
+
+            <mat-expansion-panel [expanded]="false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h5>Użytkownicy</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                    <a mat-list-item routerLink="users">
+                        Lista użytkowników
+                    </a>
+                    <a mat-list-item routerLink="user-add">
+                        Dodaj użytkownika
+                    </a>
+                </mat-nav-list>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel [expanded]="false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h5>Klasy</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                    <a mat-list-item routerLink="classes">
+                        Lista klas
+                    </a>
+                    <a mat-list-item routerLink="classes-add">
+                        Dodaj klasę
+                    </a>
+                </mat-nav-list>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel [expanded]="false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h5>Grafik</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                    <a mat-list-item routerLink="schedule">
+                        Lista grafików
+                    </a>
+                </mat-nav-list>
+            </mat-expansion-panel>
+
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
