@@ -4,6 +4,10 @@ namespace backend.Models.Entities;
 
 public class User : IdentityUser
 {
+    public bool IsActive { get; set; }
+    public DateTime DateAdded { get; set; }
+    public DateTime? LastSuccessfulLogin { get; set; }
+    
     public int? TeacherId { get; set; }
     public Teacher? Teacher { get; set; }
 

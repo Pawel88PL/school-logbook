@@ -2,8 +2,7 @@ using System.Security.Authentication;
 using System.Text;
 using backend.Auth;
 using backend.Data;
-using backend.Interfaces;
-using backend.Models;
+using backend.Interfaces.Services;
 using backend.Models.Entities;
 using backend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -150,8 +149,7 @@ namespace backend
             {
                 options.AddPolicy("AllowSpecificOrigin",
                     builder => builder.WithOrigins(
-                        "http://localhost:4200",
-                        "https://bs-project.pl")
+                        "http://localhost:4200")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
@@ -202,7 +200,7 @@ namespace backend
         // Dodanie serwisów
         private static void RegisterServices(IServiceCollection services)
         {
-
+            services.AddScoped<ITokenService, TokenService>();
         }
 
         private static void ConfigureMiddleware(WebApplication app)

@@ -35,6 +35,7 @@ public static class RoleInitializer
             {
                 UserName = email,
                 Email = email,
+                IsActive = true,
                 EmailConfirmed = true,
                 LockoutEnabled = false
             };
