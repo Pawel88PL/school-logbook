@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend.Data;
 
 #nullable disable
 
-namespace backend.Data.Migrations
+namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250427155641_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,6 +158,34 @@ namespace backend.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("backend.Models.Entities.Admin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Admins");
+                });
+
             modelBuilder.Entity("backend.Models.Entities.Attendance", b =>
                 {
                     b.Property<int>("Id")
@@ -260,6 +291,7 @@ namespace backend.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -267,8 +299,7 @@ namespace backend.Data.Migrations
                     b.HasIndex("ClassId");
 
                     b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Students");
                 });
@@ -307,13 +338,13 @@ namespace backend.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Teachers");
                 });
@@ -324,6 +355,9 @@ namespace backend.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AdminId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -449,6 +483,17 @@ namespace backend.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("backend.Models.Entities.Admin", b =>
+                {
+                    b.HasOne("backend.Models.Entities.User", "User")
+                        .WithOne("Admin")
+                        .HasForeignKey("backend.Models.Entities.Admin", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("backend.Models.Entities.Attendance", b =>
                 {
                     b.HasOne("backend.Models.Entities.Schedule", "Schedule")
@@ -516,7 +561,8 @@ namespace backend.Data.Migrations
                     b.HasOne("backend.Models.Entities.User", "User")
                         .WithOne("Student")
                         .HasForeignKey("backend.Models.Entities.Student", "UserId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Class");
 
@@ -528,7 +574,8 @@ namespace backend.Data.Migrations
                     b.HasOne("backend.Models.Entities.User", "User")
                         .WithOne("Teacher")
                         .HasForeignKey("backend.Models.Entities.Teacher", "UserId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -564,6 +611,8 @@ namespace backend.Data.Migrations
 
             modelBuilder.Entity("backend.Models.Entities.User", b =>
                 {
+                    b.Navigation("Admin");
+
                     b.Navigation("Student");
 
                     b.Navigation("Teacher");

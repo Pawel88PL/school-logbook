@@ -10,6 +10,7 @@ public class AppDbContext : IdentityDbContext<User>
     {
     }
 
+    public DbSet<Admin> Admins { get; private set; } = default!;
     public DbSet<Student> Students { get; private set; } = default!;
     public DbSet<Teacher> Teachers { get; private set; } = default!;
     public DbSet<Class> Classes { get; private set; } = default!;
@@ -21,6 +22,13 @@ public class AppDbContext : IdentityDbContext<User>
     {
         base.OnModelCreating(modelBuilder);
 
+        // Admin (1) → (1) User (mandatory)
+        modelBuilder.Entity<Admin>()
+            .HasOne(a => a.User)
+            .WithOne(u => u.Admin)
+            .HasForeignKey<Admin>(a => a.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
         // Student → Class (many-to-one)
         modelBuilder.Entity<Student>()
             .HasOne(s => s.Class)
@@ -28,19 +36,19 @@ public class AppDbContext : IdentityDbContext<User>
             .HasForeignKey(s => s.ClassId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // Student → User (optional one-to-one)
+        // Student (1) → (1) User (mandatory)
         modelBuilder.Entity<Student>()
             .HasOne(s => s.User)
             .WithOne(u => u.Student)
             .HasForeignKey<Student>(s => s.UserId)
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.Restrict);
 
-        // Teacher → User (optional one-to-one)
+        // Teacher (1) → (1) User (mandatory)
         modelBuilder.Entity<Teacher>()
             .HasOne(t => t.User)
             .WithOne(u => u.Teacher)
             .HasForeignKey<Teacher>(t => t.UserId)
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.Restrict);
 
         // Class → HomeroomTeacher (optional one-to-many)
         modelBuilder.Entity<Class>()

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, catchError, tap, throwError } from 'rxjs';
-import { RegisterModel, User } from '../../shared/models/user-model';
+import { RegisterModel, User } from '../models/user-model';
 import { JwtService } from './jwt.service';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
-import { UpdateUserModel } from '../../shared/models/user-model';
+import { UpdateUserModel } from '../models/user-model';
 
 @Injectable({
   providedIn: 'root'
@@ -44,12 +44,6 @@ export class AuthService {
     } else {
       this.router.navigate(['/user']);
     }
-  }
-
-  getLoggedUser(): Observable<User> {
-    const token = this.jwtService.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<User>(`${this.apiUrl}/logged-user`, { headers });
   }
 
   getName(): string | null {

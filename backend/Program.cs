@@ -2,6 +2,7 @@ using System.Security.Authentication;
 using System.Text;
 using backend.Auth;
 using backend.Data;
+using backend.Interfaces;
 using backend.Interfaces.Services;
 using backend.Models.Entities;
 using backend.Services;
@@ -201,6 +202,7 @@ namespace backend
         private static void RegisterServices(IServiceCollection services)
         {
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         private static void ConfigureMiddleware(WebApplication app)

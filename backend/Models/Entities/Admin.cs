@@ -2,7 +2,7 @@ using backend.Interfaces;
 
 namespace backend.Models.Entities;
 
-public class Teacher : IUserEntity
+public class Admin : IUserEntity
 {
     public int Id { get; set; }
     public string FirstName { get; set; } = null!;
@@ -10,7 +10,4 @@ public class Teacher : IUserEntity
 
     public string UserId { get; set; } = default!;
     public User User { get; set; } = default!;
-
-    public ICollection<Schedule> Lessons { get; set; } = new List<Schedule>();
-    public ICollection<Class> HomeroomClasses { get; set; } = new List<Class>();
 }

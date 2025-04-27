@@ -1,3 +1,4 @@
+using backend.Data;
 using backend.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 
@@ -8,6 +9,9 @@ public static class RoleInitializer
     public static async Task CreateRoles(IServiceProvider serviceProvider)
     {
         var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
+        var dbContext = serviceProvider.GetRequiredService<AppDbContext>();
+        var config = serviceProvider.GetRequiredService<IConfiguration>();
 
         string[] roleNames = { "Administrator", "Student", "Teacher" };
         foreach (var roleName in roleNames)
@@ -18,14 +22,17 @@ public static class RoleInitializer
             }
         }
 
-        var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
-        var config = serviceProvider.GetRequiredService<IConfiguration>();
-
         var email = config["AdminAccount:Email"]
             ?? throw new ArgumentNullException("AdminAccount:Email");
 
         var password = config["AdminAccount:Password"]
             ?? throw new ArgumentNullException("AdminAccount:Password");
+
+        var firstName = config["AdminAccount:FirstName"]
+            ?? throw new ArgumentNullException("AdminAccount:FirstName");
+
+        var lastName = config["AdminAccount:LastName"]
+            ?? throw new ArgumentNullException("AdminAccount:LastName");
 
         var adminUser = await userManager.FindByEmailAsync(email);
 
@@ -44,6 +51,16 @@ public static class RoleInitializer
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(newAdmin, "Administrator");
+
+                var adminEntity = new Admin
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    UserId = newAdmin.Id
+                };
+
+                dbContext.Admins.Add(adminEntity);
+                await dbContext.SaveChangesAsync();
             }
         }
     }

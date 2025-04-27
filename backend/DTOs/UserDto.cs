@@ -22,6 +22,12 @@ public class PagedUsers
     public List<UserDto> Data { get; set; } = new List<UserDto>();
 }
 
+public class SimpleUserDto
+{
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+}
+
 public class UpdateUser
 {
     public string? Id { get; set; }
