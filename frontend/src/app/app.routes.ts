@@ -6,9 +6,9 @@ import { studentGuard } from './core/guards/student.guard';
 import { teacherGuard } from './core/guards/teacher.guard';
 
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
-import { UserListComponent } from './features/admin/user-list/user-list.component';
 import { ClassListComponent } from './features/admin/class-list/class-list.component';
-import { ScheduleComponent } from './features/admin/schedule/schedule.component';
+import { SubjectListComponent } from './features/admin/subject-list/subject-list.component';
+import { UserListComponent } from './features/admin/user-list/user-list.component';
 
 import { TeacherLayoutComponent } from './layout/teacher-layout/teacher-layout.component';
 import { AttendanceComponent } from './features/teacher/attendance/attendance.component';
@@ -27,9 +27,9 @@ export const routes: Routes = [
         component: AdminLayoutComponent,
         canActivate: [adminGuard],
         children: [
-            { path: 'users', component: UserListComponent },
             { path: 'classes', component: ClassListComponent },
-            { path: 'schedule', component: ScheduleComponent },
+            { path: 'subjects', component: SubjectListComponent },
+            { path: 'users', component: UserListComponent },
             { path: '', redirectTo: 'users', pathMatch: 'full' }
         ]
     },

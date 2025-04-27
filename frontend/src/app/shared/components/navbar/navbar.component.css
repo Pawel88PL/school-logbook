@@ -1,11 +1,10 @@
 a,
 .disabled {
-    padding: 5px 20px;
+    padding: 10px 20px;
 }
 
 a:hover {
     background-color: #646464;
-    border-radius: 3px;
     cursor: pointer;
 }
 
@@ -34,7 +33,7 @@ a:hover {
 }
 
 .navbar-brand {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
 }
 
 .nav-item {
@@ -69,7 +68,6 @@ a:hover {
 
 .user-button:hover {
     background-color: #484848;
-    border-radius: 3px;
     cursor: pointer;
 }
 

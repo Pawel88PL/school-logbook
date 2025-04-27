@@ -4,6 +4,11 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { LOCALE_ID } from '@angular/core';
 
+import { registerLocaleData } from '@angular/common';
+import localePl from '@angular/common/locales/pl';
+
+registerLocaleData(localePl);
+
 
 // Dodajemy LOCALE_ID do konfiguracji, aby wymusić język polski
 bootstrapApplication(AppComponent, {

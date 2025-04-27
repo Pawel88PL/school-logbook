@@ -12,7 +12,7 @@
                     <a mat-list-item routerLink="users">
                         Lista użytkowników
                     </a>
-                    <a mat-list-item routerLink="user-add">
+                    <a mat-list-item>
                         Dodaj użytkownika
                     </a>
                 </mat-nav-list>
@@ -28,7 +28,7 @@
                     <a mat-list-item routerLink="classes">
                         Lista klas
                     </a>
-                    <a mat-list-item routerLink="classes-add">
+                    <a mat-list-item>
                         Dodaj klasę
                     </a>
                 </mat-nav-list>
@@ -37,12 +37,15 @@
             <mat-expansion-panel [expanded]="false">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        <h5>Grafik</h5>
+                        <h5>Przedmioty</h5>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <mat-nav-list>
-                    <a mat-list-item routerLink="schedule">
-                        Lista grafików
+                    <a mat-list-item routerLink="subjects">
+                        Lista przedmiotów
+                    </a>
+                    <a mat-list-item>
+                        Dodaj przedmiot
                     </a>
                 </mat-nav-list>
             </mat-expansion-panel>

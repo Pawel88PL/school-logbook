@@ -1,1 +1,89 @@
-<p>user-list works!</p>
+<div *ngIf="isLoading" class="mat-spinner">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="custom-container">
+    <div class="main-card">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Lista użytkowników</h1>
+            <img src="./images/add-user.png" alt="Dodaj użytkownika" class="add-icon" matTooltip="Dodaj użytkownika"
+                matTooltipPosition="left" routerLink="/user-add">
+        </div>
+
+        <hr class="my-5" />
+
+        <div class="table-responsive">
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 mb-5">
+
+                <!-- Kolumna Numer porządkowy -->
+                <ng-container matColumnDef="index">
+                    <th mat-header-cell *matHeaderCellDef> # </th>
+                    <td mat-cell *matCellDef="let user; let i = index">
+                        {{ rowNumber + i + 1 }}
+                    </td>
+                </ng-container>
+
+                <!-- Kolumna Imię -->
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Imię </th>
+                    <td mat-cell *matCellDef="let user">{{ user.firstName }}</td>
+                </ng-container>
+
+                <!-- Kolumna Nazwisko -->
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko </th>
+                    <td mat-cell *matCellDef="let user">{{ user.lastName }}</td>
+                </ng-container>
+
+                <!-- Kolumna Rola -->
+                <ng-container matColumnDef="role">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Rola </th>
+                    <td mat-cell *matCellDef="let user">{{ user.role }}</td>
+                </ng-container>
+
+                <!-- Kolumna Email -->
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                    <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+                </ng-container>
+
+
+                <!-- Kolumna Data ostatniego logowania -->
+                <ng-container matColumnDef="lastSuccessfulLogin">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Ostatnie logowanie </th>
+                    <td mat-cell *matCellDef="let user"> {{ user.lastSuccessfulLogin | date: 'dd-MM-yyyy HH:mm' }}
+                    </td>
+                </ng-container>
+
+                <!-- Kolumna Czy użytkownik ma dostęp do programu -->
+                <ng-container matColumnDef="isActive">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Aktywny </th>
+                    <td mat-cell *matCellDef="let user">
+                        <span *ngIf="user.isActive" class="badge bg-success"> Tak </span>
+                        <span *ngIf="!user.isActive" class="badge bg-danger"> Nie </span>
+                    </td>
+                </ng-container>
+
+                <!-- Kolumna Akcje -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Akcje </th>
+                    <td mat-cell *matCellDef="let user">
+                        <img src="./images/delete.png" alt="Usuń" class="delete-icon" matTooltip="Usuń"
+                            matTooltipPosition="above" (click)="onDeleteUser(user.id)">
+                    </td>
+                </ng-container>
+
+                <!-- Nagłówki i dane tabeli -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <!-- Paginacja -->
+            <mat-paginator [length]="totalRecords" [pageSize]="pageSize" [pageSizeOptions]="[10, 20, 50]"
+                showFirstLastButtons (page)="onPageChange($event)">
+            </mat-paginator>
+        </div>
+
+    </div>
+</div>

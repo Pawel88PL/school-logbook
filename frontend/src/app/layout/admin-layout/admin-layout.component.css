@@ -1,7 +1,8 @@
 .content {
     height: 100%;
     width: 100%;
-    padding: 18px 10px;
+    background-color: white;
+    padding: 20px;
     margin: auto;
     min-height: 900px;
 }
