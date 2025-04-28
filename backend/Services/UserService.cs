@@ -85,7 +85,7 @@ namespace backend.Services
             {
                 return await GetSimpleUserInfoAsync<Admin>(user.Id);
             }
-            
+
             return null;
         }
 
@@ -110,10 +110,22 @@ namespace backend.Services
             var query = from user in _context.Users.AsNoTracking()
                         join userRole in _context.UserRoles on user.Id equals userRole.UserId
                         join role in _context.Roles on userRole.RoleId equals role.Id
+                        // LEFT JOIN do Admin
+                        join admin in _context.Admins on user.Id equals admin.UserId into adminJoin
+                        from admin in adminJoin.DefaultIfEmpty()
+                            // LEFT JOIN do Teacher
+                        join teacher in _context.Teachers on user.Id equals teacher.UserId into teacherJoin
+                        from teacher in teacherJoin.DefaultIfEmpty()
+                            // LEFT JOIN do Student
+                        join student in _context.Students on user.Id equals student.UserId into studentJoin
+                        from student in studentJoin.DefaultIfEmpty()
                         select new
                         {
                             User = user,
-                            RoleName = role.Name
+                            RoleName = role.Name,
+                            Admin = admin,
+                            Teacher = teacher,
+                            Student = student
                         };
 
             if (!string.IsNullOrEmpty(request.SearchQuery))
@@ -142,6 +154,8 @@ namespace backend.Services
             var usersDto = usersWithRoles.Select(item => new UserDto
             {
                 Id = item.User.Id.ToString(),
+                FirstName = item.Admin?.FirstName ?? item.Teacher?.FirstName ?? item.Student?.FirstName ?? string.Empty,
+                LastName = item.Admin?.LastName ?? item.Teacher?.LastName ?? item.Student?.LastName ?? string.Empty,
                 Email = item.User.Email,
                 Role = item.RoleName,
                 IsActive = item.User.IsActive,
