@@ -19,7 +19,7 @@ namespace backend.Controllers
             _userService = userService;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         [HttpPost("add")]
         public async Task<IActionResult> AddNewUser([FromBody] AddUserModel addUserModel)
         {
@@ -43,7 +43,7 @@ namespace backend.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteUser(string id)
         {
@@ -105,7 +105,7 @@ namespace backend.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         [HttpPut("update")]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUser updateUser)
         {

@@ -66,6 +66,10 @@ mat-error {
     font-size: 10px;
 }
 
+mat-form-field {
+    width: 100%;
+}
+
 .mat-spinner {
     display: grid;
     place-items: center;

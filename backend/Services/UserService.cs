@@ -25,27 +25,58 @@ namespace backend.Services
 
         public async Task<IdentityResult> AddNewUserAsync(AddUserModel addUserModel)
         {
-
-            var user = await _userManager.FindByNameAsync(addUserModel.Email!);
-
-            if (user != null)
+            await using var transaction = await _context.Database.BeginTransactionAsync();
+            try
             {
-                return IdentityResult.Failed(new IdentityError { Description = "Użytkownik o podanym adresie e-mail już istnieje." });
+                var userExists = await _userManager.FindByNameAsync(addUserModel.Email!);
+
+                if (userExists != null)
+                {
+                    return IdentityResult.Failed(new IdentityError { Description = "Użytkownik o podanym adresie e-mail już istnieje." });
+                }
+
+                var newUser = new User
+                {
+                    UserName = addUserModel.Email!,
+                    Email = addUserModel.Email!,
+                    DateAdded = DateTime.Now,
+                    IsActive = true,
+                };
+
+                var createResult = await _userManager.CreateAsync(newUser, addUserModel.Password);
+                if (!createResult.Succeeded)
+                {
+                    await transaction.RollbackAsync();
+                    return createResult;
+                }
+
+                await _userManager.AddToRoleAsync(newUser, addUserModel.Role);
+
+                var userEntity = CreateUserEntity(addUserModel.Role, newUser.Id, addUserModel.FirstName, addUserModel.LastName);
+                await _context.AddAsync(userEntity);
+
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return createResult;
             }
-
-            var newUser = new User
+            catch (Exception ex)
             {
-                UserName = addUserModel.Email!,
-                Email = addUserModel.Email!,
-                DateAdded = DateTime.Now,
-                IsActive = true,
+                await transaction.RollbackAsync();
+                Log.Error(ex, "Błąd podczas dodawania nowego użytkownika");
+                return IdentityResult.Failed(new IdentityError { Description = "Wystąpił błąd podczas dodawania użytkownika." });
+            }
+        }
+
+        private static IUserEntity CreateUserEntity(string role, string userId, string firstName, string lastName)
+        {
+            return role switch
+            {
+                "Student" => new Student { UserId = userId, FirstName = firstName, LastName = lastName },
+                "Teacher" => new Teacher { UserId = userId, FirstName = firstName, LastName = lastName },
+                "Administrator" => new Admin { UserId = userId, FirstName = firstName, LastName = lastName },
+                _ => throw new ArgumentException($"Nieznana rola: {role}")
             };
-
-            var result = await _userManager.CreateAsync(newUser, addUserModel.Password);
-
-            await _userManager.AddToRoleAsync(newUser, addUserModel.Role);
-
-            return result;
         }
 
         public async Task<IdentityResult> DeleteUserAsync(string userId)

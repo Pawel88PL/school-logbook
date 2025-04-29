@@ -1,0 +1,83 @@
+<div class="custom-container">
+
+    <h1>Dodaj użytkownika</h1>
+
+    <hr class="my-5" />
+
+    <form [formGroup]="userAddForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Imię</mat-label>
+            <input matInput type="text" formControlName="firstName" #autoFocusInput>
+            <mat-error *ngIf="userAddForm.controls['firstName'].hasError('required')">
+                Imię jest wymagane
+            </mat-error>
+            <mat-error *ngIf="userAddForm.controls['firstName'].hasError('minlength')">
+                Imię jest za krótkie
+            </mat-error>
+            <mat-error *ngIf="userAddForm.controls['firstName'].hasError('maxlength')">
+                Imię może zawierać maksymalnie 50 znaków
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Nazwisko</mat-label>
+            <input matInput type="text" formControlName="lastName">
+            <mat-error *ngIf="userAddForm.controls['lastName'].hasError('required')">
+                Nazwisko jest wymagane</mat-error>
+            <mat-error *ngIf="userAddForm.controls['lastName'].hasError('minlength')">
+                Nazwisko jest za krótkie
+            </mat-error>
+            <mat-error *ngIf="userAddForm.controls['lastName'].hasError('maxlength')">
+                Nazwisko może zawierać maksymalnie 50 znaków
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+            <mat-error *ngIf="userAddForm.controls['email'].hasError('required')">
+                Adres email jest wymagany
+            </mat-error>
+            <mat-error *ngIf="userAddForm.controls['email'].hasError('invalidEmail')">
+                Nieprawidłowy format adresu email
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Hasło</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+            <i class="icon-eye" matSuffix (mousedown)="togglePasswordVisibility(true)"
+                (mouseup)="togglePasswordVisibility(false)" (mouseleave)="togglePasswordVisibility(false)"
+                aria-label="Pokaż/ukryj hasło">
+                <i class="bi" [ngClass]="hidePassword ? 'bi-eye' : 'bi-eye-slash'"></i>
+            </i>
+            <mat-error *ngIf="userAddForm.get('password')?.hasError('required')">
+                Nowe hasło jest wymagane
+            </mat-error>
+            <mat-error *ngIf="userAddForm.get('password')?.hasError('minlength')">
+                Nowe hasło musi zawierać co najmniej 6 znaków
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Rola</mat-label>
+            <mat-select formControlName="role">
+                <mat-option *ngFor="let role of roles" [value]="role.name">
+                    {{ role.displayName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="userAddForm.controls['role'].hasError('required')">
+                Rola użytkownika jest wymagana
+            </mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+            <button class="proceed" [disabled]="isLoading" type="submit" (click)="onSubmit()">
+                <span *ngIf="isLoading" class="loading-spinner"></span>
+                <span *ngIf="!isLoading">
+                    Dodaj
+                </span>
+            </button>
+        </div>
+    </form>
+</div>

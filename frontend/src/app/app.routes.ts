@@ -8,6 +8,7 @@ import { teacherGuard } from './core/guards/teacher.guard';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { ClassListComponent } from './features/admin/class-list/class-list.component';
 import { SubjectListComponent } from './features/admin/subject-list/subject-list.component';
+import { UserAddComponent } from './features/admin/user-add/user-add.component';
 import { UserListComponent } from './features/admin/user-list/user-list.component';
 
 import { TeacherLayoutComponent } from './layout/teacher-layout/teacher-layout.component';
@@ -29,6 +30,7 @@ export const routes: Routes = [
         children: [
             { path: 'classes', component: ClassListComponent },
             { path: 'subjects', component: SubjectListComponent },
+            { path: 'user-add', component: UserAddComponent },
             { path: 'users', component: UserListComponent },
             { path: '', redirectTo: 'users', pathMatch: 'full' }
         ]

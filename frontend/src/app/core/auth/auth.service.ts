@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, catchError, tap, throwError } from 'rxjs';
-import { RegisterModel, User } from '../models/user-model';
 import { JwtService } from './jwt.service';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
-import { UpdateUserModel } from '../models/user-model';
 
 @Injectable({
   providedIn: 'root'
@@ -100,11 +98,5 @@ export class AuthService {
       this.router.navigate(['/login']);
       localStorage.removeItem('token');
     }
-  }
-
-  register(userData: RegisterModel): Observable<any> {
-    const token = this.jwtService.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post(`${this.apiUrl}/register`, userData, { headers });
   }
 }

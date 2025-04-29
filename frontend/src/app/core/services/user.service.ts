@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PagedRequestParams } from '../models/paged-request-params';
 import { Observable } from 'rxjs';
-import { User } from '../models/user-model';
+import { User, UserAddModel } from '../models/user-model';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { JwtService } from '../auth/jwt.service';
@@ -19,7 +19,7 @@ export class UserService {
     private jwtService: JwtService
   ) { }
 
-  addUser(userData: any): Observable<any> {
+  addUser(userData: UserAddModel): Observable<any> {
     const token = this.jwtService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post(`${this.apiUrl}/add`, userData, { headers });

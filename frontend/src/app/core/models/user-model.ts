@@ -20,15 +20,12 @@ export interface Role {
     displayName?: string;
 }
 
-export interface RegisterModel {
+export interface UserAddModel {
     firstName: string;
     lastName: string;
     role: string;
     email: string;
-    phoneNumber?: string;
-    pesel?: string;
-    nip?: string;
-    regon?: string;
+    password: string;
 }
 
 export interface UpdateUserModel {
