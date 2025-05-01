@@ -34,7 +34,11 @@
             <!-- Kolumna Rola -->
             <ng-container matColumnDef="role">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Rola </th>
-                <td mat-cell *matCellDef="let user">{{ user.role }}</td>
+                <td mat-cell *matCellDef="let user">
+                    <span *ngIf="user.role === 'Administrator'" class="badge bg-primary"> Administrator </span>
+                    <span *ngIf="user.role === 'Student'" class="badge bg-secondary"> Uczeń </span>
+                    <span *ngIf="user.role === 'Teacher'" class="badge bg-warning"> Nauczyciel </span>
+                </td>
             </ng-container>
 
             <!-- Kolumna Email -->
@@ -64,6 +68,8 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Akcje </th>
                 <td mat-cell *matCellDef="let user">
+                    <img src="./images/edit.png" alt="Edytuj" class="edit-icon" matTooltip="Edytuj"
+                        matTooltipPosition="above">
                     <img src="./images/delete.png" alt="Usuń" class="delete-icon" matTooltip="Usuń"
                         matTooltipPosition="above" (click)="onDeleteUser(user.id)">
                 </td>

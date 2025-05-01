@@ -10,6 +10,7 @@ namespace backend.Interfaces
         Task<IdentityResult> DeleteUserAsync(string userId);
         Task<SimpleUserDto?> GetUserByIdAsync(string id);
         Task<PagedUsers> GetUsersPaged(PagedRequest request);
+        Task<List<Role>> GeRolesAsync();
         Task<bool> UpdateUserAsync(UpdateUser updateUser);
     }
 }

@@ -28,10 +28,10 @@ export const routes: Routes = [
         component: AdminLayoutComponent,
         canActivate: [adminGuard],
         children: [
-            { path: 'classes', component: ClassListComponent },
-            { path: 'subjects', component: SubjectListComponent },
-            { path: 'user-add', component: UserAddComponent },
-            { path: 'users', component: UserListComponent },
+            { path: 'classes', component: ClassListComponent, data: { title: 'Dziennik - klasy' } },
+            { path: 'subjects', component: SubjectListComponent, data: { title: 'Dziennik - przedmioty' } },
+            { path: 'user-add', component: UserAddComponent, data: { title: 'Dziennik - dodaj użytkownika' } },
+            { path: 'users', component: UserListComponent, data: { title: 'Dziennik - użytkownicy' } },
             { path: '', redirectTo: 'users', pathMatch: 'full' }
         ]
     },
@@ -40,8 +40,8 @@ export const routes: Routes = [
         component: TeacherLayoutComponent,
         canActivate: [teacherGuard],
         children: [
-            { path: 'attendance', component: AttendanceComponent },
-            { path: 'classes', component: TeacherClassesComponent },
+            { path: 'attendance', component: AttendanceComponent, data: { title: 'Dziennik - frekwencja' } },
+            { path: 'classes', component: TeacherClassesComponent, data: { title: 'Dziennik - klasy' } },
             { path: '', redirectTo: 'classes', pathMatch: 'full' }
         ]
     },
@@ -50,14 +50,14 @@ export const routes: Routes = [
         component: StudentLayoutComponent,
         canActivate: [studentGuard],
         children: [
-            { path: 'schedule', component: StudentScheduleComponent },
-            { path: 'attendance', component: StudentAttendanceComponent },
+            { path: 'schedule', component: StudentScheduleComponent, data: { title: 'Dziennik - plan lekcji' } },
+            { path: 'attendance', component: StudentAttendanceComponent, data: { title: 'Dziennik - frekwencja' } },
             { path: '', redirectTo: 'schedule', pathMatch: 'full' }
         ]
     },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'login', component: LoginComponent },
-    { path: 'home', component: HomeComponent },
+    { path: 'login', component: LoginComponent, data: { title: 'Dziennik - logowanie' } },
+    { path: 'home', component: HomeComponent, data: { title: 'Dziennik lekcyjny' } },
     { path: '**', redirectTo: 'login' }
 ];
 

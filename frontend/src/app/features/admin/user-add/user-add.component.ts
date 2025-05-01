@@ -37,16 +37,13 @@ import { Role, UpdateUserModel, UserAddModel } from '../../../core/models/user-m
 export class UserAddComponent implements OnInit {
   @ViewChild('autoFocusInput') autoFocusInput!: ElementRef;
 
-  errorMessage: string | null = null;
+  errorMessage: string = '';
   isLoading: boolean = false;
   hidePassword: boolean = true;
   userAddForm!: FormGroup;
   successMessage: string = 'Dodano nowego użytkownika';
 
-  roles: Role[] = [
-    { id: 1, name: 'Administrator', displayName: 'Administrator' },
-    { id: 2, name: 'SAP FI Consultant', displayName: 'Konsultant SAP FI' },
-  ];
+  roles: Role[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -57,12 +54,41 @@ export class UserAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeUserAddForm();
+    this.getRoles();
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.autoFocusInput.nativeElement.focus();
     }, 0);
+  }
+
+  translateRoleDisplayName(role: Role): Role {
+    switch (role.name) {
+      case 'Administrator':
+        role.displayName = 'Administrator';
+        break;
+      case 'Teacher':
+        role.displayName = 'Nauczyciel';
+        break;
+      case 'Student':
+        role.displayName = 'Uczeń';
+        break;
+    }
+    return role;
+  }
+
+  getRoles(): void {
+    this.userService.getRoles().subscribe({
+      next: (response) => {
+        this.roles = response.map((role: Role) => this.translateRoleDisplayName(role));
+      },
+      error: (error) => {
+        this.errorMessage = error.error.message;
+        this.toastr.error(this.errorMessage, 'Błąd');
+        console.error(error);
+      }
+    });
   }
 
   extractErrorMessage(error: any): string {

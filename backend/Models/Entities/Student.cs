@@ -8,8 +8,8 @@ public class Student : IUserEntity
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
 
-    public int ClassId { get; set; }
-    public Class Class { get; set; } = null!;
+    public int? ClassId { get; set; }
+    public Class? Class { get; set; } = null!;
 
     public string UserId { get; set; } = default!;
     public User User { get; set; } = default!;

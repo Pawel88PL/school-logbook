@@ -106,6 +106,23 @@ namespace backend.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
+        [HttpGet("roles")]
+        public async Task<IActionResult> GetRoles()
+        {
+            try
+            {
+                var roles = await _userService.GeRolesAsync();
+                return Ok(roles);
+            }
+            catch (Exception e)
+            {
+                var message = $"Wystąpił błąd podczas pobierania ról: {e.Message}";
+                Log.Error(message);
+                return BadRequest(new { message });
+            }
+        }
+
+        [Authorize(Roles = "Administrator")]
         [HttpPut("update")]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUser updateUser)
         {

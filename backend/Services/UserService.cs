@@ -81,14 +81,56 @@ namespace backend.Services
 
         public async Task<IdentityResult> DeleteUserAsync(string userId)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            await using var transaction = await _context.Database.BeginTransactionAsync();
 
-            if (user == null)
+            try
             {
-                return IdentityResult.Failed(new IdentityError { Description = "Nie znaleziono użytkownika." });
-            }
+                var user = await _userManager.FindByIdAsync(userId);
+                if (user == null)
+                {
+                    return IdentityResult.Failed(new IdentityError { Description = "Nie znaleziono użytkownika." });
+                }
 
-            return await _userManager.DeleteAsync(user);
+                var roles = await _userManager.GetRolesAsync(user);
+                var role = roles.FirstOrDefault();
+
+                if (role == "Administrator")
+                {
+                    var admin = await _context.Admins.FirstOrDefaultAsync(a => a.UserId == userId);
+                    if (admin != null)
+                        _context.Admins.Remove(admin);
+                }
+                else if (role == "Teacher")
+                {
+                    var teacher = await _context.Teachers.FirstOrDefaultAsync(t => t.UserId == userId);
+                    if (teacher != null)
+                        _context.Teachers.Remove(teacher);
+                }
+                else if (role == "Student")
+                {
+                    var student = await _context.Students.FirstOrDefaultAsync(s => s.UserId == userId);
+                    if (student != null)
+                        _context.Students.Remove(student);
+                }
+
+                await _context.SaveChangesAsync();
+
+                var result = await _userManager.DeleteAsync(user);
+                if (!result.Succeeded)
+                {
+                    await transaction.RollbackAsync();
+                    return result;
+                }
+
+                await transaction.CommitAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                Log.Error(ex, "Błąd podczas usuwania użytkownika");
+                return IdentityResult.Failed(new IdentityError { Description = "Wystąpił błąd podczas usuwania użytkownika." });
+            }
         }
 
         public async Task<SimpleUserDto?> GetUserByIdAsync(string id)
@@ -199,6 +241,19 @@ namespace backend.Services
                 TotalRecords = totalRecords,
                 Data = usersDto
             };
+        }
+
+        public async Task<List<Role>> GeRolesAsync()
+        {
+            var roles = await _context.Roles
+                .AsNoTracking()
+                .Select(r => new Role
+                {
+                    Name = r.Name ?? string.Empty
+                })
+                .ToListAsync();
+
+            return roles;
         }
 
         public async Task<bool> UpdateUserAsync(UpdateUser updateUser)

@@ -50,4 +50,10 @@ export class UserService {
 
     return this.http.get(`${this.apiUrl}/paged`, { headers, params });
   }
+
+  getRoles(): Observable<any> {
+    const token = this.jwtService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.apiUrl}/roles`, { headers });
+  }
 }
