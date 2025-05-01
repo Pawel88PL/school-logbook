@@ -10,11 +10,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 
+import { TeacherService } from '../../../core/services/teacher.service';
 import { ToastrService } from 'ngx-toastr';
-
 import { UserService } from '../../../core/services/user.service';
-import { Role, UserAddModel } from '../../../core/models/user-model';
+
 import { ClassAddModel } from '../../../core/models/class-model';
+import { Teacher } from '../../../core/models/teacher-model';
+import { Student } from '../../../core/models/student-model';
 
 @Component({
   selector: 'app-class-add',
@@ -39,30 +41,47 @@ export class ClassAddComponent implements OnInit {
   @ViewChild('autoFocusInput') autoFocusInput!: ElementRef;
 
   errorMessage: string = '';
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   classAddForm!: FormGroup;
   successMessage: string = 'Dodano nową klasę.';
 
-  students: any[] = [];
-  selectedStudents: any[] = [];
+  students: Student[] = [];
+  selectedStudents: Student[] = [];
 
-  teachers: any[] = [];
+  teachers: Teacher[] = [];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private teacherService: TeacherService,
     private toastr: ToastrService,
     private userService: UserService
   ) { }
 
   ngOnInit(): void {
     this.initializeClassAddForm();
+    this.getTeachers();
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.autoFocusInput.nativeElement.focus();
     }, 0);
+  }
+
+  getTeachers(): void {
+    this.teacherService.getTeachers().subscribe({
+      next: (teachers: Teacher[]) => {
+        this.teachers = teachers;
+      },
+      error: error => {
+        this.errorMessage = error.error.message || 'Wystąpił błąd podczas pobierania nauczycieli.';
+        this.toastr.error(this.errorMessage, 'Błąd');
+        console.error(error);
+      }
+    }).add(() => {
+      this.isLoading = false;
+    });
   }
 
   initializeClassAddForm(): void {

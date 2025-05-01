@@ -20,7 +20,7 @@
             <mat-label>Wychowawca</mat-label>
             <mat-select formControlName="homeroomTeacherId">
                 <mat-option *ngFor="let teacher of teachers" [value]="teacher.id">
-                    {{ teacher.name }}
+                    {{ teacher.firstName }} {{ teacher.lastName }}
                 </mat-option>
             </mat-select>
             <mat-error *ngIf="classAddForm.controls['homeroomTeacherId'].hasError('required')">

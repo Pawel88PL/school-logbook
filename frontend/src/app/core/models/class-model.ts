@@ -8,5 +8,5 @@ export interface ClassModel {
 export interface ClassAddModel {
     name: string;
     homeroomTeacherId: string
-    assignedStudentIds: string[];
+    assignedStudentIds: number[];
 }
