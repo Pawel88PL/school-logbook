@@ -1,1 +1,40 @@
-<p>class-add works!</p>
+<div class="custom-container">
+
+    <h1>Dodaj nową klasę</h1>
+
+    <hr class="my-5" />
+
+    <form [formGroup]="classAddForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Nazwa klasy</mat-label>
+            <input matInput type="text" formControlName="name" #autoFocusInput>
+            <mat-error *ngIf="classAddForm.controls['name'].hasError('required')">
+                Nazwa klasy jest wymagana
+            </mat-error>
+            <mat-error *ngIf="classAddForm.controls['name'].hasError('maxlength')">
+                Nazwa klasy nie może być dłuższa niż 5 znaków
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Wychowawca</mat-label>
+            <mat-select formControlName="homeroomTeacherId">
+                <mat-option *ngFor="let teacher of teachers" [value]="teacher.id">
+                    {{ teacher.name }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="classAddForm.controls['homeroomTeacherId'].hasError('required')">
+                Wychowawcaklasy jest wymagany
+            </mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+            <button class="proceed" [disabled]="isLoading" type="submit" (click)="onSubmit()">
+                <span *ngIf="isLoading" class="loading-spinner"></span>
+                <span *ngIf="!isLoading">
+                    Dodaj
+                </span>
+            </button>
+        </div>
+    </form>
+</div>
