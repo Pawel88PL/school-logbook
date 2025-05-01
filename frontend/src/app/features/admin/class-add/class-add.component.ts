@@ -10,6 +10,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 
+import { StudentService } from '../../../core/services/student.service';
 import { TeacherService } from '../../../core/services/teacher.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../core/services/user.service';
@@ -53,6 +54,7 @@ export class ClassAddComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private studentService: StudentService,
     private teacherService: TeacherService,
     private toastr: ToastrService,
     private userService: UserService
@@ -60,6 +62,7 @@ export class ClassAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeClassAddForm();
+    this.getStudents();
     this.getTeachers();
   }
 
@@ -67,6 +70,21 @@ export class ClassAddComponent implements OnInit {
     setTimeout(() => {
       this.autoFocusInput.nativeElement.focus();
     }, 0);
+  }
+
+  getStudents(): void {
+    this.studentService.getStudents().subscribe({
+      next: (students: Student[]) => {
+        this.students = students;
+      },
+      error: error => {
+        this.errorMessage = error.error.message || 'Wystąpił błąd podczas pobierania uczniów.';
+        this.toastr.error(this.errorMessage, 'Błąd');
+        console.error(error);
+      }
+    }).add(() => {
+      this.isLoading = false;
+    });
   }
 
   getTeachers(): void {
