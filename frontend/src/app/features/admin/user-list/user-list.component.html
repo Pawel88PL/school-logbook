@@ -69,7 +69,7 @@
                 <th mat-header-cell *matHeaderCellDef> Akcje </th>
                 <td mat-cell *matCellDef="let user">
                     <img src="./images/edit.png" alt="Edytuj" class="edit-icon" matTooltip="Edytuj"
-                        matTooltipPosition="above">
+                        matTooltipPosition="above" routerLink="/admin/user-edit/{{ user.id }}">
                     <img src="./images/delete.png" alt="Usuń" class="delete-icon" matTooltip="Usuń"
                         matTooltipPosition="above" (click)="onDeleteUser(user.id)">
                 </td>

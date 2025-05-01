@@ -229,7 +229,7 @@ namespace backend.Services
                 Id = item.User.Id.ToString(),
                 FirstName = item.Admin?.FirstName ?? item.Teacher?.FirstName ?? item.Student?.FirstName ?? string.Empty,
                 LastName = item.Admin?.LastName ?? item.Teacher?.LastName ?? item.Student?.LastName ?? string.Empty,
-                Email = item.User.Email,
+                Email = item.User.Email ?? string.Empty,
                 Role = item.RoleName,
                 IsActive = item.User.IsActive,
                 DateAdded = item.User.DateAdded,
@@ -258,34 +258,59 @@ namespace backend.Services
 
         public async Task<bool> UpdateUserAsync(UpdateUser updateUser)
         {
-            using var transaction = await _context.Database.BeginTransactionAsync();
+            await using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                var user = await _context.Users
-                    .FirstOrDefaultAsync(u => u.Id == updateUser.Id)
-                    ?? throw new ArgumentNullException(nameof(updateUser));
-
+                var user = await _userManager.FindByIdAsync(updateUser.Id);
                 if (user == null) return false;
 
-                // Aktualizacja danych użytkownika
                 user.UserName = updateUser.Email;
                 user.Email = updateUser.Email;
                 user.IsActive = updateUser.IsActive;
 
-                // Aktualizacja hasła użytkownika
                 if (!string.IsNullOrEmpty(updateUser.NewPassword))
                 {
                     var token = await _userManager.GeneratePasswordResetTokenAsync(user);
                     var resetPassResult = await _userManager.ResetPasswordAsync(user, token, updateUser.NewPassword);
                     if (!resetPassResult.Succeeded)
                     {
-                        // Logowanie błędów resetowania hasła
                         foreach (var error in resetPassResult.Errors)
                         {
                             Log.Error($"Error resetting password for user with ID {user.Id}: {error.Description}");
                         }
                         await transaction.RollbackAsync();
                         return false;
+                    }
+                }
+
+                var roles = await _userManager.GetRolesAsync(user);
+                var role = roles.FirstOrDefault();
+
+                if (role == "Student")
+                {
+                    var student = await _context.Students.FirstOrDefaultAsync(s => s.UserId == user.Id);
+                    if (student != null)
+                    {
+                        student.FirstName = updateUser.FirstName;
+                        student.LastName = updateUser.LastName;
+                    }
+                }
+                else if (role == "Teacher")
+                {
+                    var teacher = await _context.Teachers.FirstOrDefaultAsync(t => t.UserId == user.Id);
+                    if (teacher != null)
+                    {
+                        teacher.FirstName = updateUser.FirstName;
+                        teacher.LastName = updateUser.LastName;
+                    }
+                }
+                else if (role == "Administrator")
+                {
+                    var admin = await _context.Admins.FirstOrDefaultAsync(a => a.UserId == user.Id);
+                    if (admin != null)
+                    {
+                        admin.FirstName = updateUser.FirstName;
+                        admin.LastName = updateUser.LastName;
                     }
                 }
 

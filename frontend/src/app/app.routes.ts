@@ -9,6 +9,7 @@ import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.compone
 import { ClassListComponent } from './features/admin/class-list/class-list.component';
 import { SubjectListComponent } from './features/admin/subject-list/subject-list.component';
 import { UserAddComponent } from './features/admin/user-add/user-add.component';
+import { UserEditComponent } from './features/admin/user-edit/user-edit.component';
 import { UserListComponent } from './features/admin/user-list/user-list.component';
 
 import { TeacherLayoutComponent } from './layout/teacher-layout/teacher-layout.component';
@@ -31,6 +32,7 @@ export const routes: Routes = [
             { path: 'classes', component: ClassListComponent, data: { title: 'Dziennik - klasy' } },
             { path: 'subjects', component: SubjectListComponent, data: { title: 'Dziennik - przedmioty' } },
             { path: 'user-add', component: UserAddComponent, data: { title: 'Dziennik - dodaj użytkownika' } },
+            { path: 'user-edit/:id', component: UserEditComponent, data: { title: 'Dziennik - edytuj użytkownika' } },
             { path: 'users', component: UserListComponent, data: { title: 'Dziennik - użytkownicy' } },
             { path: '', redirectTo: 'users', pathMatch: 'full' }
         ]
