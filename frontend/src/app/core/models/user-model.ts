@@ -32,9 +32,5 @@ export interface UpdateUserModel {
     firstName: string;
     lastName: string;
     email: string;
-    phoneNumber?: string;
-    pesel?: string;
-    nip?: string;
-    regon?: string;
-    isActive: boolean;
+    newPassword: string;
 }

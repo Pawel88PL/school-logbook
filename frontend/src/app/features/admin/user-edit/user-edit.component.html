@@ -1,1 +1,71 @@
-<p>user-edit works!</p>
+<div class="custom-container">
+
+    <h1>Zaktualizuj użytkownika</h1>
+
+    <hr class="my-5" />
+
+    <form [formGroup]="updateForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Imię</mat-label>
+            <input matInput type="text" formControlName="firstName" #autoFocusInput>
+            <mat-error *ngIf="updateForm.controls['firstName'].hasError('required')">
+                Imię jest wymagane
+            </mat-error>
+            <mat-error *ngIf="updateForm.controls['firstName'].hasError('minlength')">
+                Imię jest za krótkie
+            </mat-error>
+            <mat-error *ngIf="updateForm.controls['firstName'].hasError('maxlength')">
+                Imię może zawierać maksymalnie 50 znaków
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Nazwisko</mat-label>
+            <input matInput type="text" formControlName="lastName">
+            <mat-error *ngIf="updateForm.controls['lastName'].hasError('required')">
+                Nazwisko jest wymagane</mat-error>
+            <mat-error *ngIf="updateForm.controls['lastName'].hasError('minlength')">
+                Nazwisko jest za krótkie
+            </mat-error>
+            <mat-error *ngIf="updateForm.controls['lastName'].hasError('maxlength')">
+                Nazwisko może zawierać maksymalnie 50 znaków
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+            <mat-error *ngIf="updateForm.controls['email'].hasError('required')">
+                Adres email jest wymagany
+            </mat-error>
+            <mat-error *ngIf="updateForm.controls['email'].hasError('invalidEmail')">
+                Nieprawidłowy format adresu email
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Hasło</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+            <i class="icon-eye" matSuffix (mousedown)="togglePasswordVisibility(true)"
+                (mouseup)="togglePasswordVisibility(false)" (mouseleave)="togglePasswordVisibility(false)"
+                aria-label="Pokaż/ukryj hasło">
+                <i class="bi" [ngClass]="hidePassword ? 'bi-eye' : 'bi-eye-slash'"></i>
+            </i>
+            <mat-error *ngIf="updateForm.get('password')?.hasError('required')">
+                Nowe hasło jest wymagane
+            </mat-error>
+            <mat-error *ngIf="updateForm.get('password')?.hasError('minlength')">
+                Nowe hasło musi zawierać co najmniej 6 znaków
+            </mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+            <button class="proceed" [disabled]="isLoading" type="submit" (click)="onSubmit()">
+                <span *ngIf="isLoading" class="loading-spinner"></span>
+                <span *ngIf="!isLoading">
+                    Zaktualizuj
+                </span>
+            </button>
+        </div>
+    </form>
+</div>

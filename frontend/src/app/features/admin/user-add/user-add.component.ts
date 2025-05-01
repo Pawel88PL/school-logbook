@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ToastrService } from 'ngx-toastr';
 
 import { UserService } from '../../../core/services/user.service';
-import { Role, UpdateUserModel, UserAddModel } from '../../../core/models/user-model';
+import { Role, UserAddModel } from '../../../core/models/user-model';
 
 @Component({
   selector: 'app-user-add',

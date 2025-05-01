@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PagedRequestParams } from '../models/paged-request-params';
 import { Observable } from 'rxjs';
-import { User, UserAddModel } from '../models/user-model';
+import { UpdateUserModel, User, UserAddModel } from '../models/user-model';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { JwtService } from '../auth/jwt.service';
@@ -37,6 +37,12 @@ export class UserService {
     return this.http.get<User>(`${this.apiUrl}/logged-user`, { headers });
   }
 
+  getUserById(userId: string): Observable<User> {
+    const token = this.jwtService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<User>(`${this.apiUrl}/get-user/${userId}`, { headers });
+  }
+
   getUsersPaged(request: PagedRequestParams): Observable<any> {
     const token = this.jwtService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -55,5 +61,11 @@ export class UserService {
     const token = this.jwtService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get(`${this.apiUrl}/roles`, { headers });
+  }
+
+  updateUser(userData: UpdateUserModel): Observable<any> {
+    const token = this.jwtService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put(`${this.apiUrl}/update`, userData, { headers });
   }
 }

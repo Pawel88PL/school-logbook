@@ -89,6 +89,32 @@ namespace backend.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
+        [HttpGet("get-user/{id}")]
+        public async Task<IActionResult> GetUserByIdAsync(string id)
+        {
+            if (id == null)
+            {
+                return BadRequest(new { message = "Brak identyfikatora użytkownika w zapytaniu." });
+            }
+
+            try
+            {
+                var user = await _userService.GetUserByIdAsync(id);
+                if (user == null)
+                {
+                    return NotFound(new { message = "Nie znaleziono użytkownika." });
+                }
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Wystąpił błąd podczas pobierania użytkownika.");
+                return StatusCode(500, new { message = "Wystąpił błąd podczas pobierania użytkownika. " + ex.Message });
+            }
+        }
+
+        [Authorize(Roles = "Administrator")]
         [HttpGet("paged")]
         public async Task<IActionResult> GetUsersPaged([FromQuery] PagedRequest pagedRequest)
         {

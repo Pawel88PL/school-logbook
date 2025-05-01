@@ -133,7 +133,7 @@ namespace backend.Services
             }
         }
 
-        public async Task<SimpleUserDto?> GetUserByIdAsync(string id)
+        public async Task<UserDto?> GetUserByIdAsync(string id)
         {
             var user = await _context.Users
                 .AsNoTracking()
@@ -141,40 +141,55 @@ namespace backend.Services
 
             if (user == null)
                 return null;
-
+            
             var roles = await _userManager.GetRolesAsync(user);
+            var role = roles.FirstOrDefault();
+
+            var userDto = new UserDto
+            {
+                Id = user.Id,
+                FirstName = string.Empty,
+                LastName = string.Empty,
+                Email = user.Email ?? string.Empty,
+                IsActive = user.IsActive,
+            };
 
             if (roles.Contains("Student"))
             {
-                return await GetSimpleUserInfoAsync<Student>(user.Id);
+                userDto = await GetUserInfoAsync<Student>(userDto);
+                return userDto;
             }
 
             if (roles.Contains("Teacher"))
             {
-                return await GetSimpleUserInfoAsync<Teacher>(user.Id);
+                userDto = await GetUserInfoAsync<Teacher>(userDto);
+                return userDto;
             }
 
             if (roles.Contains("Administrator"))
             {
-                return await GetSimpleUserInfoAsync<Admin>(user.Id);
+                userDto = await GetUserInfoAsync<Admin>(userDto);
+                return userDto;
             }
 
             return null;
         }
 
-        private async Task<SimpleUserDto?> GetSimpleUserInfoAsync<TEntity>(string userId) where TEntity : class, IUserEntity
+        private async Task<UserDto?> GetUserInfoAsync<TEntity>(UserDto user) where TEntity : class, IUserEntity
         {
             var entity = await _context.Set<TEntity>()
                 .AsNoTracking()
-                .FirstOrDefaultAsync(e => EF.Property<string>(e, "UserId") == userId);
+                .FirstOrDefaultAsync(e => EF.Property<string>(e, "UserId") == user.Id);
 
             if (entity == null)
                 return null;
 
-            return new SimpleUserDto
+            return new UserDto
             {
+                Id = user.Id,
                 FirstName = entity.FirstName,
-                LastName = entity.LastName
+                LastName = entity.LastName,
+                Email = user.Email,
             };
         }
 
