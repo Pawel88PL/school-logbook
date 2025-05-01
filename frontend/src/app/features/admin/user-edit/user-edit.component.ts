@@ -36,7 +36,7 @@ export class UserEditComponent implements OnInit {
   @ViewChild('autoFocusInput') autoFocusInput!: ElementRef;
 
   errorMessage: string = '';
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   hidePassword: boolean = true;
   successMessage: string = 'Zaktualizowano użytkownika';
   updateForm!: FormGroup;
