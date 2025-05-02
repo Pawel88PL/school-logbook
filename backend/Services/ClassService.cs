@@ -1,6 +1,7 @@
 using backend.Data;
 using backend.DTOs;
 using backend.Interfaces;
+using backend.Models;
 using backend.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,5 +39,58 @@ public class ClassService(AppDbContext context) : IClassService
 
         await _context.Classes.AddAsync(newClass);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<PagedClasses> GetClassesPaged(PagedRequest request)
+    {
+        var query = _context.Classes
+            .Include(c => c.HomeroomTeacher)
+            .AsQueryable();
+
+        if (!string.IsNullOrEmpty(request.SortColumn))
+        {
+            var isDescending = request.SortDirection?.ToLower() == "desc";
+
+            query = request.SortColumn.ToLower() switch
+            {
+                "createdat" => isDescending
+                    ? query.OrderByDescending(e => e.CreatedAt)
+                    : query.OrderBy(e => e.CreatedAt),
+
+                "name" => isDescending
+                    ? query.OrderByDescending(e => e.Name)
+                    : query.OrderBy(e => e.Name),
+
+                _ => throw new ArgumentException($"Invalid sort column: {request.SortColumn}")
+            };
+        }
+        else
+        {
+            query = query.OrderByDescending(c => c.CreatedAt);
+        }
+
+        int totalRecords = await query.CountAsync();
+
+        var classes = await query
+            .Skip((request.PageNumber - 1) * request.PageSize)
+            .Take(request.PageSize)
+            .ToListAsync();
+
+        var classesDto = classes.Select(item => new ClassDto
+        {
+            Id = item.Id,
+            Name = item.Name,
+            CreatedAt = item.CreatedAt,
+            UpdatedAt = item.UpdatedAt,
+            HomeroomTeacherName = item.HomeroomTeacher != null
+                ? $"{item.HomeroomTeacher.FirstName} {item.HomeroomTeacher.LastName}"
+                : null,
+        }).ToList();
+
+        return new PagedClasses
+        {
+            TotalRecords = totalRecords,
+            Data = classesDto
+        };
     }
 }

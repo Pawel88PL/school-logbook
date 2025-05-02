@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
