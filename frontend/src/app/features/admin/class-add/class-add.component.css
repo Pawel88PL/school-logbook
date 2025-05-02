@@ -1,10 +1,14 @@
+.chosen-student {
+    padding: 17px 0;
+}
+
 .custom-container {
     margin: 20px 40px;
-    max-width: 1400px;
+    max-width: 800px;
 }
 
 .form-actions {
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .icon-eye {
@@ -29,9 +33,19 @@
 }
 
 mat-form-field {
-    max-width: 350px;
     width: 100%;
-    margin: 10px 20px 0 0;
+}
+
+.mat-spinner {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .proceed {
@@ -52,6 +66,18 @@ mat-form-field {
 
 .proceed:hover:not(:disabled) {
     background: #383838;
+}
+
+.search-student-input {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.students-list {
+    max-height: 350px;
+    overflow-y: auto;
+    margin-top: 10px;
 }
 
 @keyframes spin {

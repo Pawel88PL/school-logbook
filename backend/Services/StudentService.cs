@@ -19,6 +19,8 @@ public class StudentService(AppDbContext context) : IStudentService
                 FirstName = student.FirstName,
                 LastName = student.LastName,
             })
+            .OrderBy(student => student.LastName)
+            .ThenBy(student => student.FirstName)
             .ToListAsync();
 
         return students;

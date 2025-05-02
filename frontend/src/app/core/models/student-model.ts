@@ -5,4 +5,5 @@ export interface Student {
     email: string;
     classId: number;
     className: string;
+    isSelected: boolean;
 }
