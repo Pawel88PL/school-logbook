@@ -13,11 +13,13 @@ public class StudentService(AppDbContext context) : IStudentService
     {
         var students = await _context.Students
             .AsNoTracking()
+            .Include(student => student.Class)
             .Select(student => new StudentDto
             {
                 Id = student.Id,
                 FirstName = student.FirstName,
                 LastName = student.LastName,
+                ClassName = student.Class!.Name,
             })
             .OrderBy(student => student.LastName)
             .ThenBy(student => student.FirstName)

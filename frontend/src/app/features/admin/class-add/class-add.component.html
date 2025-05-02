@@ -62,6 +62,9 @@
                                 </td>
                                 <td class="align-content-center" [innerHTML]="highlight(student.firstName)">
                                 </td>
+                                <td class="align-content-center">
+                                    {{ student.className }}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -81,6 +84,9 @@
                             <tr *ngFor="let student of selectedStudents">
                                 <td class="align-content-center chosen-student">
                                     {{ student.lastName }} {{ student.firstName }}
+                                </td>
+                                <td class="align-content-center">
+                                    {{ student.className }}
                                 </td>
                             </tr>
                         </tbody>
