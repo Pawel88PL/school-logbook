@@ -47,6 +47,27 @@ public class ClassController(IClassService classService) : ControllerBase
         }
     }
 
+    [Authorize(Roles = "Administrator, Teacher")]
+    [HttpGet("get/{id}")]
+    public async Task<IActionResult> GetClassById(int id)
+    {
+        try
+        {
+            var classDto = await _classService.GetClassById(id);
+            if (classDto == null)
+            {
+                return NotFound(new { message = "Nie znaleziono klasy o podanym identyfikatorze." });
+            }
+            return Ok(classDto);
+        }
+        catch (Exception e)
+        {
+            var message = $"Wystąpił błąd podczas pobierania klasy: {e.Message}";
+            Log.Error(message);
+            return BadRequest(new { message });
+        }
+    }
+
     [Authorize(Roles = "Administrator")]
     [HttpGet("paged")]
     public async Task<IActionResult> GetClassesPaged([FromQuery] PagedRequest pagedRequest)
@@ -59,6 +80,23 @@ public class ClassController(IClassService classService) : ControllerBase
         catch (Exception e)
         {
             var message = $"Wystąpił błąd podczas pobierania klas: {e.Message}";
+            Log.Error(message);
+            return BadRequest(new { message });
+        }
+    }
+
+    [Authorize(Roles = "Administrator")]
+    [HttpPut("update")]
+    public async Task<IActionResult> UpdateClass([FromBody] ClassDto classDto)
+    {
+        try
+        {
+            await _classService.UpdateClass(classDto);
+            return Ok(new { message = "Klasa została zaktualizowana pomyślnie." });
+        }
+        catch (Exception e)
+        {
+            var message = $"Wystąpił błąd podczas aktualizacji klasy: {e.Message}";
             Log.Error(message);
             return BadRequest(new { message });
         }

@@ -64,6 +64,28 @@ public class ClassService(AppDbContext context) : IClassService
         await _context.SaveChangesAsync();
     }
 
+    public async Task<ClassDto> GetClassById(int id)
+    {
+        var classEntity = await _context.Classes
+            .Include(c => c.Students)
+            .FirstOrDefaultAsync(c => c.Id == id);
+
+        if (classEntity == null)
+        {
+            throw new Exception("Nie znaleziono klasy");
+        }
+
+        return new ClassDto
+        {
+            Id = classEntity.Id,
+            Name = classEntity.Name,
+            CreatedAt = classEntity.CreatedAt,
+            UpdatedAt = classEntity.UpdatedAt,
+            HomeroomTeacherId = classEntity.HomeroomTeacherId,
+            AssignedStudentIds = classEntity.Students.Select(s => s.Id).ToList(),
+        };
+    }
+
     public async Task<PagedClasses> GetClassesPaged(PagedRequest request)
     {
         var query = _context.Classes
@@ -115,5 +137,45 @@ public class ClassService(AppDbContext context) : IClassService
             TotalRecords = totalRecords,
             Data = classesDto
         };
+    }
+
+    public async Task UpdateClass(ClassDto classDto)
+    {
+        var classToUpdate = await _context.Classes
+            .Include(s => s.Students)
+            .FirstOrDefaultAsync(m => m.Id == classDto.Id);
+
+        if (classToUpdate == null)
+        {
+            throw new Exception($"Nie znaleziono klasy o ID {classDto.Id}");
+        }
+
+        classToUpdate.Name = classDto.Name;
+        classToUpdate.HomeroomTeacherId = classDto.HomeroomTeacherId;
+        classToUpdate.UpdatedAt = DateTime.Now;
+
+        var currentStudentIds = classToUpdate.Students.Select(s => s.Id).ToList();
+
+        var targetStudentIds = classDto.AssignedStudentIds;
+
+        var studentsToRemove = await _context.Students
+        .Where(s => currentStudentIds.Contains(s.Id) && !targetStudentIds.Contains(s.Id))
+        .ToListAsync();
+
+        foreach (var student in studentsToRemove)
+        {
+            student.ClassId = null;
+        }
+
+        var studentsToAdd = await _context.Students
+            .Where(s => targetStudentIds.Contains(s.Id) && s.ClassId != classDto.Id)
+            .ToListAsync();
+
+        foreach (var student in studentsToAdd)
+        {
+            student.ClassId = classDto.Id;
+        }
+
+        await _context.SaveChangesAsync();
     }
 }

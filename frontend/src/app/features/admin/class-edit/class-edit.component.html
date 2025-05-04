@@ -4,7 +4,9 @@
 
 <div class="custom-container">
 
-    <h1>Edytuj klasę</h1>
+    <h1>
+        Szczegóły klasy {{ class?.name }}
+    </h1>
 
     <hr class="my-5" />
 
@@ -97,10 +99,10 @@
     </div>
 
     <div class="form-actions">
-        <button class="proceed" [disabled]="isLoading" type="submit" (click)="onSubmit()">
+        <button class="proceed" [disabled]="isLoading" type="submit" (click)="onUpdateClass()">
             <span *ngIf="isLoading" class="loading-spinner"></span>
             <span *ngIf="!isLoading">
-                Dodaj klasę
+                Zapisz zmiany
             </span>
         </button>
     </div>
