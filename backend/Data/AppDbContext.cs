@@ -57,6 +57,24 @@ public class AppDbContext : IdentityDbContext<User>
             .HasForeignKey(c => c.HomeroomTeacherId)
             .OnDelete(DeleteBehavior.SetNull);
 
+        modelBuilder.Entity<ClassSubject>()
+            .HasOne(cs => cs.Class)
+            .WithMany(c => c.ClassSubjects)
+            .HasForeignKey(cs => cs.ClassId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<ClassSubject>()
+            .HasOne(cs => cs.Subject)
+            .WithMany(s => s.ClassSubjects)
+            .HasForeignKey(cs => cs.SubjectId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<ClassSubject>()
+            .HasOne(cs => cs.Teacher)
+            .WithMany(t => t.ClassSubjects)
+            .HasForeignKey(cs => cs.TeacherId)
+            .OnDelete(DeleteBehavior.Cascade);
+
         // Schedule → Class, Subject, Teacher
         modelBuilder.Entity<Schedule>()
             .HasOne(s => s.Class)
