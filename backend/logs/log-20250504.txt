@@ -134,3 +134,179 @@ ORDER BY [t].[Name]
 2025-05-04 07:48:50.135 +02:00 [INF] CORS policy execution successful.
 2025-05-04 07:48:50.136 +02:00 [INF] Request finished HTTP/1.1 DELETE http://localhost:5234/api/class/delete/1 - 404 0 null 1.2405ms
 2025-05-04 07:48:50.143 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: DELETE http://localhost:5234/api/class/delete/1, Response status code: 404
+2025-05-04 08:02:35.142 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-04 08:02:35.148 +02:00 [INF] CORS policy execution successful.
+2025-05-04 08:02:35.149 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 7.4972ms
+2025-05-04 08:02:35.154 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-04 08:02:35.154 +02:00 [INF] CORS policy execution successful.
+2025-05-04 08:02:35.181 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-04 08:02:35.205 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-04 08:02:35.235 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/class/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - null null
+2025-05-04 08:02:35.236 +02:00 [INF] CORS policy execution successful.
+2025-05-04 08:02:35.237 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/class/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - 204 null null 1.6219ms
+2025-05-04 08:02:35.238 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/class/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - null null
+2025-05-04 08:02:35.239 +02:00 [INF] CORS policy execution successful.
+2025-05-04 08:02:35.239 +02:00 [INF] Executing endpoint 'backend.Controllers.ClassController.GetClassesPaged (backend)'
+2025-05-04 08:02:35.258 +02:00 [INF] Route matched with {action = "GetClassesPaged", controller = "Class"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClassesPaged(backend.Models.PagedRequest) on controller backend.Controllers.ClassController (backend).
+2025-05-04 08:02:35.550 +02:00 [INF] Executed DbCommand (51ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-04 08:02:35.617 +02:00 [INF] Executed DbCommand (46ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-04 08:02:35.668 +02:00 [INF] Executed DbCommand (47ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-04 08:02:35.668 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-04 08:02:35.678 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 472.9197ms
+2025-05-04 08:02:35.678 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-04 08:02:35.678 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 524.3033ms
+2025-05-04 08:02:35.795 +02:00 [INF] Executed DbCommand (46ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Classes] AS [c]
+2025-05-04 08:02:35.847 +02:00 [INF] Executed DbCommand (48ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    ORDER BY [c].[Name]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+LEFT JOIN [Teachers] AS [t0] ON [t].[HomeroomTeacherId] = [t0].[Id]
+ORDER BY [t].[Name]
+2025-05-04 08:02:35.848 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.PagedClasses'.
+2025-05-04 08:02:35.851 +02:00 [INF] Executed action backend.Controllers.ClassController.GetClassesPaged (backend) in 592.4687ms
+2025-05-04 08:02:35.851 +02:00 [INF] Executed endpoint 'backend.Controllers.ClassController.GetClassesPaged (backend)'
+2025-05-04 08:02:35.851 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/class/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - 200 null application/json; charset=utf-8 612.7165ms
+2025-05-04 08:03:03.919 +02:00 [INF] Application is starting
+2025-05-04 08:03:03.949 +02:00 [INF] User profile is available. Using '/Users/pawelstaniul/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-05-04 08:03:03.978 +02:00 [WRN] The WebRootPath was not found: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/wwwroot. Static files may be unavailable.
+2025-05-04 08:03:03.984 +02:00 [INF] Now listening on: http://localhost:5234
+2025-05-04 08:03:03.986 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-04 08:03:03.986 +02:00 [INF] Hosting environment: Development
+2025-05-04 08:03:03.986 +02:00 [INF] Content root path: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend
+2025-05-04 08:15:32.738 +02:00 [INF] Application is starting
+2025-05-04 08:15:32.767 +02:00 [INF] User profile is available. Using '/Users/pawelstaniul/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-05-04 08:15:32.792 +02:00 [WRN] The WebRootPath was not found: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/wwwroot. Static files may be unavailable.
+2025-05-04 08:15:32.798 +02:00 [INF] Now listening on: http://localhost:5234
+2025-05-04 08:15:32.800 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-04 08:15:32.800 +02:00 [INF] Hosting environment: Development
+2025-05-04 08:15:32.800 +02:00 [INF] Content root path: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend
+2025-05-04 08:15:53.988 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/class/delete/1 - null null
+2025-05-04 08:15:54.001 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-05-04 08:15:54.014 +02:00 [INF] CORS policy execution successful.
+2025-05-04 08:15:54.019 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/class/delete/1 - 204 null null 31.79ms
+2025-05-04 08:15:54.023 +02:00 [INF] Request starting HTTP/1.1 DELETE http://localhost:5234/api/class/delete/1 - null null
+2025-05-04 08:15:54.025 +02:00 [INF] CORS policy execution successful.
+2025-05-04 08:15:54.065 +02:00 [INF] Executing endpoint 'backend.Controllers.ClassController.DeleteClass (backend)'
+2025-05-04 08:15:54.077 +02:00 [INF] Route matched with {action = "DeleteClass", controller = "Class"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DeleteClass(Int32) on controller backend.Controllers.ClassController (backend).
+2025-05-04 08:15:55.093 +02:00 [INF] Executed DbCommand (75ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [s].[Id], [s].[ClassId], [s].[FirstName], [s].[LastName], [s].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__id_0
+) AS [t]
+LEFT JOIN [Students] AS [s] ON [t].[Id] = [s].[ClassId]
+ORDER BY [t].[Id]
+2025-05-04 08:15:55.299 +02:00 [INF] Executed DbCommand (65ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Int32), @p3='?' (DbType = Int32), @p2='?' (DbType = Int32), @p5='?' (DbType = Int32), @p4='?' (DbType = Int32), @p7='?' (DbType = Int32), @p6='?' (DbType = Int32), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [Students] SET [ClassId] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+UPDATE [Students] SET [ClassId] = @p2
+OUTPUT 1
+WHERE [Id] = @p3;
+UPDATE [Students] SET [ClassId] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+UPDATE [Students] SET [ClassId] = @p6
+OUTPUT 1
+WHERE [Id] = @p7;
+DELETE FROM [Classes]
+OUTPUT 1
+WHERE [Id] = @p8;
+2025-05-04 08:15:55.369 +02:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-04 08:15:55.379 +02:00 [INF] Executed action backend.Controllers.ClassController.DeleteClass (backend) in 1300.2629ms
+2025-05-04 08:15:55.379 +02:00 [INF] Executed endpoint 'backend.Controllers.ClassController.DeleteClass (backend)'
+2025-05-04 08:15:55.388 +02:00 [INF] Request finished HTTP/1.1 DELETE http://localhost:5234/api/class/delete/1 - 200 null application/json; charset=utf-8 1364.5702ms
+2025-05-04 08:15:55.389 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/class/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - null null
+2025-05-04 08:15:55.391 +02:00 [INF] CORS policy execution successful.
+2025-05-04 08:15:55.391 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/class/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - 204 null null 2.3898ms
+2025-05-04 08:15:55.393 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/class/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - null null
+2025-05-04 08:15:55.397 +02:00 [INF] CORS policy execution successful.
+2025-05-04 08:15:55.399 +02:00 [INF] Executing endpoint 'backend.Controllers.ClassController.GetClassesPaged (backend)'
+2025-05-04 08:15:55.406 +02:00 [INF] Route matched with {action = "GetClassesPaged", controller = "Class"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClassesPaged(backend.Models.PagedRequest) on controller backend.Controllers.ClassController (backend).
+2025-05-04 08:15:55.501 +02:00 [INF] Executed DbCommand (47ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Classes] AS [c]
+2025-05-04 08:15:55.561 +02:00 [INF] Executed DbCommand (48ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    ORDER BY [c].[Name]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+LEFT JOIN [Teachers] AS [t0] ON [t].[HomeroomTeacherId] = [t0].[Id]
+ORDER BY [t].[Name]
+2025-05-04 08:15:55.570 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.PagedClasses'.
+2025-05-04 08:15:55.582 +02:00 [INF] Executed action backend.Controllers.ClassController.GetClassesPaged (backend) in 175.4951ms
+2025-05-04 08:15:55.582 +02:00 [INF] Executed endpoint 'backend.Controllers.ClassController.GetClassesPaged (backend)'
+2025-05-04 08:15:55.582 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/class/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - 200 null application/json; charset=utf-8 189.0159ms
+2025-05-04 08:15:58.246 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/class/delete/2 - null null
+2025-05-04 08:15:58.246 +02:00 [INF] CORS policy execution successful.
+2025-05-04 08:15:58.247 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/class/delete/2 - 204 null null 0.9377ms
+2025-05-04 08:15:58.248 +02:00 [INF] Request starting HTTP/1.1 DELETE http://localhost:5234/api/class/delete/2 - null null
+2025-05-04 08:15:58.249 +02:00 [INF] CORS policy execution successful.
+2025-05-04 08:15:58.259 +02:00 [INF] Executing endpoint 'backend.Controllers.ClassController.DeleteClass (backend)'
+2025-05-04 08:15:58.260 +02:00 [INF] Route matched with {action = "DeleteClass", controller = "Class"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DeleteClass(Int32) on controller backend.Controllers.ClassController (backend).
+2025-05-04 08:15:58.359 +02:00 [INF] Executed DbCommand (56ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [s].[Id], [s].[ClassId], [s].[FirstName], [s].[LastName], [s].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__id_0
+) AS [t]
+LEFT JOIN [Students] AS [s] ON [t].[Id] = [s].[ClassId]
+ORDER BY [t].[Id]
+2025-05-04 08:15:58.463 +02:00 [INF] Executed DbCommand (56ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Int32), @p3='?' (DbType = Int32), @p2='?' (DbType = Int32), @p4='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [Students] SET [ClassId] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+UPDATE [Students] SET [ClassId] = @p2
+OUTPUT 1
+WHERE [Id] = @p3;
+DELETE FROM [Classes]
+OUTPUT 1
+WHERE [Id] = @p4;
+2025-05-04 08:15:58.512 +02:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-04 08:15:58.512 +02:00 [INF] Executed action backend.Controllers.ClassController.DeleteClass (backend) in 252.2585ms
+2025-05-04 08:15:58.513 +02:00 [INF] Executed endpoint 'backend.Controllers.ClassController.DeleteClass (backend)'
+2025-05-04 08:15:58.513 +02:00 [INF] Request finished HTTP/1.1 DELETE http://localhost:5234/api/class/delete/2 - 200 null application/json; charset=utf-8 264.6939ms
+2025-05-04 08:15:58.518 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/class/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - null null
+2025-05-04 08:15:58.520 +02:00 [INF] CORS policy execution successful.
+2025-05-04 08:15:58.521 +02:00 [INF] Executing endpoint 'backend.Controllers.ClassController.GetClassesPaged (backend)'
+2025-05-04 08:15:58.521 +02:00 [INF] Route matched with {action = "GetClassesPaged", controller = "Class"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClassesPaged(backend.Models.PagedRequest) on controller backend.Controllers.ClassController (backend).
+2025-05-04 08:15:58.570 +02:00 [INF] Executed DbCommand (46ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Classes] AS [c]
+2025-05-04 08:15:58.619 +02:00 [INF] Executed DbCommand (47ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    ORDER BY [c].[Name]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+LEFT JOIN [Teachers] AS [t0] ON [t].[HomeroomTeacherId] = [t0].[Id]
+ORDER BY [t].[Name]
+2025-05-04 08:15:58.620 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.PagedClasses'.
+2025-05-04 08:15:58.620 +02:00 [INF] Executed action backend.Controllers.ClassController.GetClassesPaged (backend) in 98.909ms
+2025-05-04 08:15:58.620 +02:00 [INF] Executed endpoint 'backend.Controllers.ClassController.GetClassesPaged (backend)'
+2025-05-04 08:15:58.620 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/class/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - 200 null application/json; charset=utf-8 101.8029ms

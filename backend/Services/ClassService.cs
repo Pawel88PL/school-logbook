@@ -17,6 +17,8 @@ public class ClassService(AppDbContext context) : IClassService
         {
             Name = classDto.Name,
             HomeroomTeacherId = classDto.HomeroomTeacherId,
+            CreatedAt = DateTime.Now,
+            UpdatedAt = DateTime.Now,
         };
 
         if (classDto.AssignedStudentIds.Any())
@@ -38,6 +40,27 @@ public class ClassService(AppDbContext context) : IClassService
         }
 
         await _context.Classes.AddAsync(newClass);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteClass(int id)
+    {
+        var classToDelete = await _context.Classes
+            .Include(c => c.Students)
+            .FirstOrDefaultAsync(c => c.Id == id);
+
+        if (classToDelete == null)
+        {
+            throw new Exception("Nie znaleziono klasy do usunięcia");
+        }
+
+        // Odpinanie uczniów (ustawiamy ClassId = null)
+        foreach (var student in classToDelete.Students)
+        {
+            student.ClassId = null;
+        }
+
+        _context.Classes.Remove(classToDelete);
         await _context.SaveChangesAsync();
     }
 

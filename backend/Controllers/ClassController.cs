@@ -9,11 +9,11 @@ namespace backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize(Roles = "Administrator")]
 public class ClassController(IClassService classService) : ControllerBase
 {
     private readonly IClassService _classService = classService;
 
+    [Authorize(Roles = "Administrator")]
     [HttpPost("add")]
     public async Task<IActionResult> AddClass([FromBody] ClassDto classDto)
     {
@@ -30,6 +30,24 @@ public class ClassController(IClassService classService) : ControllerBase
         }
     }
 
+    [Authorize(Roles = "Administrator")]
+    [HttpDelete("delete/{id}")]
+    public async Task<IActionResult> DeleteClass(int id)
+    {
+        try
+        {
+            await _classService.DeleteClass(id);
+            return Ok(new { message = "Klasa została usunięta pomyślnie." });
+        }
+        catch (Exception e)
+        {
+            var message = $"Wystąpił błąd podczas usuwania klasy: {e.Message}";
+            Log.Error(message);
+            return BadRequest(new { message });
+        }
+    }
+
+    [Authorize(Roles = "Administrator")]
     [HttpGet("paged")]
     public async Task<IActionResult> GetClassesPaged([FromQuery] PagedRequest pagedRequest)
     {
