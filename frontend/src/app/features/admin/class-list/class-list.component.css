@@ -1,20 +1,10 @@
-.add-icon {
-    width: 30px;
-    cursor: pointer;
-    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
-}
-
-.add-icon:hover {
-    transform: scale(1.1);
-}
-
 .custom-container {
     margin: 20px 40px;
     max-width: 1400px;
 }
 
 .delete-icon,
-.edit-icon {
+.details-icon {
     cursor: pointer;
     margin: 5px;
     max-width: 25px;
@@ -23,7 +13,7 @@
 }
 
 .delete-icon:hover,
-.edit-icon:hover {
+.details-icon:hover {
     opacity: 0.7;
     transform: scale(1.15);
 }

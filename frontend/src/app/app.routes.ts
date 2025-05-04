@@ -7,6 +7,7 @@ import { teacherGuard } from './core/guards/teacher.guard';
 
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { ClassAddComponent } from './features/admin/class-add/class-add.component';
+import { ClassEditComponent } from './features/admin/class-edit/class-edit.component';
 import { ClassListComponent } from './features/admin/class-list/class-list.component';
 import { SubjectListComponent } from './features/admin/subject-list/subject-list.component';
 import { UserAddComponent } from './features/admin/user-add/user-add.component';
@@ -31,6 +32,7 @@ export const routes: Routes = [
         canActivate: [adminGuard],
         children: [
             { path: 'class-add', component: ClassAddComponent, data: { title: 'Dziennik - dodaj klasę' } },
+            { path: 'class-edit/:id', component: ClassEditComponent, data: { title: 'Dziennik - edytuj klasę' } },
             { path: 'classes', component: ClassListComponent, data: { title: 'Dziennik - klasy' } },
             { path: 'subjects', component: SubjectListComponent, data: { title: 'Dziennik - przedmioty' } },
             { path: 'user-add', component: UserAddComponent, data: { title: 'Dziennik - dodaj użytkownika' } },

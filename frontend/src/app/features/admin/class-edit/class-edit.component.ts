@@ -22,7 +22,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ClassService } from '../../../core/services/class.service';
 
 @Component({
-  selector: 'app-class-add',
+  selector: 'app-class-edit',
   imports: [
     CommonModule,
     FormsModule,
@@ -38,10 +38,11 @@ import { ClassService } from '../../../core/services/class.service';
     RouterModule,
     ReactiveFormsModule
   ],
-  templateUrl: './class-add.component.html',
-  styleUrl: './class-add.component.css'
+  templateUrl: './class-edit.component.html',
+  styleUrl: './class-edit.component.css'
 })
-export class ClassAddComponent implements OnInit {
+
+export class ClassEditComponent implements OnInit {
 
   @ViewChild('autoFocusInput') autoFocusInput!: ElementRef;
 

@@ -13,6 +13,7 @@ public class TeacherService(AppDbContext context) : ITeacherService
     {
         var teachers = await _context.Teachers
             .AsNoTracking()
+            .Where(t => !t.HomeroomClasses.Any())
             .Select(teacher => new TeacherDto
             {
                 Id = teacher.Id,

@@ -48,11 +48,11 @@
             <!-- Kolumna Akcje -->
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Akcje </th>
-                <td mat-cell *matCellDef="let user">
-                    <img src="./images/edit.png" alt="Edytuj" class="edit-icon" matTooltip="Edytuj"
-                        matTooltipPosition="above" routerLink="/admin/user-edit/{{ user.id }}">
+                <td mat-cell *matCellDef="let row">
+                    <img src="./images/info.png" alt="Szczegóły" class="details-icon" matTooltip="Szczegóły"
+                        matTooltipPosition="above" routerLink="/admin/class-edit/{{ row.id }}">
                     <img src="./images/delete.png" alt="Usuń" class="delete-icon" matTooltip="Usuń"
-                        matTooltipPosition="above" (click)="onDeleteClass(user.id)">
+                        matTooltipPosition="above" (click)="onDeleteClass(row.id)">
                 </td>
             </ng-container>
 
