@@ -7929,3 +7929,133 @@ Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
 2025-05-04 14:05:29.331 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/_framework/aspnetcore-browser-refresh.js - 200 13732 application/javascript; charset=utf-8 7.6751ms
 2025-05-04 14:05:29.375 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/swagger/v1/swagger.json - null null
 2025-05-04 14:05:29.418 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 42.4418ms
+2025-05-04 14:18:16.462 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-04 14:18:16.514 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-05-04 14:18:16.560 +02:00 [INF] CORS policy execution successful.
+2025-05-04 14:18:16.562 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 100.1162ms
+2025-05-04 14:18:16.563 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-04 14:18:16.564 +02:00 [INF] CORS policy execution successful.
+2025-05-04 14:18:16.673 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-04 14:18:16.691 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-04 14:18:17.703 +02:00 [INF] Executed DbCommand (69ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-04 14:18:17.786 +02:00 [INF] Executed DbCommand (47ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-04 14:18:17.845 +02:00 [INF] Executed DbCommand (46ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-04 14:18:17.850 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-04 14:18:17.866 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 1170.7387ms
+2025-05-04 14:18:17.867 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-04 14:18:17.923 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 1356.9915ms
+2025-05-04 15:30:49.149 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/auth/login - null null
+2025-05-04 15:30:49.181 +02:00 [INF] CORS policy execution successful.
+2025-05-04 15:30:49.183 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/auth/login - 204 null null 35.1146ms
+2025-05-04 15:30:49.187 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5234/api/auth/login - application/json 55
+2025-05-04 15:30:49.189 +02:00 [INF] CORS policy execution successful.
+2025-05-04 15:30:49.195 +02:00 [INF] Executing endpoint 'backend.Controllers.AuthController.Login (backend)'
+2025-05-04 15:30:49.221 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(backend.DTOs.Login) on controller backend.Controllers.AuthController (backend).
+2025-05-04 15:30:49.610 +02:00 [INF] Executed DbCommand (50ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-05-04 15:30:49.757 +02:00 [INF] Executed DbCommand (46ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-04 15:30:49.806 +02:00 [INF] Executed DbCommand (46ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-04 15:30:49.857 +02:00 [INF] Executed DbCommand (46ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2025-05-04 15:30:49.916 +02:00 [INF] Executed DbCommand (45ms) [Parameters=[@__role_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2025-05-04 15:30:49.934 +02:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2025-05-04 15:30:50.021 +02:00 [INF] Executed DbCommand (85ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-05-04 15:30:50.032 +02:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.Threading.Tasks.Task`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-04 15:30:50.077 +02:00 [INF] Executed DbCommand (47ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-04 15:30:50.144 +02:00 [INF] Executed DbCommand (48ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-05-04 15:30:50.280 +02:00 [INF] Executed DbCommand (53ms) [Parameters=[@p20='?' (Size = 450), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p21='?' (Size = 4000), @p3='?' (DbType = DateTime2), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTime2), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTimeOffset), @p10='?' (Size = 256), @p11='?' (Size = 256), @p12='?' (Size = 4000), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 4000), @p16='?' (DbType = Int32), @p17='?' (DbType = Int32), @p18='?' (DbType = Boolean), @p19='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p0, [AdminId] = @p1, [ConcurrencyStamp] = @p2, [DateAdded] = @p3, [Email] = @p4, [EmailConfirmed] = @p5, [IsActive] = @p6, [LastSuccessfulLogin] = @p7, [LockoutEnabled] = @p8, [LockoutEnd] = @p9, [NormalizedEmail] = @p10, [NormalizedUserName] = @p11, [PasswordHash] = @p12, [PhoneNumber] = @p13, [PhoneNumberConfirmed] = @p14, [SecurityStamp] = @p15, [StudentId] = @p16, [TeacherId] = @p17, [TwoFactorEnabled] = @p18, [UserName] = @p19
+OUTPUT 1
+WHERE [Id] = @p20 AND [ConcurrencyStamp] = @p21;
+2025-05-04 15:30:50.297 +02:00 [INF] Executed action backend.Controllers.AuthController.Login (backend) in 1075.4539ms
+2025-05-04 15:30:50.297 +02:00 [INF] Executed endpoint 'backend.Controllers.AuthController.Login (backend)'
+2025-05-04 15:30:50.298 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5234/api/auth/login - 200 null application/json; charset=utf-8 1110.4ms
+2025-05-04 15:30:50.306 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-04 15:30:50.308 +02:00 [INF] CORS policy execution successful.
+2025-05-04 15:30:50.308 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 2.245ms
+2025-05-04 15:30:50.310 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-04 15:30:50.311 +02:00 [INF] CORS policy execution successful.
+2025-05-04 15:30:50.313 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-04 15:30:50.313 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-04 15:30:50.342 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/paged?pageNumber=1&pageSize=10&sortColumn=role&sortDirection=asc&searchQuery= - null null
+2025-05-04 15:30:50.343 +02:00 [INF] CORS policy execution successful.
+2025-05-04 15:30:50.343 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/paged?pageNumber=1&pageSize=10&sortColumn=role&sortDirection=asc&searchQuery= - 204 null null 0.9587ms
+2025-05-04 15:30:50.345 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/paged?pageNumber=1&pageSize=10&sortColumn=role&sortDirection=asc&searchQuery= - null null
+2025-05-04 15:30:50.346 +02:00 [INF] CORS policy execution successful.
+2025-05-04 15:30:50.351 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetUsersPaged (backend)'
+2025-05-04 15:30:50.362 +02:00 [INF] Route matched with {action = "GetUsersPaged", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetUsersPaged(backend.Models.PagedRequest) on controller backend.Controllers.UserController (backend).
+2025-05-04 15:30:50.459 +02:00 [INF] Executed DbCommand (47ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-04 15:30:50.522 +02:00 [INF] Executed DbCommand (48ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-04 15:30:50.570 +02:00 [INF] Executed DbCommand (47ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-04 15:30:50.571 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-04 15:30:50.571 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 257.2807ms
+2025-05-04 15:30:50.571 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-04 15:30:50.571 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 261.4146ms
+2025-05-04 15:30:50.681 +02:00 [INF] Executed DbCommand (50ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [AspNetUsers] AS [a]
+INNER JOIN [AspNetUserRoles] AS [a0] ON [a].[Id] = [a0].[UserId]
+INNER JOIN [AspNetRoles] AS [a1] ON [a0].[RoleId] = [a1].[Id]
+LEFT JOIN [Admins] AS [a2] ON [a].[Id] = [a2].[UserId]
+LEFT JOIN [Teachers] AS [t] ON [a].[Id] = [t].[UserId]
+LEFT JOIN [Students] AS [s] ON [a].[Id] = [s].[UserId]
+2025-05-04 15:30:50.748 +02:00 [INF] Executed DbCommand (57ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName], [a1].[Name] AS [RoleName], [a2].[Id], [a2].[FirstName], [a2].[LastName], [a2].[UserId], [t].[Id], [t].[FirstName], [t].[LastName], [t].[UserId], [s].[Id], [s].[ClassId], [s].[FirstName], [s].[LastName], [s].[UserId]
+FROM [AspNetUsers] AS [a]
+INNER JOIN [AspNetUserRoles] AS [a0] ON [a].[Id] = [a0].[UserId]
+INNER JOIN [AspNetRoles] AS [a1] ON [a0].[RoleId] = [a1].[Id]
+LEFT JOIN [Admins] AS [a2] ON [a].[Id] = [a2].[UserId]
+LEFT JOIN [Teachers] AS [t] ON [a].[Id] = [t].[UserId]
+LEFT JOIN [Students] AS [s] ON [a].[Id] = [s].[UserId]
+ORDER BY [a1].[Name]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-05-04 15:30:50.750 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.PagedUsers'.
+2025-05-04 15:30:50.753 +02:00 [INF] Executed action backend.Controllers.UserController.GetUsersPaged (backend) in 390.527ms
+2025-05-04 15:30:50.753 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetUsersPaged (backend)'
+2025-05-04 15:30:50.753 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/paged?pageNumber=1&pageSize=10&sortColumn=role&sortDirection=asc&searchQuery= - 200 null application/json; charset=utf-8 407.9071ms
