@@ -49,7 +49,7 @@ import { ClassService } from '../../../core/services/class.service';
 
 export class ClassListComponent implements OnInit {
 
-  displayedColumns: string[] = ['index', 'name', 'createdAt', 'updatedAt', 'homeroomTeacherName', 'actions'];
+  displayedColumns: string[] = ['index', 'name', 'createdAt', 'updatedAt', 'homeroomTeacherName', 'studentCount', 'actions'];
   dataSource = new MatTableDataSource<User>([]);
   pageIndex: number = 0;
   pageSize: number = 10;

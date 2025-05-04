@@ -8,6 +8,7 @@ public class ClassDto
     public DateTime UpdatedAt { get; set; }
     public int? HomeroomTeacherId { get; set; }
     public string? HomeroomTeacherName { get; set; }
+    public int? StudentCount { get; set; }
     public List<int> AssignedStudentIds { get; set; } = new List<int>();
 }
 

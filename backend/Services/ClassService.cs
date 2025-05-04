@@ -4,6 +4,7 @@ using backend.Interfaces;
 using backend.Models;
 using backend.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace backend.Services;
 
@@ -89,22 +90,35 @@ public class ClassService(AppDbContext context) : IClassService
     public async Task<PagedClasses> GetClassesPaged(PagedRequest request)
     {
         var query = _context.Classes
-            .Include(c => c.HomeroomTeacher)
-            .AsQueryable();
+            .AsNoTracking()
+            .Select(c => new
+            {
+                c.Id,
+                c.Name,
+                c.CreatedAt,
+                c.UpdatedAt,
+                HomeroomTeacherName = c.HomeroomTeacher != null
+                    ? c.HomeroomTeacher.FirstName + " " + c.HomeroomTeacher.LastName
+                    : null,
+                StudentCount = c.Students.Count()
+            });
 
         if (!string.IsNullOrEmpty(request.SortColumn))
         {
             var isDescending = request.SortDirection?.ToLower() == "desc";
-
             query = request.SortColumn.ToLower() switch
             {
+                "name" => isDescending
+                    ? query.OrderByDescending(e => e.Name)
+                    : query.OrderBy(e => e.Name),
+
                 "createdat" => isDescending
                     ? query.OrderByDescending(e => e.CreatedAt)
                     : query.OrderBy(e => e.CreatedAt),
 
-                "name" => isDescending
-                    ? query.OrderByDescending(e => e.Name)
-                    : query.OrderBy(e => e.Name),
+                "updatedAt" => isDescending
+                    ? query.OrderByDescending(e => e.UpdatedAt)
+                    : query.OrderBy(e => e.UpdatedAt),
 
                 _ => throw new ArgumentException($"Invalid sort column: {request.SortColumn}")
             };
@@ -127,9 +141,8 @@ public class ClassService(AppDbContext context) : IClassService
             Name = item.Name,
             CreatedAt = item.CreatedAt,
             UpdatedAt = item.UpdatedAt,
-            HomeroomTeacherName = item.HomeroomTeacher != null
-                ? $"{item.HomeroomTeacher.FirstName} {item.HomeroomTeacher.LastName}"
-                : null,
+            HomeroomTeacherName = item.HomeroomTeacherName,
+            StudentCount = item.StudentCount,
         }).ToList();
 
         return new PagedClasses
@@ -141,41 +154,52 @@ public class ClassService(AppDbContext context) : IClassService
 
     public async Task UpdateClass(ClassDto classDto)
     {
-        var classToUpdate = await _context.Classes
-            .Include(s => s.Students)
-            .FirstOrDefaultAsync(m => m.Id == classDto.Id);
-
-        if (classToUpdate == null)
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
         {
-            throw new Exception($"Nie znaleziono klasy o ID {classDto.Id}");
+            var classToUpdate = await _context.Classes
+                .Include(c => c.Students)
+                .FirstOrDefaultAsync(c => c.Id == classDto.Id);
+
+            if (classToUpdate == null)
+            {
+                Log.Error($"Nie znaleziono klasy o ID {classDto.Id}");
+                throw new Exception($"Nie znaleziono klasy o ID {classDto.Id}");
+            }
+
+            classToUpdate.Name = classDto.Name;
+            classToUpdate.HomeroomTeacherId = classDto.HomeroomTeacherId;
+            classToUpdate.UpdatedAt = DateTime.Now;
+
+            var currentStudentIds = classToUpdate.Students.Select(s => s.Id).ToList();
+            var targetStudentIds = classDto.AssignedStudentIds;
+
+            var studentsToRemove = await _context.Students
+                .Where(s => currentStudentIds.Contains(s.Id) && !targetStudentIds.Contains(s.Id))
+                .ToListAsync();
+
+            foreach (var student in studentsToRemove)
+            {
+                student.ClassId = null;
+            }
+
+            var studentsToAdd = await _context.Students
+                .Where(s => targetStudentIds.Contains(s.Id) && s.ClassId != classDto.Id)
+                .ToListAsync();
+
+            foreach (var student in studentsToAdd)
+            {
+                student.ClassId = classDto.Id;
+            }
+
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
         }
-
-        classToUpdate.Name = classDto.Name;
-        classToUpdate.HomeroomTeacherId = classDto.HomeroomTeacherId;
-        classToUpdate.UpdatedAt = DateTime.Now;
-
-        var currentStudentIds = classToUpdate.Students.Select(s => s.Id).ToList();
-
-        var targetStudentIds = classDto.AssignedStudentIds;
-
-        var studentsToRemove = await _context.Students
-        .Where(s => currentStudentIds.Contains(s.Id) && !targetStudentIds.Contains(s.Id))
-        .ToListAsync();
-
-        foreach (var student in studentsToRemove)
+        catch (Exception ex)
         {
-            student.ClassId = null;
+            await transaction.RollbackAsync();
+            Log.Error(ex, "Wystąpił błąd podczas aktualizacji klasy");
+            throw new Exception("Wystąpił błąd podczas aktualizacji klasy", ex);
         }
-
-        var studentsToAdd = await _context.Students
-            .Where(s => targetStudentIds.Contains(s.Id) && s.ClassId != classDto.Id)
-            .ToListAsync();
-
-        foreach (var student in studentsToAdd)
-        {
-            student.ClassId = classDto.Id;
-        }
-
-        await _context.SaveChangesAsync();
     }
 }
