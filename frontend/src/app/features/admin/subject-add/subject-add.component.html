@@ -1,1 +1,41 @@
-<p>subject-add works!</p>
+<div *ngIf="isLoading" class="mat-spinner">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="custom-container">
+
+    <h1>Dodaj nowy przedmiot</h1>
+
+    <hr class="my-5" />
+
+    <form [formGroup]="subjectAddForm" class="mb-3">
+        <div class="row">
+            <div class="col-lg-6">
+                <mat-form-field appearance="outline" class="mb-3">
+                    <mat-label>Nazwa przedmiotu</mat-label>
+                    <input matInput type="text" formControlName="name" #autoFocusInput>
+                    <mat-error *ngIf="subjectAddForm.controls['name'].hasError('required')">
+                        Nazwa przedmiotu jest wymagana
+                    </mat-error>
+                    <mat-error *ngIf="subjectAddForm.controls['name'].hasError('minLength')">
+                        Nazwa przedmiotu musi być dłuższa niż 2 znaki
+                    </mat-error>
+                    <mat-error *ngIf="subjectAddForm.controls['name'].hasError('maxlength')">
+                        Nazwa przedmiotu nie może być dłuższa niż 20 znaków
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+
+    
+
+    <div class="form-actions">
+        <button class="proceed" [disabled]="isLoading" type="submit" (click)="onSubmit()">
+            <span *ngIf="isLoading" class="loading-spinner"></span>
+            <span *ngIf="!isLoading">
+                Dodaj przedmiot
+            </span>
+        </button>
+    </div>
+</div>

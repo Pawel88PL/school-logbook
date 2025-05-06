@@ -4,7 +4,7 @@
     background-color: white;
     padding: 20px;
     margin: auto;
-    min-height: 900px;
+    height: calc(100vh - 60px);
 }
 
 h5,
