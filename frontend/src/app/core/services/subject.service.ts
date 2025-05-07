@@ -26,19 +26,7 @@ export class SubjectService {
     return this.http.post(`${this.apiUrl}/add`, data, { headers });
   }
 
-  deleteClass(id: number): Observable<any> {
-    const token = this.jwtService.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.delete(`${this.apiUrl}/delete/${id}`, { headers });
-  }
-
-  getClassById(id: number): Observable<ClassModel> {
-    const token = this.jwtService.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<ClassModel>(`${this.apiUrl}/get/${id}`, { headers });
-  }
-
-  getClassesPaged(request: PagedRequestParams): Observable<any> {
+  getSubjectPaged(request: PagedRequestParams): Observable<any> {
     const token = this.jwtService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
@@ -49,11 +37,5 @@ export class SubjectService {
       .set('sortDirection', request.sortDirection)
 
     return this.http.get(`${this.apiUrl}/paged`, { headers, params });
-  }
-
-  updateClass(data: ClassModel): Observable<any> {
-    const token = this.jwtService.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.put(`${this.apiUrl}/update`, data, { headers });
   }
 }

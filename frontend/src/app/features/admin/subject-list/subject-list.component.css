@@ -1,0 +1,43 @@
+.custom-container {
+    margin: 20px 40px;
+    max-width: 1400px;
+}
+
+.delete-icon,
+.details-icon {
+    cursor: pointer;
+    margin: 5px;
+    max-width: 25px;
+    max-height: 25px;
+    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+.delete-icon:hover,
+.details-icon:hover {
+    opacity: 0.7;
+    transform: scale(1.15);
+}
+
+.main-card {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1200px;
+}
+
+.mat-spinner {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+@media screen and (max-width: 600px) {
+    .custom-container {
+        margin: 20px 5px;
+    }
+}

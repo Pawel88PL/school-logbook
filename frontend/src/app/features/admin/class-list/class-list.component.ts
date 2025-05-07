@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
@@ -15,17 +14,15 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTooltip } from '@angular/material/tooltip';
 
-import { JwtService } from '../../../core/auth/jwt.service';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from '../../../core/services/user.service';
 
-import { User } from '../../../core/models/user-model';
 import { DeleteConfirmationComponent } from '../../../shared/components/delete-confirmation/delete-confirmation.component';
 import { ClassService } from '../../../core/services/class.service';
 
 @Component({
   selector: 'app-class-list',
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     FormsModule,
 
     MatCardModule,
@@ -50,7 +47,7 @@ import { ClassService } from '../../../core/services/class.service';
 export class ClassListComponent implements OnInit {
 
   displayedColumns: string[] = ['index', 'name', 'createdAt', 'updatedAt', 'homeroomTeacherName', 'studentCount', 'actions'];
-  dataSource = new MatTableDataSource<User>([]);
+  dataSource = new MatTableDataSource<any>([]);
   pageIndex: number = 0;
   pageSize: number = 10;
   rowNumber: number = 0;
