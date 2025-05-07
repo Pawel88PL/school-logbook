@@ -134,7 +134,7 @@ export class SubjectAddComponent implements OnInit {
         next: () => {
           this.toastr.success(this.successMessage, 'Sukces');
           this.isLoading = false;
-          this.router.navigate(['/admin/classes']);
+          this.router.navigate(['/admin/subjects']);
         },
         error: error => {
           this.errorMessage = error.error.message || 'Wystąpił błąd podczas dodawania nowej klasy.';

@@ -203,6 +203,7 @@ namespace backend
         {
             services.AddScoped<IClassService, ClassService>();
             services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<ISubjectService, SubjectService>();
             services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserService, UserService>();
