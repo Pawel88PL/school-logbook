@@ -36,6 +36,12 @@ export class ClassService {
     return this.http.get<ClassModel>(`${this.apiUrl}/get/${id}`, { headers });
   }
 
+  getClasses(): Observable<ClassModel[]> {
+    const token = this.jwtService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<ClassModel[]>(`${this.apiUrl}/all`, { headers });
+  }
+
   getClassesPaged(request: PagedRequestParams): Observable<any> {
     const token = this.jwtService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

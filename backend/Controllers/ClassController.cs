@@ -68,6 +68,23 @@ public class ClassController(IClassService classService) : ControllerBase
         }
     }
 
+    [Authorize(Roles = "Administrator, Teacher")]
+    [HttpGet("all")]
+    public async Task<IActionResult> GetClasses()
+    {
+        try
+        {
+            var classes = await _classService.GetClassesAsync();
+            return Ok(classes);
+        }
+        catch (Exception e)
+        {
+            var message = $"Wystąpił błąd podczas pobierania klas: {e.Message}";
+            Log.Error(message);
+            return BadRequest(new { message });
+        }
+    }
+
     [Authorize(Roles = "Administrator")]
     [HttpGet("paged")]
     public async Task<IActionResult> GetClassesPaged([FromQuery] PagedRequest pagedRequest)

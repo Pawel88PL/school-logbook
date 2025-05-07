@@ -18,6 +18,8 @@ import { ToastrService } from 'ngx-toastr';
 import { SubjectAddModel } from '../../../core/models/subject-model';
 import { Teacher } from '../../../core/models/teacher-model';
 import { SubjectService } from '../../../core/services/subject.service';
+import { ClassModel } from '../../../core/models/class-model';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-subject-add',
@@ -48,9 +50,9 @@ export class SubjectAddComponent implements OnInit {
 
   errorMessage: string = '';
   isLoading: boolean = true;
-  searchTerm: string = '';
   successMessage: string = '';
 
+  classes: ClassModel[] = [];
   teachers: Teacher[] = [];
 
   constructor(
@@ -64,7 +66,7 @@ export class SubjectAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeSubjectAddForm();
-    this.getTeachers();
+    this.loadInitialData();
   }
 
   ngAfterViewInit(): void {
@@ -73,18 +75,25 @@ export class SubjectAddComponent implements OnInit {
     }, 0);
   }
 
-  getTeachers(): void {
-    this.teacherService.getTeachers().subscribe({
-      next: (teachers: Teacher[]) => {
+  loadInitialData(): void {
+    this.isLoading = true;
+
+    forkJoin({
+      classes: this.classService.getClasses(),
+      teachers: this.teacherService.getTeachers()
+    }).subscribe({
+      next: ({ classes, teachers }) => {
+        this.classes = classes;
         this.teachers = teachers;
       },
-      error: error => {
-        this.errorMessage = error.error.message || 'Wystąpił błąd podczas pobierania nauczycieli.';
+      error: (error) => {
+        this.errorMessage = 'Błąd podczas ładowania danych początkowych.';
         this.toastr.error(this.errorMessage, 'Błąd');
         console.error(error);
+      },
+      complete: () => {
+        this.isLoading = false;
       }
-    }).add(() => {
-      this.isLoading = false;
     });
   }
 

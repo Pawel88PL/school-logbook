@@ -87,6 +87,20 @@ public class ClassService(AppDbContext context) : IClassService
         };
     }
 
+    public async Task<IEnumerable<ClassDto>> GetClassesAsync()
+    {
+        var classes = await _context.Classes
+            .AsNoTracking()
+            .Select(c => new ClassDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+            })
+            .ToListAsync();
+
+        return classes;
+    }
+
     public async Task<PagedClasses> GetClassesPaged(PagedRequest request)
     {
         var query = _context.Classes
