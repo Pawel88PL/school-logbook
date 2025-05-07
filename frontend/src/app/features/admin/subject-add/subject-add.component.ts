@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule, FormArray } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
@@ -10,12 +10,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltip } from '@angular/material/tooltip';
 
 import { ClassService } from '../../../core/services/class.service';
 import { TeacherService } from '../../../core/services/teacher.service';
 import { ToastrService } from 'ngx-toastr';
 
-import { SubjectAddModel } from '../../../core/models/subject-model';
 import { Teacher } from '../../../core/models/teacher-model';
 import { SubjectService } from '../../../core/services/subject.service';
 import { ClassModel } from '../../../core/models/class-model';
@@ -34,6 +34,7 @@ import { forkJoin } from 'rxjs';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatTooltip,
 
     RouterModule,
     ReactiveFormsModule
@@ -46,7 +47,7 @@ export class SubjectAddComponent implements OnInit {
 
   @ViewChild('autoFocusInput') autoFocusInput!: ElementRef;
 
-  subjectAddForm!: FormGroup;
+  subjectForm!: FormGroup;
 
   errorMessage: string = '';
   isLoading: boolean = true;
@@ -65,7 +66,7 @@ export class SubjectAddComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.initializeSubjectAddForm();
+    this.initializeSubjectForm();
     this.loadInitialData();
   }
 
@@ -73,6 +74,19 @@ export class SubjectAddComponent implements OnInit {
     setTimeout(() => {
       this.autoFocusInput.nativeElement.focus();
     }, 0);
+  }
+
+  get assignments(): FormArray {
+    return this.subjectForm.get('assignments') as FormArray;
+  }
+
+  addAssignment(): void {
+    this.assignments.push(
+      this.fb.group({
+        classId: [null, Validators.required],
+        teacherId: [null, Validators.required]
+      })
+    );
   }
 
   loadInitialData(): void {
@@ -85,6 +99,8 @@ export class SubjectAddComponent implements OnInit {
       next: ({ classes, teachers }) => {
         this.classes = classes;
         this.teachers = teachers;
+
+        this.addAssignment();
       },
       error: (error) => {
         this.errorMessage = 'Błąd podczas ładowania danych początkowych.';
@@ -97,24 +113,24 @@ export class SubjectAddComponent implements OnInit {
     });
   }
 
-  initializeSubjectAddForm(): void {
-    this.subjectAddForm = this.fb.group({
+  initializeSubjectForm(): void {
+    this.subjectForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      assignments: this.fb.array([])
     });
   }
 
-  prepareSubjectAddModel(): SubjectAddModel {
-    return {
-      name: this.subjectAddForm.get('name')?.value,
-    };
-  }
-
   onSubmit(): void {
-    if (this.subjectAddForm.valid) {
-      this.isLoading = true;
-      const newSubject = this.prepareSubjectAddModel();
+    if (this.subjectForm.invalid) {
+      this.toastr.warning('Uzupełnij wszystkie wymagane pola', 'Uwaga');
+      return;
+    }
 
-      this.subjectService.addSubject(newSubject).subscribe({
+    if (this.subjectForm.valid) {
+      this.isLoading = true;
+      const subjectData = this.subjectForm.value;
+
+      this.subjectService.addSubject(subjectData).subscribe({
         next: () => {
           this.toastr.success(this.successMessage, 'Sukces');
           this.isLoading = false;
@@ -128,5 +144,9 @@ export class SubjectAddComponent implements OnInit {
         }
       });
     }
+  }
+
+  removeAssignment(index: number): void {
+    this.assignments.removeAt(index);
   }
 }

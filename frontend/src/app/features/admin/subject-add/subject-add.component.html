@@ -8,34 +8,68 @@
 
     <hr class="my-5" />
 
-    <form [formGroup]="subjectAddForm" class="mb-3">
-        <div class="row">
-            <div class="col-lg-6">
-                <mat-form-field appearance="outline" class="mb-3">
-                    <mat-label>Nazwa przedmiotu</mat-label>
-                    <input matInput type="text" formControlName="name" #autoFocusInput>
-                    <mat-error *ngIf="subjectAddForm.controls['name'].hasError('required')">
-                        Nazwa przedmiotu jest wymagana
-                    </mat-error>
-                    <mat-error *ngIf="subjectAddForm.controls['name'].hasError('minLength')">
-                        Nazwa przedmiotu musi być dłuższa niż 2 znaki
-                    </mat-error>
-                    <mat-error *ngIf="subjectAddForm.controls['name'].hasError('maxlength')">
-                        Nazwa przedmiotu nie może być dłuższa niż 20 znaków
+    <form [formGroup]="subjectForm" class="mb-3" (ngSubmit)="onSubmit()">
+
+        <div class="d-flex">
+            <mat-form-field appearance="outline" class="mb-3">
+                <mat-label>Nazwa przedmiotu</mat-label>
+                <input matInput type="text" formControlName="name" placeholder="Np. Matematyka" #autoFocusInput>
+                <mat-error *ngIf="subjectForm.controls['name'].hasError('required')">
+                    Nazwa przedmiotu jest wymagana
+                </mat-error>
+                <mat-error *ngIf="subjectForm.controls['name'].hasError('minLength')">
+                    Nazwa przedmiotu musi być dłuższa niż 2 znaki
+                </mat-error>
+                <mat-error *ngIf="subjectForm.controls['name'].hasError('maxlength')">
+                    Nazwa przedmiotu nie może być dłuższa niż 20 znaków
+                </mat-error>
+            </mat-form-field>
+
+            <!-- Dodaj kolejne przypisanie -->
+            <img src="./images/add.png" alt="Dodaj" class="add-icon" matTooltip="Dodaj kolejne przypisanie"
+                matTooltipPosition="above" (click)="addAssignment()">
+        </div>
+
+        <!-- Lista przypisań (FormArray) -->
+        <div formArrayName="assignments">
+            <div *ngFor="let assignment of assignments.controls; let i = index" [formGroupName]="i"
+                class="mb-4 flex flex-wrap gap-4 items-center">
+
+                <!-- Wybór klasy -->
+                <mat-form-field appearance="outline" class="w-48">
+                    <mat-label>Klasa</mat-label>
+                    <mat-select formControlName="classId">
+                        <mat-option *ngFor="let c of classes" [value]="c.id">{{ c.name }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="assignment.get('classId')?.hasError('required')">
+                        Klasa jest wymagana
                     </mat-error>
                 </mat-form-field>
+
+                <!-- Wybór nauczyciela -->
+                <mat-form-field appearance="outline" class="w-72">
+                    <mat-label>Nauczyciel</mat-label>
+                    <mat-select formControlName="teacherId">
+                        <mat-option *ngFor="let t of teachers" [value]="t.id">
+                            {{ t.firstName }} {{ t.lastName }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="assignment.get('teacherId')?.hasError('required')">
+                        Nauczyciel jest wymagany
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Usuń przypisanie -->
+                <img src="./images/delete.png" alt="Usuń" class="delete-icon" matTooltip="Usuń przypisanie"
+                    matTooltipPosition="above" (click)="removeAssignment(i)">
             </div>
         </div>
-    </form>
 
-    
-
-    <div class="form-actions">
-        <button class="proceed" [disabled]="isLoading" type="submit" (click)="onSubmit()">
+        <button class="proceed" [disabled]="isLoading" type="submit">
             <span *ngIf="isLoading" class="loading-spinner"></span>
             <span *ngIf="!isLoading">
                 Dodaj przedmiot
             </span>
         </button>
-    </div>
+    </form>
 </div>
