@@ -37,6 +37,7 @@ export const routes: Routes = [
             { path: 'class-edit/:id', component: ClassEditComponent, data: { title: 'Dziennik - edytuj klasę' } },
             { path: 'classes', component: ClassListComponent, data: { title: 'Dziennik - klasy' } },
             { path: 'subject-add', component: SubjectAddComponent, data: { title: 'Dziennik - dodaj przedmiot' } },
+            { path: 'subject-edit/:id', component: SubjectEditComponent, data: { title: 'Dziennik - edytuj przedmiot' } },
             { path: 'subjects', component: SubjectListComponent, data: { title: 'Dziennik - przedmioty' } },
             { path: 'user-add', component: UserAddComponent, data: { title: 'Dziennik - dodaj użytkownika' } },
             { path: 'user-edit/:id', component: UserEditComponent, data: { title: 'Dziennik - edytuj użytkownika' } },

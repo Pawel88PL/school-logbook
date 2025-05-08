@@ -57,7 +57,7 @@
                 <th mat-header-cell *matHeaderCellDef> Akcje </th>
                 <td mat-cell *matCellDef="let row">
                     <img src="./images/info.png" alt="Szczegóły" class="details-icon" matTooltip="Szczegóły"
-                        matTooltipPosition="above" routerLink="/admin/class-edit/{{ row.id }}">
+                        matTooltipPosition="above" routerLink="/admin/subject-edit/{{ row.id }}">
                     <img src="./images/delete.png" alt="Usuń" class="delete-icon" matTooltip="Usuń"
                         matTooltipPosition="above" (click)="onDeleteSubject(row.id)">
                 </td>
