@@ -64,20 +64,20 @@ export class SubjectListComponent implements OnInit {
     this.loadSubjects(0, this.pageSize);
   }
 
-  // deleteSubject(id: number) {
-  //   this.isLoading = true;
-  //   this.subjectService.deleteClass(id).subscribe({
-  //     next: () => {
-  //       this.toastr.success('Klasa została usunięta', 'Sukces');
-  //       this.loadClasses(this.paginator.pageIndex, this.paginator.pageSize);
-  //     },
-  //     error: (error) => {
-  //       this.toastr.error('Wystąpił błąd podczas usuwania klasy', 'Błąd');
-  //       console.error(error);
-  //       this.isLoading = false;
-  //     }
-  //   });
-  // }
+  deleteSubject(id: number) {
+    this.isLoading = true;
+    this.subjectService.deleteSubject(id).subscribe({
+      next: () => {
+        this.toastr.success('Przedmiot został usunięty', 'Sukces');
+        this.loadSubjects(this.paginator.pageIndex, this.paginator.pageSize);
+      },
+      error: (error) => {
+        this.toastr.error(error.error.message, 'Błąd');
+        console.error(error);
+        this.isLoading = false;
+      }
+    });
+  }
 
   initializeSort() {
     if (!this.isSortInitialized) {
@@ -124,7 +124,7 @@ export class SubjectListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // this.deleteClass(id);
+        this.deleteSubject(id);
       }
     });
   }

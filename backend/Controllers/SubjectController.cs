@@ -34,6 +34,23 @@ public class SubjectController(ISubjectService subjectService) : ControllerBase
         }
     }
 
+    [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrator")]
+    public async Task<IActionResult> DeleteSubject(int id)
+    {
+        try
+        {
+            await _subjectService.DeleteSubjectAsync(id);
+            return Ok(new { message = "Przedmiot został usunięty." });
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Błąd podczas usuwania przedmiotu");
+            return StatusCode(500, new { message = $"Wystąpił błąd: {ex.Message}" });
+        }
+    }
+
+
     [HttpGet("paged")]
     public async Task<IActionResult> GetSubjectsPaged([FromQuery] PagedRequest request)
     {

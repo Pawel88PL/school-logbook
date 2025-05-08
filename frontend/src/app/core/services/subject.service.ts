@@ -26,6 +26,12 @@ export class SubjectService {
     return this.http.post(`${this.apiUrl}/add`, data, { headers });
   }
 
+  deleteSubject(id: number): Observable<any> {
+    const token = this.jwtService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete(`${this.apiUrl}/${id}`, { headers });
+  }
+
   getSubjectPaged(request: PagedRequestParams): Observable<any> {
     const token = this.jwtService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

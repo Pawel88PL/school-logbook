@@ -48,6 +48,41 @@ public class SubjectService(AppDbContext context) : ISubjectService
         }
     }
 
+    public async Task DeleteSubjectAsync(int subjectId)
+    {
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+
+        try
+        {
+            var subject = await _context.Subjects
+                .Include(s => s.ClassSubjects)
+                .FirstOrDefaultAsync(s => s.Id == subjectId);
+
+            if (subject == null)
+            {
+                throw new Exception($"Nie znaleziono przedmiotu o ID {subjectId}");
+            }
+
+            // Usuń powiązania w tabeli ClassSubjects
+            if (subject.ClassSubjects.Any())
+            {
+                _context.ClassSubjects.RemoveRange(subject.ClassSubjects);
+            }
+
+            // Usuń sam przedmiot
+            _context.Subjects.Remove(subject);
+
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }
+        catch (Exception ex)
+        {
+            await transaction.RollbackAsync();
+            Log.Error(ex, $"Błąd podczas usuwania przedmiotu ID {subjectId}");
+            throw new Exception("Wystąpił błąd podczas usuwania przedmiotu.", ex);
+        }
+    }
+
     public async Task<PagedSubjects> GetSubjectsPaged(PagedRequest request)
     {
         var query = _context.Subjects
