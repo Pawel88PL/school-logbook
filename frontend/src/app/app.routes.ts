@@ -9,6 +9,8 @@ import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.compone
 import { ClassAddComponent } from './features/admin/class-add/class-add.component';
 import { ClassEditComponent } from './features/admin/class-edit/class-edit.component';
 import { ClassListComponent } from './features/admin/class-list/class-list.component';
+import { ScheduleEditComponent } from './features/admin/schedule-edit/schedule-edit.component';
+import { ScheduleListComponent } from './features/admin/schedule-list/schedule-list.component';
 import { SubjectAddComponent } from './features/admin/subject-add/subject-add.component';
 import { SubjectEditComponent } from './features/admin/subject-edit/subject-edit.component';
 import { SubjectListComponent } from './features/admin/subject-list/subject-list.component';
@@ -36,6 +38,8 @@ export const routes: Routes = [
             { path: 'class-add', component: ClassAddComponent, data: { title: 'Dziennik - dodaj klasę' } },
             { path: 'class-edit/:id', component: ClassEditComponent, data: { title: 'Dziennik - edytuj klasę' } },
             { path: 'classes', component: ClassListComponent, data: { title: 'Dziennik - klasy' } },
+            { path: 'schedule-edit/:id', component: ScheduleEditComponent, data: { title: 'Dziennik - edytuj plan lekcji' } },
+            { path: 'schedules', component: ScheduleListComponent, data: { title: 'Dziennik - plany lekcji' } },
             { path: 'subject-add', component: SubjectAddComponent, data: { title: 'Dziennik - dodaj przedmiot' } },
             { path: 'subject-edit/:id', component: SubjectEditComponent, data: { title: 'Dziennik - edytuj przedmiot' } },
             { path: 'subjects', component: SubjectListComponent, data: { title: 'Dziennik - przedmioty' } },
