@@ -1,1 +1,48 @@
-<p>teacher-layout works!</p>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav [mode]="isSmallScreen ? 'over' : 'side'" [opened]="sidenavOpened" class="sidenav bg-dark">
+        <mat-nav-list role="navigation" aria-label="Panel nauczyciela">
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h5>Plan lekcji</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <a mat-list-item routerLink="/teacher/schedule">Pokaż plan lekcji</a>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h5>Obecności</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <a mat-list-item routerLink="/teacher/attendance">Lista obecności</a>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h5>Moje przedmioty</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <a mat-list-item routerLink="/teacher/subjects">Lista przedmiotów</a>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h5>Moje klasy</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <a mat-list-item routerLink="/teacher/classes">Lista klas</a>
+            </mat-expansion-panel>
+
+        </mat-nav-list>
+    </mat-sidenav>
+
+
+    <mat-sidenav-content class="content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
