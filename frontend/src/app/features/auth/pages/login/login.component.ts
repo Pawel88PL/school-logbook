@@ -51,14 +51,6 @@ export class LoginComponent implements OnInit {
     this.initialeLoginForm();
   }
 
-  handleRedirectAfterLogin() {
-    if (this.authService.isAdmin()) {
-      this.router.navigate(['/admin']);
-    } else {
-      this.router.navigate(['/home']);
-    }
-  }
-
   initialeLoginForm() {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.email]],
@@ -78,7 +70,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginData.username, loginData.password).subscribe({
         next: () => {
           this.errorMessage = null;
-          this.handleRedirectAfterLogin();
+          // Przekierowanie odbywa się w auth.service po pomyślnym zalogowaniu
         },
         error: (message) => {
           this.isInLogginProcess = false;

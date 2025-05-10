@@ -37,10 +37,15 @@ export class AuthService {
       this.toastr.clear(Number(toastId));
     }
 
-    if (this.isAdmin() || this.isEmployee()) {
-      this.router.navigate(['/gpps-office']);
-    } else {
-      this.router.navigate(['/user']);
+    if (this.isAdmin()) {
+      this.router.navigate(['/admin']);
+    } else if (this.isTeacher()) {
+      this.router.navigate(['/teacher']);
+    } else if (this.isStudent()) {
+      this.router.navigate(['/student']);
+    }
+    else {
+      this.router.navigate(['/']);
     }
   }
 
@@ -56,14 +61,14 @@ export class AuthService {
     return roles.includes('Administrator');
   }
 
-  isEmployee(): boolean {
+  isTeacher(): boolean {
     const roles = this.jwtService.getUserRole();
-    return roles.includes('Employee');
+    return roles.includes('Teacher');
   }
 
-  isTaxpayer(): boolean {
+  isStudent(): boolean {
     const roles = this.jwtService.getUserRole();
-    return roles.includes('Taxpayer');
+    return roles.includes('Student');
   }
 
   isLoggedIn(): boolean {
