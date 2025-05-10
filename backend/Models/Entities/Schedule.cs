@@ -4,6 +4,9 @@ public class Schedule
 {
     public int Id { get; set; }
 
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime? UpdatedAt { get; set; }
+
     public int ClassId { get; set; }
     public Class Class { get; set; } = null!;
 
@@ -14,7 +17,7 @@ public class Schedule
     public Teacher Teacher { get; set; } = null!;
 
     public DayOfWeek DayOfWeek { get; set; }
-    public TimeSpan Time { get; set; } // np. 08:00
+    public TimeSpan StartTime { get; set; } // np. 08:00
 
     public ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
 }
