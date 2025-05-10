@@ -48,7 +48,7 @@
             <!-- Kolumna Klasa - nauczyciel -->
             <ng-container matColumnDef="assignmentsDto">
                 <th mat-header-cell *matHeaderCellDef> Klasa - nauczyciel </th>
-                <td mat-cell *matCellDef="let row"> {{ row.assignmentsDto }}
+                <td mat-cell *matCellDef="let row"> {{ row.assignmentsDto.join(', ') }}
                 </td>
             </ng-container>
 

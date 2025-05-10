@@ -83,6 +83,30 @@ public class SubjectService(AppDbContext context) : ISubjectService
         }
     }
 
+    public async Task<SubjectDto> GetSubjectByIdAsync(int id)
+    {
+        var subject = await _context.Subjects
+            .AsNoTracking()
+            .Where(s => s.Id == id)
+            .Select(s => new SubjectDto
+            {
+                Id = s.Id,
+                Name = s.Name,
+                Assignments = s.ClassSubjects.Select(cs => new SubjectAssignmentDto
+                {
+                    ClassId = cs.ClassId,
+                    TeacherId = cs.TeacherId
+                }).ToList()
+            })
+            .FirstOrDefaultAsync();
+
+        if (subject == null)
+            throw new Exception("Przedmiot nie został znaleziony");
+
+        return subject;
+    }
+
+
     public async Task<PagedSubjects> GetSubjectsPaged(PagedRequest request)
     {
         var query = _context.Subjects
@@ -148,5 +172,53 @@ public class SubjectService(AppDbContext context) : ISubjectService
             TotalRecords = totalRecords,
             Data = subjectDtos
         };
+    }
+
+    public async Task UpdateSubjectWithAssignmentsAsync(SubjectDto dto)
+    {
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+
+        try
+        {
+            var subject = await _context.Subjects
+                .FirstOrDefaultAsync(s => s.Id == dto.Id);
+
+            if (subject == null)
+            {
+                throw new Exception($"Nie znaleziono przedmiotu o ID {dto.Id}");
+            }
+
+            // 1. Aktualizacja danych podstawowych
+            subject.Name = dto.Name;
+            subject.UpdatedAt = DateTime.Now;
+            _context.Subjects.Update(subject);
+
+            // 2. Usunięcie istniejących przypisań
+            var existingAssignments = await _context.ClassSubjects
+                .Where(cs => cs.SubjectId == dto.Id)
+                .ToListAsync();
+
+            _context.ClassSubjects.RemoveRange(existingAssignments);
+
+            // 3. Dodanie nowych przypisań
+            var newAssignments = dto.Assignments.Select(a => new ClassSubject
+            {
+                ClassId = a.ClassId,
+                TeacherId = a.TeacherId,
+                SubjectId = dto.Id
+            }).ToList();
+
+            await _context.ClassSubjects.AddRangeAsync(newAssignments);
+
+            // 4. Zapisanie zmian
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }
+        catch (Exception ex)
+        {
+            await transaction.RollbackAsync();
+            Log.Error(ex, "Błąd podczas edycji przedmiotu z przypisaniami");
+            throw new Exception("Błąd podczas edycji przedmiotu", ex);
+        }
     }
 }

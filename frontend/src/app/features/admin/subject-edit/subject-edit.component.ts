@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule, FormArray } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -20,6 +20,7 @@ import { Teacher } from '../../../core/models/teacher-model';
 import { SubjectService } from '../../../core/services/subject.service';
 import { ClassModel } from '../../../core/models/class-model';
 import { forkJoin } from 'rxjs';
+import { AssignmentModel, SubjectModel } from '../../../core/models/subject-model';
 
 @Component({
   selector: 'app-subject-edit',
@@ -48,6 +49,7 @@ export class SubjectEditComponent implements OnInit {
   @ViewChild('autoFocusInput') autoFocusInput!: ElementRef;
 
   subjectForm!: FormGroup;
+  subjectId: number | null = null;
 
   errorMessage: string = '';
   isLoading: boolean = true;
@@ -57,6 +59,7 @@ export class SubjectEditComponent implements OnInit {
   teachers: Teacher[] = [];
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private classService: ClassService,
     private fb: FormBuilder,
     private router: Router,
@@ -66,6 +69,7 @@ export class SubjectEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.captureURLparameters();
     this.initializeSubjectForm();
     this.loadInitialData();
   }
@@ -89,6 +93,29 @@ export class SubjectEditComponent implements OnInit {
     );
   }
 
+  captureURLparameters(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.subjectId = params['id'];
+    });
+  }
+
+  getSubject(id: number): void {
+    this.isLoading = true;
+
+    this.subjectService.getSubjectById(id).subscribe({
+      next: (subject) => {
+        this.setValueToSubjectForm(subject);
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.errorMessage = 'Błąd podczas ładowania przedmiotu.';
+        this.toastr.error(this.errorMessage, 'Błąd');
+        console.error(error);
+        this.isLoading = false;
+      }
+    });
+  }
+
   loadInitialData(): void {
     this.isLoading = true;
 
@@ -100,7 +127,9 @@ export class SubjectEditComponent implements OnInit {
         this.classes = classes;
         this.teachers = teachers;
 
-        this.addAssignment();
+        if (this.subjectId) {
+          this.getSubject(this.subjectId);
+        }
       },
       error: (error) => {
         this.errorMessage = 'Błąd podczas ładowania danych początkowych.';
@@ -128,9 +157,9 @@ export class SubjectEditComponent implements OnInit {
 
     if (this.subjectForm.valid) {
       this.isLoading = true;
-      const subjectData = this.subjectForm.value;
+      const subjectData = this.prepareSubjectModel();
 
-      this.subjectService.addSubject(subjectData).subscribe({
+      this.subjectService.updateSubject(subjectData).subscribe({
         next: () => {
           this.toastr.success(this.successMessage, 'Sukces');
           this.isLoading = false;
@@ -146,7 +175,29 @@ export class SubjectEditComponent implements OnInit {
     }
   }
 
+  prepareSubjectModel(): SubjectModel {
+    return {
+      id: this.subjectId as number,
+      name: this.subjectForm.get('name')?.value,
+      assignments: this.subjectForm.get('assignments')?.value.map((assignment: AssignmentModel) => ({
+        classId: assignment.classId,
+        teacherId: assignment.teacherId
+      }))
+    };
+  }
+
   removeAssignment(index: number): void {
     this.assignments.removeAt(index);
+  }
+
+  setValueToSubjectForm(subject: SubjectModel): void {
+    this.subjectForm.get('name')?.setValue(subject.name);
+    this.assignments.clear();
+    subject.assignments.forEach(a => {
+      this.assignments.push(this.fb.group({
+        classId: [a.classId, Validators.required],
+        teacherId: [a.teacherId, Validators.required]
+      }));
+    });
   }
 }

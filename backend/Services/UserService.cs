@@ -279,9 +279,8 @@ namespace backend.Services
                 var user = await _userManager.FindByIdAsync(updateUser.Id);
                 if (user == null) return false;
 
-                user.UserName = updateUser.Email;
-                user.Email = updateUser.Email;
-                user.IsActive = updateUser.IsActive;
+                await _userManager.SetUserNameAsync(user, updateUser.Email);
+                await _userManager.SetEmailAsync(user, updateUser.Email);
 
                 if (!string.IsNullOrEmpty(updateUser.NewPassword))
                 {

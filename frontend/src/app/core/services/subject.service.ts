@@ -5,7 +5,7 @@ import { JwtService } from '../auth/jwt.service';
 import { Observable } from 'rxjs';
 import { ClassModel } from '../models/class-model';
 import { PagedRequestParams } from '../models/paged-request-params';
-import { SubjectAddModel } from '../models/subject-model';
+import { SubjectAddModel, SubjectModel } from '../models/subject-model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,12 @@ export class SubjectService {
     return this.http.delete(`${this.apiUrl}/${id}`, { headers });
   }
 
+  getSubjectById(id: number): Observable<any> {
+    const token = this.jwtService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.apiUrl}/${id}`, { headers });
+  }
+
   getSubjectPaged(request: PagedRequestParams): Observable<any> {
     const token = this.jwtService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -43,5 +49,11 @@ export class SubjectService {
       .set('sortDirection', request.sortDirection)
 
     return this.http.get(`${this.apiUrl}/paged`, { headers, params });
+  }
+
+  updateSubject(data: SubjectModel): Observable<any> {
+    const token = this.jwtService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put(`${this.apiUrl}/update`, data, { headers });
   }
 }

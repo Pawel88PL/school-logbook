@@ -50,6 +50,25 @@ public class SubjectController(ISubjectService subjectService) : ControllerBase
         }
     }
 
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetSubjectById(int id)
+    {
+        try
+        {
+            var subject = await _subjectService.GetSubjectByIdAsync(id);
+            if (subject == null)
+            {
+                return NotFound(new { message = "Nie znaleziono przedmiotu." });
+            }
+            return Ok(subject);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Błąd podczas pobierania przedmiotu");
+            return Problem(detail: ex.Message, statusCode: 500, title: "Błąd serwera");
+        }
+    }
+
 
     [HttpGet("paged")]
     public async Task<IActionResult> GetSubjectsPaged([FromQuery] PagedRequest request)
@@ -62,6 +81,26 @@ public class SubjectController(ISubjectService subjectService) : ControllerBase
         catch (Exception ex)
         {
             Log.Error(ex, "Błąd podczas pobierania przedmiotów");
+            return Problem(detail: ex.Message, statusCode: 500, title: "Błąd serwera");
+        }
+    }
+
+    [HttpPut("update")]
+    public async Task<IActionResult> UpdateSubjectWithAssignments([FromBody] SubjectDto dto)
+    {
+        if (dto == null)
+        {
+            return BadRequest("Niepoprawne dane wejściowe.");
+        }
+
+        try
+        {
+            await _subjectService.UpdateSubjectWithAssignmentsAsync(dto);
+            return Ok(new { message = "Przedmiot został zaktualizowany." });
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Błąd podczas aktualizacji przedmiotu z przypisaniami");
             return Problem(detail: ex.Message, statusCode: 500, title: "Błąd serwera");
         }
     }
