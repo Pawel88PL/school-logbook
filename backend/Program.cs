@@ -202,6 +202,7 @@ namespace backend
         private static void RegisterServices(IServiceCollection services)
         {
             services.AddScoped<IClassService, ClassService>();
+            services.AddScoped<IScheduleService, ScheduleService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<ISubjectService, SubjectService>();
             services.AddScoped<ITeacherService, TeacherService>();
