@@ -16,7 +16,7 @@ public class ScheduleService(AppDbContext context) : IScheduleService
             {
                 Id = c.Id,
                 Name = c.Name,
-                HasSchedule = c.Schedules.Any() // jeśli klasa ma chociaż jeden wpis w planie
+                EntryCount = c.Schedules.Count()
             })
             .ToListAsync();
     }

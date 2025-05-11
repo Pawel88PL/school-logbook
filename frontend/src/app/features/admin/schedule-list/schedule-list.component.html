@@ -4,7 +4,7 @@
 
 <div class="custom-container">
 
-    <h1>Plany lekcji</h1>
+    <h1>Plany lekcji ({{ dataSource.data.length }})</h1>
 
     <hr class="my-5" />
 
@@ -21,14 +21,15 @@
 
             <!-- Kolumna Nazwa klasy -->
             <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nazwa klasy </th>
+                <th mat-header-cell *matHeaderCellDef> Nazwa klasy </th>
                 <td mat-cell *matCellDef="let row">{{ row.name }}</td>
             </ng-container>
 
             <!-- Kolumna Liczba wpisów -->
-            <ng-container matColumnDef="studentCount">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Liczba wpisów </th>
-                <td mat-cell *matCellDef="let row"> {{ row.studentCount }}
+            <ng-container matColumnDef="entryCount">
+                <th mat-header-cell *matHeaderCellDef> Liczba wpisów </th>
+                <td mat-cell *matCellDef="let row">
+                    {{ row.entryCount > 0 ? row.entryCount : '—' }}
                 </td>
             </ng-container>
 
@@ -36,18 +37,19 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef class="text-center"> Akcje </th>
                 <td mat-cell *matCellDef="let row" class="text-center">
-                    <span *ngIf="!row.hasSchedule">
-                        <img src="./images/add.png" alt="Utwórz plan lekcji" class="details-icon"
-                            matTooltip="Utwórz plan lekcji" matTooltipPosition="above"
-                            routerLink="/admin/schedule-edit/{{ row.id }}">
-                        Utwórz plan lekcji
-                    </span>
-                    <span *ngIf="row.hasSchedule">
-                        <img src="./images/edit.png" alt="Edytuj plan lekcji" class="details-icon"
-                            matTooltip="Edytuj plan lekcji" matTooltipPosition="above"
-                            routerLink="/admin/schedule-edit/{{ row.id }}">
-                        Edytuj plan lekcji
-                    </span>
+                    <ng-container *ngIf="!row.hasSchedule">
+                        <a matTooltip="Utwórz plan lekcji" [routerLink]="'/admin/schedule-edit/' + row.id" class="action-link">
+                            <img src="./images/add.png" alt="Utwórz plan" class="details-icon" />
+                            <span>Utwórz plan lekcji</span>
+                        </a>
+                    </ng-container>
+                
+                    <ng-container *ngIf="row.hasSchedule">
+                        <a matTooltip="Edytuj plan lekcji" [routerLink]="'/admin/schedule-edit/' + row.id" class="action-link">
+                            <img src="./images/edit.png" alt="Edytuj plan" class="details-icon" />
+                            <span>Edytuj plan lekcji</span>
+                        </a>
+                    </ng-container>
                 </td>
             </ng-container>
 
