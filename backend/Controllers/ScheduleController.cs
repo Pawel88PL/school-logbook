@@ -26,4 +26,23 @@ public class ScheduleController(IScheduleService schedule) : ControllerBase
             return BadRequest(new { message });
         }
     }
+
+    [HttpGet("class/{classId}")]
+    public async Task<IActionResult> GetScheduleForClass(int classId)
+    {
+        try
+        {
+            var schedule = await _schedule.GetScheduleForClassAsync(classId);
+            if (schedule == null)
+                return NotFound(new { message = "Nie znaleziono harmonogramu dla tej klasy." });
+
+            return Ok(schedule);
+        }
+        catch (Exception ex)
+        {
+            var message = $"Wystąpił błąd podczas pobierania harmonogramu dla klasy o ID {classId}: {ex.Message}";
+            Log.Error(message);
+            return BadRequest(new { message });
+        }
+    }
 }
