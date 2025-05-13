@@ -5,7 +5,6 @@ using backend.Models;
 using backend.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Dynamic.Core; // <-- Konieczne do dynamicznej zmiany sortowania
 using Serilog;
 
 namespace backend.Services
@@ -141,7 +140,7 @@ namespace backend.Services
 
             if (user == null)
                 return null;
-            
+
             var roles = await _userManager.GetRolesAsync(user);
             var role = roles.FirstOrDefault();
 
@@ -218,18 +217,32 @@ namespace backend.Services
 
             if (!string.IsNullOrEmpty(request.SearchQuery))
             {
-                query = query.Where(c => c.User.Email!.Contains(request.SearchQuery));
+                query = query.Where(c => c.RoleName!.Contains(request.SearchQuery));
             }
 
-            if (!string.IsNullOrEmpty(request.SortColumn) && request.SortColumn == "role")
+            // Dynamiczne sortowanie
+            if (!string.IsNullOrEmpty(request.SortColumn))
             {
-                var sortExpression = $"RoleName {(request.SortDirection == "desc" ? "descending" : "ascending")}";
-                query = query.OrderBy(sortExpression);
+                query = request.SortColumn switch
+                {
+                    "role" => request.SortDirection == "desc"
+                        ? query.OrderByDescending(c => c.RoleName)
+                        : query.OrderBy(c => c.RoleName),
+
+                    "email" => request.SortDirection == "desc"
+                        ? query.OrderByDescending(c => c.User.Email)
+                        : query.OrderBy(c => c.User.Email),
+
+                    "lastSuccessfulLogin" => request.SortDirection == "desc"
+                        ? query.OrderByDescending(c => c.User.LastSuccessfulLogin)
+                        : query.OrderBy(c => c.User.LastSuccessfulLogin),
+
+                    _ => query.OrderByDescending(c => c.RoleName)
+                };
             }
-            else if (!string.IsNullOrEmpty(request.SortColumn))
+            else
             {
-                var sortExpression = $"User.{request.SortColumn} {(request.SortDirection == "desc" ? "descending" : "ascending")}";
-                query = query.OrderBy(sortExpression);
+                query = query.OrderBy(c => c.RoleName);
             }
 
             int totalRecords = await query.CountAsync();
@@ -246,10 +259,27 @@ namespace backend.Services
                 LastName = item.Admin?.LastName ?? item.Teacher?.LastName ?? item.Student?.LastName ?? string.Empty,
                 Email = item.User.Email ?? string.Empty,
                 Role = item.RoleName,
-                IsActive = item.User.IsActive,
                 DateAdded = item.User.DateAdded,
                 LastSuccessfulLogin = item.User.LastSuccessfulLogin
             }).ToList();
+
+            // Sortowanie po imieniu/nazwisku w pamięci
+            if (!string.IsNullOrEmpty(request.SortColumn))
+            {
+                bool desc = request.SortDirection?.ToLower() == "desc";
+                usersDto = request.SortColumn.ToLower() switch
+                {
+                    "firstname" => desc
+                        ? usersDto.OrderByDescending(u => u.FirstName).ToList()
+                        : usersDto.OrderBy(u => u.FirstName).ToList(),
+
+                    "lastname" => desc
+                        ? usersDto.OrderByDescending(u => u.LastName).ToList()
+                        : usersDto.OrderBy(u => u.LastName).ToList(),
+
+                    _ => usersDto
+                };
+            }
 
             return new PagedUsers
             {

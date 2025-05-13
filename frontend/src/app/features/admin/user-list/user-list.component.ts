@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { catchError, combineLatest, debounceTime, distinctUntilChanged, of, startWith, Subscription, switchMap } from 'rxjs';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -11,15 +11,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginatorIntlPolish } from '../../../shared/classes/mat-paginator-polish';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatTooltip } from '@angular/material/tooltip';
 
 import { JwtService } from '../../../core/auth/jwt.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../core/services/user.service';
 
-import { User } from '../../../core/models/user-model';
+import { Role, User } from '../../../core/models/user-model';
 import { DeleteConfirmationComponent } from '../../../shared/components/delete-confirmation/delete-confirmation.component';
 
 @Component({
@@ -33,6 +34,7 @@ import { DeleteConfirmationComponent } from '../../../shared/components/delete-c
     MatInputModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
     MatSortModule,
     MatTableModule,
     MatTooltip,
@@ -47,10 +49,11 @@ import { DeleteConfirmationComponent } from '../../../shared/components/delete-c
   styleUrl: './user-list.component.css'
 })
 
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  displayedColumns: string[] = ['index', 'firstName', 'lastName', 'role', 'email', 'lastSuccessfulLogin', 'isActive', 'actions'];
-  dataSource = new MatTableDataSource<User>([]);
+  displayedColumns: string[] = ['index', 'firstName', 'lastName', 'role', 'email', 'lastSuccessfulLogin', 'actions'];
+  data: User[] = [];
+
   pageIndex: number = 0;
   pageSize: number = 10;
   rowNumber: number = 0;
@@ -60,8 +63,12 @@ export class UserListComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
   errorMessage: string | null = null;
-  isLoading: boolean = true;
+  isLoadingResults: boolean = true;
   isSortInitialized: boolean = false;
+
+  roles: Role[] = [];
+
+  private subscription = new Subscription();
 
   searchForm!: FormGroup;
   searchQuery: string = '';
@@ -70,74 +77,109 @@ export class UserListComponent implements OnInit {
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private jwtService: JwtService,
-    private usersService: UserService,
+    private userService: UserService,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.initialeSearchForm();
-    this.loadUsers(0, this.pageSize);
-    this.searchQueryChanges();
+    this.getRoles();
   }
 
-  deleteUser(userId: string) {
+  ngAfterViewInit(): void {
+    this.resetPageOnSortChange();
+    this.observeTableChanges();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  private deleteUser(userId: string) {
     if (userId === this.jwtService.getUserId()) {
       this.toastr.error('Nie możesz usunąć swojego konta', 'Błąd');
       return;
     }
-    this.isLoading = true;
-    this.usersService.deleteUser(userId).subscribe({
+    this.isLoadingResults = true;
+    this.userService.deleteUser(userId).subscribe({
       next: () => {
         this.toastr.success('Użytkownik został usunięty', 'Sukces');
-        this.loadUsers(this.paginator.pageIndex, this.paginator.pageSize);
+        this.isLoadingResults = false;
       },
       error: (error) => {
         this.toastr.error('Wystąpił błąd podczas usuwania użytkownika', 'Błąd');
         console.error(error);
-        this.isLoading = false;
+        this.isLoadingResults = false;
       }
     });
   }
 
-  initialeSearchForm() {
-    this.searchForm = this.formBuilder.group({
-      query: [''],
-    })
-  }
-
-  initializeSort() {
-    if (!this.isSortInitialized) {
-      setTimeout(() => {
-        this.dataSource.sort = this.sort;
-        this.sort.sortChange.subscribe((event) => this.onSortChange(event));
-      }, 500);
-      this.isSortInitialized = true;
-    }
-  }
-
-  loadUsers(pageIndex: number, pageSize: number, sortColumn?: string, sortDirection?: string, searchQuery?: string): void {
-    const params = {
-      pageNumber: pageIndex + 1,
-      pageSize: pageSize,
-      sortColumn: sortColumn || 'role',
-      sortDirection: sortDirection || 'asc',
-      searchQuery: searchQuery || ''
-    };
-
-    this.usersService.getUsersPaged(params).subscribe({
+  private getRoles(): void {
+    this.userService.getRoles().subscribe({
       next: (response) => {
-        this.dataSource.data = response.data;
-        this.totalRecords = response.totalRecords;
-        this.initializeSort();
-        this.isLoading = false;
+        this.roles = response.map((role: Role) => ({
+          name: role.name,
+          displayName: this.translateRoleDisplayName(role.name || '')
+        }));
       },
       error: (error) => {
-        this.errorMessage = error.error.message ?? 'Wystąpił błąd podczas pobierania danych';
-        this.toastr.error(this.errorMessage!, 'Błąd');
+        this.toastr.error(error.error.message, 'Błąd');
         console.error(error);
-        this.isLoading = false;
       }
     });
+  }
+
+  getRowNumber(index: number): number {
+    return (this.paginator?.pageIndex || 0) * this.paginator.pageSize + index + 1;
+  }
+
+  private initialeSearchForm() {
+    this.searchForm = this.formBuilder.group({
+      query: [''],
+    });
+  }
+
+  private observeTableChanges(): void {
+    const query$ = this.searchForm.get('query')!.valueChanges.pipe(
+      startWith(this.searchForm.get('query')!.value),
+      debounceTime(300),
+      distinctUntilChanged()
+    );
+
+    const sort$ = this.sort.sortChange.pipe(startWith({}));
+    const page$ = this.paginator.page.pipe(startWith({}));
+
+    this.subscription.add(
+      combineLatest([query$, sort$, page$])
+        .pipe(
+          switchMap(([query]) => {
+
+            this.searchQuery = query;
+
+            this.isLoadingResults = true;
+            return this.userService.getUsersPaged({
+              pageNumber: this.paginator.pageIndex + 1,
+              pageSize: this.paginator.pageSize,
+              sortColumn: this.sort.active || 'role',
+              sortDirection: this.sort.direction || 'asc',
+              searchQuery: query || '',
+            }).pipe(
+              catchError(error => {
+                // Obsługuje błąd z backendu
+                this.isLoadingResults = false; // Zatrzymuje ładowanie
+                console.error('Error occurred:', error);
+                this.toastr.error('Wystąpił problem podczas pobierania danych', 'Błąd');
+                return of({ data: [], totalRecords: 0 }); // Możesz zwrócić domyślne dane
+              })
+            );
+          })
+        )
+        .subscribe((response: any) => {
+          this.data = response.data;
+          this.totalRecords = response.totalRecords;
+          this.isLoadingResults = false;
+        })
+    );
   }
 
   onDeleteUser(userId: string): void {
@@ -161,26 +203,20 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  onPageChange(event: any): void {
-    this.loadUsers(event.pageIndex, event.pageSize);
-    this.rowNumber = event.pageIndex * event.pageSize;
+  private resetPageOnSortChange(): void {
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
   }
 
-  onSearch(query: string): void {
-    const searchQuery = query.trim();
-    this.loadUsers(0, this.pageSize, undefined, undefined, searchQuery);
-  }
-
-  onSortChange(event: any): void {
-    this.loadUsers(this.paginator.pageIndex, this.paginator.pageSize, event.active, event.direction);
-  }
-
-  searchQueryChanges() {
-    this.searchForm.get('query')?.valueChanges.pipe(
-      debounceTime(100),
-      distinctUntilChanged()
-    ).subscribe(query => {
-      this.onSearch(query);
-    });
+  private translateRoleDisplayName(displayName: string): string {
+    switch (displayName) {
+      case 'Administrator':
+        return 'Administrator';
+      case 'Teacher':
+        return 'Nauczyciel';
+      case 'Student':
+        return 'Uczeń';
+      default:
+        return displayName; // Fallback, jeśli nie rozpoznano roli
+    }
   }
 }
