@@ -1,6 +1,7 @@
 using backend.Data;
 using backend.DTOs;
 using backend.Interfaces;
+using backend.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services;
@@ -8,6 +9,53 @@ namespace backend.Services;
 public class ScheduleService(AppDbContext context) : IScheduleService
 {
     private readonly AppDbContext _context = context;
+
+    public async Task<ScheduleEntryDto> AddEntryAsync(ScheduleEntryDto dto)
+    {
+        // Walidacja obecności danych
+        var @class = await _context.Classes.FindAsync(dto.ClassId)
+            ?? throw new Exception("Nie znaleziono klasy.");
+
+        var subject = await _context.Subjects.FindAsync(dto.SubjectId)
+            ?? throw new Exception("Nie znaleziono przedmiotu.");
+
+        var teacher = await _context.Teachers.FindAsync(dto.TeacherId)
+            ?? throw new Exception("Nie znaleziono nauczyciela.");
+
+        // Można też dodatkowo sprawdzić, czy taki wpis już istnieje:
+        var exists = await _context.Schedules.AnyAsync(s =>
+            s.ClassId == dto.ClassId &&
+            s.DayOfWeek == dto.DayOfWeek &&
+            s.StartTime == dto.StartTime);
+
+        if (exists)
+            throw new Exception("W tym dniu i o tej godzinie już istnieje wpis dla tej klasy.");
+
+        // Utwórz nowy wpis
+        var entry = new Schedule
+        {
+            ClassId = dto.ClassId,
+            SubjectId = dto.SubjectId,
+            TeacherId = dto.TeacherId,
+            DayOfWeek = dto.DayOfWeek,
+            StartTime = dto.StartTime
+        };
+
+        await _context.Schedules.AddAsync(entry);
+        await _context.SaveChangesAsync();
+
+        return new ScheduleEntryDto
+        {
+            Id = entry.Id,
+            ClassId = entry.ClassId,
+            SubjectId = entry.SubjectId,
+            TeacherId = entry.TeacherId,
+            SubjectName = subject.Name,
+            TeacherFullName = $"{teacher.FirstName} {teacher.LastName}",
+            DayOfWeek = entry.DayOfWeek,
+            StartTime = entry.StartTime
+        };
+    }
 
     public async Task<List<ClassWithScheduleDto>> GetClassesWithScheduleAsync()
     {

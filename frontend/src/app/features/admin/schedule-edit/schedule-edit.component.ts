@@ -56,25 +56,6 @@ export class ScheduleEditComponent implements OnInit {
     this.loadSubjectsForClass();
   }
 
-  openAddEntryDialog(day: number): void {
-    const dialogRef = this.dialog.open(ScheduleEntryDialogComponent, {
-      width: '500px',
-      data: {
-        dayOfWeek: day,
-        classId: this.classId,
-        availableSubjects: this.subjectOptions
-      }
-    });
-
-    dialogRef.afterClosed().subscribe((result: ScheduleEntryModel | null) => {
-      if (result) {
-        this.schedule.entries.push(result);
-        this.schedule.entries = [...this.schedule.entries]; // trigger change detection
-      }
-    });
-  }
-
-
   captureURLparameters(): void {
     this.activatedRoute.params.subscribe(params => {
       this.classId = params['id'];
@@ -136,7 +117,41 @@ export class ScheduleEditComponent implements OnInit {
     });
   }
 
+  openAddEntryDialog(day: number): void {
+    const dialogRef = this.dialog.open(ScheduleEntryDialogComponent, {
+      width: '500px',
+      data: {
+        dayOfWeek: day,
+        classId: this.classId,
+        availableSubjects: this.subjectOptions
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const entryToSend: ScheduleEntryModel = {
+          id: 0, // backend ustawi id
+          classId: this.classId!,
+          subjectId: result.subjectId,
+          teacherId: result.teacherId,
+          dayOfWeek: day,
+          startTime: result.startTime + ':00', // backend wymaga formatu HH:mm:ss
+        };
+
+        this.scheduleService.addScheduleEntry(entryToSend).subscribe({
+          next: (createdEntry) => {
+            this.toastr.success('Dodano wpis do planu lekcji', 'Sukces');
+            this.schedule.entries.push(createdEntry); // backend dostarczył wszystko
+          },
+          error: () => {
+            this.toastr.error('Błąd podczas dodawania wpisu do planu', 'Błąd');
+          }
+        });
+      }
+    });
+  }
+
   trackById(index: number, item: ScheduleEntryModel): number {
-    return item.id;
+    return item.id ? item.id : index;
   }
 }

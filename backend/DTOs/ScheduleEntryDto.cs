@@ -6,9 +6,12 @@ public class ScheduleEntryDto
     public DayOfWeek DayOfWeek { get; set; }
     public TimeSpan StartTime { get; set; }
 
+    public int ClassId { get; set; }
+    public string? ClassName { get; set; }
+
     public int SubjectId { get; set; }
-    public string SubjectName { get; set; } = null!;
+    public string? SubjectName { get; set; }
 
     public int TeacherId { get; set; }
-    public string TeacherFullName { get; set; } = null!;
+    public string? TeacherFullName { get; set; }
 }

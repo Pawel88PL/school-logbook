@@ -1,3 +1,4 @@
+using backend.DTOs;
 using backend.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -10,6 +11,21 @@ public class ScheduleController(IScheduleService schedule) : ControllerBase
 {
     private readonly IScheduleService _schedule = schedule;
 
+    [HttpPost("add-entry")]
+    public async Task<IActionResult> AddEntry([FromBody] ScheduleEntryDto dto)
+    {
+        try
+        {
+            var entryDto = await _schedule.AddEntryAsync(dto);
+            return Ok(entryDto);
+        }
+        catch (Exception ex)
+        {
+            var message = $"Wystąpił błąd podczas dodawania wpisu: {ex.Message}";
+            Log.Error(message);
+            return BadRequest(new { message });
+        }
+    }
 
     [HttpGet("classes-with-schedule")]
     public async Task<IActionResult> GetClassesWithSchedule()
