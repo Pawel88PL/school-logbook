@@ -6,4 +6,5 @@ public interface IScheduleService
 {
     Task<List<ClassWithScheduleDto>> GetClassesWithScheduleAsync();
     Task<ScheduleForClassDto?> GetScheduleForClassAsync(int classId);
+    Task<List<SubjectWithTeachersDto>> GetSubjectsForClassAsync(int classId);
 }

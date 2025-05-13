@@ -45,4 +45,20 @@ public class ScheduleController(IScheduleService schedule) : ControllerBase
             return BadRequest(new { message });
         }
     }
+
+    [HttpGet("class/{classId}/subjects")]
+    public async Task<IActionResult> GetSubjectsForClass(int classId)
+    {
+        try
+        {
+            var subjects = await _schedule.GetSubjectsForClassAsync(classId);
+            return Ok(subjects);
+        }
+        catch (Exception ex)
+        {
+            var message = $"Wystąpił błąd podczas pobierania przedmiotów dla klasy o ID {classId}: {ex.Message}";
+            Log.Error(message);
+            return BadRequest(new { message });
+        }
+    }
 }

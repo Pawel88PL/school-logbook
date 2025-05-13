@@ -13,4 +13,3 @@ public class ClassSubject
     public int TeacherId { get; set; }
     public Teacher Teacher { get; set; } = default!;
 }
-

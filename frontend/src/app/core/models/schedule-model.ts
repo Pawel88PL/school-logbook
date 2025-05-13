@@ -2,8 +2,8 @@ export interface ScheduleEntryModel {
     id: number;
     dayOfWeek: number;
     startTime: string;
-    subjectId: number;
+    subjectId?: number;
     subjectName: string;
-    teacherId: number;
+    teacherId?: number;
     teacherFullName: string;
 }

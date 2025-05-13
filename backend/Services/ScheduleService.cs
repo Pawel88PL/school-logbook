@@ -56,4 +56,30 @@ public class ScheduleService(AppDbContext context) : IScheduleService
             Entries = entries
         };
     }
+
+    public async Task<List<SubjectWithTeachersDto>> GetSubjectsForClassAsync(int classId)
+    {
+        var assignments = await _context.ClassSubjects
+            .Where(cs => cs.ClassId == classId)
+            .Include(cs => cs.Subject)
+            .Include(cs => cs.Teacher)
+            .ToListAsync();
+
+        var grouped = assignments
+            .GroupBy(cs => new { cs.SubjectId, cs.Subject.Name })
+            .Select(g => new SubjectWithTeachersDto
+            {
+                SubjectId = g.Key.SubjectId,
+                SubjectName = g.Key.Name,
+                Teachers = g.Select(t => new TeacherDto
+                {
+                    Id = t.Teacher.Id,
+                    FirstName = t.Teacher.FirstName,
+                    LastName = t.Teacher.LastName,
+                }).DistinctBy(t => t.Id).ToList()
+            })
+            .ToList();
+
+        return grouped;
+    }
 }

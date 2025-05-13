@@ -18,12 +18,6 @@
     transform: scale(1.15);
 }
 
-.main-card {
-    margin: 0 auto;
-    padding: 20px;
-    max-width: 1200px;
-}
-
 .mat-spinner {
     display: grid;
     place-items: center;

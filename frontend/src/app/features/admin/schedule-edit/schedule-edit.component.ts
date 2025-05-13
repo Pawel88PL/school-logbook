@@ -2,20 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltip } from '@angular/material/tooltip';
 
 import { ScheduleService } from '../../../core/services/schedule.service';
 import { ToastrService } from 'ngx-toastr';
 
 import { ScheduleForClassModel } from '../../../core/models/class-schedule-model';
 import { ScheduleEntryModel } from '../../../core/models/schedule-model';
+import { SubjectWithTeachersModel } from '../../../core/models/subject-teacher.model';
+import { ScheduleEntryDialogComponent } from '../schedule-entry-dialog/schedule-entry-dialog.component';
 
 @Component({
   selector: 'app-schedule-edit',
   imports: [
     CommonModule,
 
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltip
   ],
   templateUrl: './schedule-edit.component.html',
   styleUrl: './schedule-edit.component.css'
@@ -28,6 +33,8 @@ export class ScheduleEditComponent implements OnInit {
   isLoading = true;
   errorMessage: string = '';
 
+  subjectOptions: SubjectWithTeachersModel[] = [];
+
   daysOfWeek = [
     { label: 'Poniedziałek', value: 1 },
     { label: 'Wtorek', value: 2 },
@@ -38,6 +45,7 @@ export class ScheduleEditComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog,
     private scheduleService: ScheduleService,
     private toastr: ToastrService
 
@@ -45,9 +53,27 @@ export class ScheduleEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.captureURLparameters();
+    this.loadSubjectsForClass();
   }
 
-  addEntry(day: number): void {}
+  openAddEntryDialog(day: number): void {
+    const dialogRef = this.dialog.open(ScheduleEntryDialogComponent, {
+      width: '500px',
+      data: {
+        dayOfWeek: day,
+        classId: this.classId,
+        availableSubjects: this.subjectOptions
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result: ScheduleEntryModel | null) => {
+      if (result) {
+        this.schedule.entries.push(result);
+        this.schedule.entries = [...this.schedule.entries]; // trigger change detection
+      }
+    });
+  }
+
 
   captureURLparameters(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -62,9 +88,19 @@ export class ScheduleEditComponent implements OnInit {
     });
   }
 
-  deleteEntry(id: number): void {}
+  deleteEntry(id: number): void {
+    const index = this.schedule.entries.findIndex(e => e.id === id);
+    if (index >= 0) {
+      this.schedule.entries.splice(index, 1);
+      this.toastr.info('Wpis został usunięty (lokalnie)');
+    }
+  }
 
-  editEntry(entry: ScheduleEntryModel): void {}
+  editEntry(entry: ScheduleEntryModel): void {
+    this.toastr.info(`Edytuj wpis: ${entry.subjectName} - ${entry.teacherFullName}`);
+    // Tu w przyszłości otwierasz modal lub formularz
+  }
+
 
   getEntriesForDay(day: number): ScheduleEntryModel[] {
     return this.schedule?.entries.filter(e => e.dayOfWeek === day) || [];
@@ -86,4 +122,21 @@ export class ScheduleEditComponent implements OnInit {
     });
   }
 
+  loadSubjectsForClass(): void {
+    if (!this.classId) return;
+
+    this.scheduleService.getSubjectsForClass(this.classId).subscribe({
+      next: (subjects) => {
+        this.subjectOptions = subjects;
+      },
+      error: (error) => {
+        this.toastr.error('Błąd podczas pobierania przedmiotów z nauczycielami.', 'Błąd');
+        console.error(error);
+      }
+    });
+  }
+
+  trackById(index: number, item: ScheduleEntryModel): number {
+    return item.id;
+  }
 }

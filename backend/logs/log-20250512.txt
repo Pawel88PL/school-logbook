@@ -1,0 +1,1404 @@
+2025-05-12 20:12:31.759 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/auth/login - null null
+2025-05-12 20:12:31.798 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:12:31.800 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/auth/login - 204 null null 42.3156ms
+2025-05-12 20:12:31.806 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5234/api/auth/login - application/json 55
+2025-05-12 20:12:31.811 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:12:31.814 +02:00 [INF] Executing endpoint 'backend.Controllers.AuthController.Login (backend)'
+2025-05-12 20:12:31.848 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(backend.DTOs.Login) on controller backend.Controllers.AuthController (backend).
+2025-05-12 20:12:32.027 +02:00 [INF] Executed DbCommand (17ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-05-12 20:12:32.148 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 20:12:32.166 +02:00 [INF] Executed DbCommand (15ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 20:12:32.183 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2025-05-12 20:12:32.206 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__role_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2025-05-12 20:12:32.234 +02:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2025-05-12 20:12:32.247 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-05-12 20:12:32.253 +02:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.Threading.Tasks.Task`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-12 20:12:32.265 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 20:12:32.288 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-05-12 20:12:32.373 +02:00 [INF] Executed DbCommand (19ms) [Parameters=[@p20='?' (Size = 450), @p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p21='?' (Size = 4000), @p3='?' (DbType = DateTime2), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTime2), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTimeOffset), @p10='?' (Size = 256), @p11='?' (Size = 256), @p12='?' (Size = 4000), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 4000), @p16='?' (DbType = Int32), @p17='?' (DbType = Int32), @p18='?' (DbType = Boolean), @p19='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p0, [AdminId] = @p1, [ConcurrencyStamp] = @p2, [DateAdded] = @p3, [Email] = @p4, [EmailConfirmed] = @p5, [IsActive] = @p6, [LastSuccessfulLogin] = @p7, [LockoutEnabled] = @p8, [LockoutEnd] = @p9, [NormalizedEmail] = @p10, [NormalizedUserName] = @p11, [PasswordHash] = @p12, [PhoneNumber] = @p13, [PhoneNumberConfirmed] = @p14, [SecurityStamp] = @p15, [StudentId] = @p16, [TeacherId] = @p17, [TwoFactorEnabled] = @p18, [UserName] = @p19
+OUTPUT 1
+WHERE [Id] = @p20 AND [ConcurrencyStamp] = @p21;
+2025-05-12 20:12:32.386 +02:00 [INF] Executed action backend.Controllers.AuthController.Login (backend) in 538.0377ms
+2025-05-12 20:12:32.386 +02:00 [INF] Executed endpoint 'backend.Controllers.AuthController.Login (backend)'
+2025-05-12 20:12:32.387 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5234/api/auth/login - 200 null application/json; charset=utf-8 580.3044ms
+2025-05-12 20:12:32.392 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:12:32.392 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:12:32.392 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 0.1445ms
+2025-05-12 20:12:32.393 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:12:32.393 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:12:32.393 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:12:32.393 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-12 20:12:32.408 +02:00 [INF] Executed DbCommand (15ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-12 20:12:32.419 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/paged?pageNumber=1&pageSize=10&sortColumn=role&sortDirection=asc&searchQuery= - null null
+2025-05-12 20:12:32.419 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:12:32.420 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/paged?pageNumber=1&pageSize=10&sortColumn=role&sortDirection=asc&searchQuery= - 204 null null 1.2919ms
+2025-05-12 20:12:32.421 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/paged?pageNumber=1&pageSize=10&sortColumn=role&sortDirection=asc&searchQuery= - null null
+2025-05-12 20:12:32.421 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:12:32.428 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetUsersPaged (backend)'
+2025-05-12 20:12:32.431 +02:00 [INF] Route matched with {action = "GetUsersPaged", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetUsersPaged(backend.Models.PagedRequest) on controller backend.Controllers.UserController (backend).
+2025-05-12 20:12:32.433 +02:00 [INF] Executed DbCommand (16ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 20:12:32.449 +02:00 [INF] Executed DbCommand (15ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 20:12:32.449 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-12 20:12:32.449 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 56.079ms
+2025-05-12 20:12:32.449 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:12:32.449 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 56.6167ms
+2025-05-12 20:12:32.785 +02:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [AspNetUsers] AS [a]
+INNER JOIN [AspNetUserRoles] AS [a0] ON [a].[Id] = [a0].[UserId]
+INNER JOIN [AspNetRoles] AS [a1] ON [a0].[RoleId] = [a1].[Id]
+LEFT JOIN [Admins] AS [a2] ON [a].[Id] = [a2].[UserId]
+LEFT JOIN [Teachers] AS [t] ON [a].[Id] = [t].[UserId]
+LEFT JOIN [Students] AS [s] ON [a].[Id] = [s].[UserId]
+2025-05-12 20:12:32.815 +02:00 [INF] Executed DbCommand (21ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName], [a1].[Name] AS [RoleName], [a2].[Id], [a2].[FirstName], [a2].[LastName], [a2].[UserId], [t].[Id], [t].[FirstName], [t].[LastName], [t].[UserId], [s].[Id], [s].[ClassId], [s].[FirstName], [s].[LastName], [s].[UserId]
+FROM [AspNetUsers] AS [a]
+INNER JOIN [AspNetUserRoles] AS [a0] ON [a].[Id] = [a0].[UserId]
+INNER JOIN [AspNetRoles] AS [a1] ON [a0].[RoleId] = [a1].[Id]
+LEFT JOIN [Admins] AS [a2] ON [a].[Id] = [a2].[UserId]
+LEFT JOIN [Teachers] AS [t] ON [a].[Id] = [t].[UserId]
+LEFT JOIN [Students] AS [s] ON [a].[Id] = [s].[UserId]
+ORDER BY [a1].[Name]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2025-05-12 20:12:32.821 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.PagedUsers'.
+2025-05-12 20:12:32.822 +02:00 [INF] Executed action backend.Controllers.UserController.GetUsersPaged (backend) in 391.2162ms
+2025-05-12 20:12:32.822 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetUsersPaged (backend)'
+2025-05-12 20:12:32.822 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/paged?pageNumber=1&pageSize=10&sortColumn=role&sortDirection=asc&searchQuery= - 200 null application/json; charset=utf-8 401.4298ms
+2025-05-12 20:13:10.202 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 20:13:10.206 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:13:10.207 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - 204 null null 4.9115ms
+2025-05-12 20:13:10.210 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 20:13:10.211 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:13:10.212 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 20:13:10.213 +02:00 [INF] Route matched with {action = "GetClassesWithSchedule", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClassesWithSchedule() on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:13:10.244 +02:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name], (
+    SELECT COUNT(*)
+    FROM [Schedules] AS [s]
+    WHERE [c].[Id] = [s].[ClassId]) AS [EntryCount]
+FROM [Classes] AS [c]
+ORDER BY [c].[Name]
+2025-05-12 20:13:10.245 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.ClassWithScheduleDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 20:13:10.245 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetClassesWithSchedule (backend) in 32.0079ms
+2025-05-12 20:13:10.245 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 20:13:10.245 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - 200 null application/json; charset=utf-8 35.729ms
+2025-05-12 20:13:12.936 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:13:12.936 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:13:12.936 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 0.4902ms
+2025-05-12 20:13:12.940 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:13:12.940 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:13:12.942 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:13:12.942 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:13:12.974 +02:00 [INF] Executed DbCommand (27ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 20:13:12.975 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 20:13:12.975 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 32.3654ms
+2025-05-12 20:13:12.975 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:13:12.975 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 35.1005ms
+2025-05-12 20:15:53.797 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:15:53.805 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:15:53.807 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 9.6465ms
+2025-05-12 20:15:53.808 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:15:53.809 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:15:53.826 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:15:53.828 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-12 20:15:53.830 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:15:53.831 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:15:53.832 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 1.1498ms
+2025-05-12 20:15:53.834 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:15:53.835 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:15:53.835 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:15:53.836 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:15:53.853 +02:00 [INF] Executed DbCommand (17ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-12 20:15:53.874 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 20:15:53.901 +02:00 [INF] Executed DbCommand (24ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 20:15:53.902 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-12 20:15:53.902 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 74.8208ms
+2025-05-12 20:15:53.902 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:15:53.903 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 94.3837ms
+2025-05-12 20:15:53.967 +02:00 [INF] Executed DbCommand (17ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 20:15:53.968 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 20:15:53.968 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 131.4907ms
+2025-05-12 20:15:53.968 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:15:53.968 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 134.4967ms
+2025-05-12 20:16:18.911 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:16:18.927 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:16:18.928 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 16.9405ms
+2025-05-12 20:16:18.929 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:16:18.930 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:16:18.931 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:16:18.933 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-12 20:16:18.957 +02:00 [INF] Executed DbCommand (15ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-12 20:16:18.958 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:16:18.959 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:16:18.959 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 0.6818ms
+2025-05-12 20:16:18.963 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:16:18.963 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:16:18.963 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:16:18.963 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:16:18.982 +02:00 [INF] Executed DbCommand (16ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 20:16:18.992 +02:00 [INF] Executed DbCommand (22ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 20:16:19.010 +02:00 [INF] Executed DbCommand (15ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 20:16:19.015 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-12 20:16:19.016 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 82.7096ms
+2025-05-12 20:16:19.016 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:16:19.016 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 86.9113ms
+2025-05-12 20:16:19.016 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 20:16:19.016 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 52.3617ms
+2025-05-12 20:16:19.016 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:16:19.016 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 53.4714ms
+2025-05-12 20:16:33.810 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:16:33.813 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:16:33.814 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 3.547ms
+2025-05-12 20:16:33.816 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:16:33.821 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:16:33.826 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:16:33.829 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-12 20:16:33.850 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:16:33.850 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:16:33.850 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 0.4466ms
+2025-05-12 20:16:33.854 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:16:33.854 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:16:33.855 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:16:33.855 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:16:33.874 +02:00 [INF] Executed DbCommand (16ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-12 20:16:33.875 +02:00 [INF] Executed DbCommand (16ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 20:16:33.878 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 20:16:33.880 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 25.295ms
+2025-05-12 20:16:33.880 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:16:33.880 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 26.3166ms
+2025-05-12 20:16:33.892 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 20:16:33.910 +02:00 [INF] Executed DbCommand (16ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 20:16:33.912 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-12 20:16:33.913 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 83.9856ms
+2025-05-12 20:16:33.913 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:16:33.913 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 97.5597ms
+2025-05-12 20:17:16.007 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:17:16.007 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:17:16.024 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:17:16.025 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:17:16.025 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 17.9164ms
+2025-05-12 20:17:16.025 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 17.5386ms
+2025-05-12 20:17:16.029 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:17:16.029 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:17:16.029 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:17:16.029 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:17:16.034 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:17:16.035 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:17:16.037 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-12 20:17:16.037 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:17:16.066 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-12 20:17:16.068 +02:00 [INF] Executed DbCommand (16ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 20:17:16.072 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 20:17:16.083 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 20:17:16.087 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 49.3729ms
+2025-05-12 20:17:16.087 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:17:16.088 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 59.2466ms
+2025-05-12 20:17:16.099 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 20:17:16.100 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-12 20:17:16.100 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 63.2013ms
+2025-05-12 20:17:16.100 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:17:16.101 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 71.9432ms
+2025-05-12 20:17:30.053 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:17:30.057 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:17:30.065 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:17:30.065 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:17:30.076 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 18.7169ms
+2025-05-12 20:17:30.076 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 22.9666ms
+2025-05-12 20:17:30.078 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:17:30.078 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:17:30.079 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:17:30.079 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:17:30.093 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:17:30.093 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:17:30.094 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-12 20:17:30.094 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:17:30.161 +02:00 [INF] Executed DbCommand (20ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-12 20:17:30.162 +02:00 [INF] Executed DbCommand (21ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 20:17:30.164 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 20:17:30.164 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 70.009ms
+2025-05-12 20:17:30.164 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:17:30.164 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 86.1179ms
+2025-05-12 20:17:30.178 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 20:17:30.194 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 20:17:30.195 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-12 20:17:30.196 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 102.0129ms
+2025-05-12 20:17:30.196 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:17:30.196 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 118.4613ms
+2025-05-12 20:20:00.436 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:20:00.436 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:20:00.440 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:20:00.458 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:20:00.458 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 21.793ms
+2025-05-12 20:20:00.460 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 20.1118ms
+2025-05-12 20:20:00.496 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:20:00.495 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:20:00.500 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:20:00.503 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:20:00.506 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:20:00.506 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:20:00.506 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:20:00.506 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-12 20:20:00.536 +02:00 [INF] Executed DbCommand (15ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-12 20:20:00.541 +02:00 [INF] Executed DbCommand (18ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 20:20:00.542 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 20:20:00.545 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 38.4309ms
+2025-05-12 20:20:00.545 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:20:00.546 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 49.771ms
+2025-05-12 20:20:00.553 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 20:20:00.571 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 20:20:00.572 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-12 20:20:00.578 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 69.6237ms
+2025-05-12 20:20:00.578 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:20:00.578 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 82.8957ms
+2025-05-12 20:20:49.985 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:20:49.990 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:20:49.992 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 7.1548ms
+2025-05-12 20:20:49.996 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:20:50.011 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:20:50.011 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:20:50.011 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:20:50.011 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 0.4367ms
+2025-05-12 20:20:50.013 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:20:50.015 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:20:50.016 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:20:50.016 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:20:50.017 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-12 20:20:50.018 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:20:50.099 +02:00 [INF] Executed DbCommand (26ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-12 20:20:50.099 +02:00 [INF] Executed DbCommand (26ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 20:20:50.103 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 20:20:50.104 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 85.818ms
+2025-05-12 20:20:50.104 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:20:50.104 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 91.2989ms
+2025-05-12 20:20:50.117 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 20:20:50.133 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 20:20:50.134 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-12 20:20:50.134 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 116.3757ms
+2025-05-12 20:20:50.134 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:20:50.134 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 138.2332ms
+2025-05-12 20:22:15.615 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:22:15.632 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:22:15.667 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:22:15.670 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 54.8156ms
+2025-05-12 20:22:15.670 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:22:15.670 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 3.1202ms
+2025-05-12 20:22:15.674 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:22:15.674 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:22:15.677 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:22:15.678 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:22:15.692 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:22:15.692 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:22:15.694 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-12 20:22:15.701 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:22:15.741 +02:00 [INF] Executed DbCommand (17ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-12 20:22:15.742 +02:00 [INF] Executed DbCommand (17ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 20:22:15.748 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 20:22:15.751 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 49.6917ms
+2025-05-12 20:22:15.751 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:22:15.751 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 77.0844ms
+2025-05-12 20:22:15.761 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 20:22:15.776 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 20:22:15.776 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-12 20:22:15.777 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 82.323ms
+2025-05-12 20:22:15.777 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:22:15.777 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 102.913ms
+2025-05-12 20:22:38.084 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 20:22:38.088 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:22:38.089 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - 204 null null 7.0798ms
+2025-05-12 20:22:38.092 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 20:22:38.095 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:22:38.105 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 20:22:38.107 +02:00 [INF] Route matched with {action = "GetClassesWithSchedule", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClassesWithSchedule() on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:22:38.143 +02:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name], (
+    SELECT COUNT(*)
+    FROM [Schedules] AS [s]
+    WHERE [c].[Id] = [s].[ClassId]) AS [EntryCount]
+FROM [Classes] AS [c]
+ORDER BY [c].[Name]
+2025-05-12 20:22:38.143 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.ClassWithScheduleDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 20:22:38.144 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetClassesWithSchedule (backend) in 37.1378ms
+2025-05-12 20:22:38.144 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 20:22:38.144 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - 200 null application/json; charset=utf-8 53.0737ms
+2025-05-12 20:22:39.190 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:22:39.190 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:22:39.190 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 0.64ms
+2025-05-12 20:22:39.202 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:22:39.203 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:22:39.205 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:22:39.205 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:22:39.231 +02:00 [INF] Executed DbCommand (21ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 20:22:39.233 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 20:22:39.233 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 27.5315ms
+2025-05-12 20:22:39.233 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:22:39.233 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 31.0157ms
+2025-05-12 20:43:40.024 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:43:40.027 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:43:40.027 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 3.0774ms
+2025-05-12 20:43:40.028 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-12 20:43:40.029 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:43:40.052 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:43:40.054 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-12 20:43:40.056 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:43:40.056 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:43:40.056 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 0.6329ms
+2025-05-12 20:43:40.059 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:43:40.059 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:43:40.060 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:43:40.061 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:43:40.278 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-12 20:43:40.297 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 20:43:40.313 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 20:43:40.313 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-12 20:43:40.314 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 258.6486ms
+2025-05-12 20:43:40.314 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 20:43:40.314 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 285.6005ms
+2025-05-12 20:43:40.356 +02:00 [INF] Executed DbCommand (15ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 20:43:40.357 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 20:43:40.357 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 295.9622ms
+2025-05-12 20:43:40.357 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:43:40.357 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 298.1047ms
+2025-05-12 20:44:26.292 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/subject/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - null null
+2025-05-12 20:44:26.293 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:44:26.293 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/subject/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - 204 null null 0.9984ms
+2025-05-12 20:44:26.294 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/subject/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - null null
+2025-05-12 20:44:26.297 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:44:26.302 +02:00 [INF] Executing endpoint 'backend.Controllers.SubjectController.GetSubjectsPaged (backend)'
+2025-05-12 20:44:26.318 +02:00 [INF] Route matched with {action = "GetSubjectsPaged", controller = "Subject"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSubjectsPaged(backend.Models.PagedRequest) on controller backend.Controllers.SubjectController (backend).
+2025-05-12 20:44:26.382 +02:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Subjects] AS [s]
+2025-05-12 20:44:26.429 +02:00 [INF] Executed DbCommand (24ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Name], [t].[CreatedAt], [t].[UpdatedAt], [t0].[ClassName], [t0].[TeacherFullName], [t0].[Id], [t0].[Id0], [t0].[Id1]
+FROM (
+    SELECT [s].[Id], [s].[Name], [s].[CreatedAt], [s].[UpdatedAt]
+    FROM [Subjects] AS [s]
+    ORDER BY [s].[Name]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+LEFT JOIN (
+    SELECT [c0].[Name] AS [ClassName], [t1].[FirstName] + N' ' + [t1].[LastName] AS [TeacherFullName], [c].[Id], [c0].[Id] AS [Id0], [t1].[Id] AS [Id1], [c].[SubjectId]
+    FROM [ClassSubjects] AS [c]
+    INNER JOIN [Classes] AS [c0] ON [c].[ClassId] = [c0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [c].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[SubjectId]
+ORDER BY [t].[Name], [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 20:44:26.432 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.PagedSubjects'.
+2025-05-12 20:44:26.440 +02:00 [INF] Executed action backend.Controllers.SubjectController.GetSubjectsPaged (backend) in 122.1558ms
+2025-05-12 20:44:26.440 +02:00 [INF] Executed endpoint 'backend.Controllers.SubjectController.GetSubjectsPaged (backend)'
+2025-05-12 20:44:26.440 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/subject/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - 200 null application/json; charset=utf-8 146.1691ms
+2025-05-12 20:45:01.259 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 20:45:01.260 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:45:01.260 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - 204 null null 1.4192ms
+2025-05-12 20:45:01.261 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 20:45:01.262 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:45:01.262 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 20:45:01.263 +02:00 [INF] Route matched with {action = "GetClassesWithSchedule", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClassesWithSchedule() on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:45:01.280 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name], (
+    SELECT COUNT(*)
+    FROM [Schedules] AS [s]
+    WHERE [c].[Id] = [s].[ClassId]) AS [EntryCount]
+FROM [Classes] AS [c]
+ORDER BY [c].[Name]
+2025-05-12 20:45:01.282 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.ClassWithScheduleDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 20:45:01.283 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetClassesWithSchedule (backend) in 19.803ms
+2025-05-12 20:45:01.284 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 20:45:01.284 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - 200 null application/json; charset=utf-8 22.6658ms
+2025-05-12 20:45:03.618 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:45:03.619 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:45:03.619 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 0.3397ms
+2025-05-12 20:45:03.622 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:45:03.623 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:45:03.624 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:45:03.624 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:45:03.648 +02:00 [INF] Executed DbCommand (21ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 20:45:03.649 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 20:45:03.649 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 24.8221ms
+2025-05-12 20:45:03.649 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:45:03.649 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 26.757ms
+2025-05-12 20:45:16.682 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 20:45:16.683 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:45:16.683 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - 204 null null 1.2175ms
+2025-05-12 20:45:16.686 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 20:45:16.686 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:45:16.688 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 20:45:16.688 +02:00 [INF] Route matched with {action = "GetClassesWithSchedule", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClassesWithSchedule() on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:45:16.711 +02:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name], (
+    SELECT COUNT(*)
+    FROM [Schedules] AS [s]
+    WHERE [c].[Id] = [s].[ClassId]) AS [EntryCount]
+FROM [Classes] AS [c]
+ORDER BY [c].[Name]
+2025-05-12 20:45:16.711 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.ClassWithScheduleDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 20:45:16.711 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetClassesWithSchedule (backend) in 22.4743ms
+2025-05-12 20:45:16.711 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 20:45:16.712 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - 200 null application/json; charset=utf-8 25.7746ms
+2025-05-12 20:45:24.484 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:45:24.484 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:45:24.484 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 0.2823ms
+2025-05-12 20:45:24.486 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 20:45:24.486 +02:00 [INF] CORS policy execution successful.
+2025-05-12 20:45:24.486 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:45:24.486 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 20:45:24.509 +02:00 [INF] Executed DbCommand (20ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 20:45:24.509 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 20:45:24.509 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 23.2123ms
+2025-05-12 20:45:24.510 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 20:45:24.510 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 24.1425ms
+2025-05-12 20:54:55.143 +02:00 [INF] Application is starting
+2025-05-12 20:54:55.178 +02:00 [INF] User profile is available. Using '/Users/pawelstaniul/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-05-12 20:54:55.209 +02:00 [WRN] The WebRootPath was not found: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/wwwroot. Static files may be unavailable.
+2025-05-12 20:54:55.219 +02:00 [INF] Now listening on: http://localhost:5234
+2025-05-12 20:54:55.220 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-12 20:54:55.220 +02:00 [INF] Hosting environment: Development
+2025-05-12 20:54:55.220 +02:00 [INF] Content root path: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend
+2025-05-12 21:08:34.128 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 21:08:34.128 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-12 21:08:34.203 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-05-12 21:08:34.227 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:08:34.227 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:08:34.233 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 114.2921ms
+2025-05-12 21:08:34.233 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 114.3151ms
+2025-05-12 21:08:34.236 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 21:08:34.236 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-12 21:08:34.241 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:08:34.241 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:08:34.313 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:08:34.313 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 21:08:34.327 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-12 21:08:34.327 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:08:35.172 +02:00 [INF] Executed DbCommand (50ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 21:08:35.209 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 21:08:35.223 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 894.3309ms
+2025-05-12 21:08:35.223 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:08:35.226 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 989.8285ms
+2025-05-12 21:08:35.297 +02:00 [INF] Executed DbCommand (29ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-12 21:08:35.338 +02:00 [INF] Executed DbCommand (29ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 21:08:35.372 +02:00 [INF] Executed DbCommand (29ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 21:08:35.373 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-12 21:08:35.380 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 1052.9035ms
+2025-05-12 21:08:35.380 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 21:08:35.380 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 1144.3224ms
+2025-05-12 21:14:43.941 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-12 21:14:43.969 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:14:43.974 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 33.3ms
+2025-05-12 21:14:43.979 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-12 21:14:43.983 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:14:43.984 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 21:14:43.984 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4/subjects - null null
+2025-05-12 21:14:43.985 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:14:43.985 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 1.446ms
+2025-05-12 21:14:43.987 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 21:14:43.988 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:14:43.993 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:14:43.994 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4/subjects - 204 null null 9.6768ms
+2025-05-12 21:14:44.005 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4/subjects - null null
+2025-05-12 21:14:44.005 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:14:44.028 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 21:14:44.028 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:14:44.033 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4/subjects - 404 0 null 27.9878ms
+2025-05-12 21:14:44.036 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-12 21:14:44.035 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:14:44.041 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5234/api/schedule/class/4/subjects, Response status code: 404
+2025-05-12 21:14:44.198 +02:00 [INF] Executed DbCommand (28ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-12 21:14:44.230 +02:00 [INF] Executed DbCommand (30ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 21:14:44.230 +02:00 [INF] Executed DbCommand (60ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 21:14:44.235 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 21:14:44.236 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 199.5387ms
+2025-05-12 21:14:44.236 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:14:44.237 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 249.9526ms
+2025-05-12 21:14:44.262 +02:00 [INF] Executed DbCommand (27ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 21:14:44.263 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-12 21:14:44.264 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 227.2218ms
+2025-05-12 21:14:44.264 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 21:14:44.264 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 285.0973ms
+2025-05-12 21:15:02.311 +02:00 [INF] Application is shutting down...
+2025-05-12 21:15:11.049 +02:00 [INF] Application is starting
+2025-05-12 21:15:11.080 +02:00 [INF] User profile is available. Using '/Users/pawelstaniul/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-05-12 21:15:11.107 +02:00 [WRN] The WebRootPath was not found: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/wwwroot. Static files may be unavailable.
+2025-05-12 21:15:11.113 +02:00 [INF] Now listening on: http://localhost:5234
+2025-05-12 21:15:11.114 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-12 21:15:11.114 +02:00 [INF] Hosting environment: Development
+2025-05-12 21:15:11.114 +02:00 [INF] Content root path: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend
+2025-05-12 21:15:11.632 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/swagger/index.html - null null
+2025-05-12 21:15:11.671 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/swagger/index.html - 200 null text/html;charset=utf-8 40.0545ms
+2025-05-12 21:15:11.929 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-12 21:15:11.932 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/_framework/aspnetcore-browser-refresh.js - 200 13732 application/javascript; charset=utf-8 2.569ms
+2025-05-12 21:15:11.964 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/swagger/v1/swagger.json - null null
+2025-05-12 21:15:12.011 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 47.251ms
+2025-05-12 21:17:58.186 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-12 21:17:58.207 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-05-12 21:17:58.213 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 21:17:58.217 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4/subjects - null null
+2025-05-12 21:17:58.297 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:17:58.297 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:17:58.297 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:17:58.298 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 112.4663ms
+2025-05-12 21:17:58.299 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4/subjects - 204 null null 82.5534ms
+2025-05-12 21:17:58.300 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 87.3073ms
+2025-05-12 21:17:58.301 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4/subjects - null null
+2025-05-12 21:17:58.300 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-12 21:17:58.302 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 21:17:58.302 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:17:58.302 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:17:58.303 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:17:58.428 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:17:58.428 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 21:17:58.428 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:17:58.456 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-12 21:17:58.456 +02:00 [INF] Route matched with {action = "GetSubjectsForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSubjectsForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:17:58.456 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:17:59.229 +02:00 [INF] Executed DbCommand (36ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[ClassId], [c].[SubjectId], [c].[TeacherId], [s].[Id], [s].[CreatedAt], [s].[Name], [s].[UpdatedAt], [t].[Id], [t].[FirstName], [t].[LastName], [t].[UserId]
+FROM [ClassSubjects] AS [c]
+INNER JOIN [Subjects] AS [s] ON [c].[SubjectId] = [s].[Id]
+INNER JOIN [Teachers] AS [t] ON [c].[TeacherId] = [t].[Id]
+WHERE [c].[ClassId] = @__classId_0
+2025-05-12 21:17:59.272 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-12 21:17:59.274 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.SubjectWithTeachersDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 21:17:59.278 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetSubjectsForClass (backend) in 821.2068ms
+2025-05-12 21:17:59.279 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:17:59.281 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4/subjects - 200 null application/json; charset=utf-8 980.487ms
+2025-05-12 21:17:59.293 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 21:17:59.311 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 21:17:59.312 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-12 21:17:59.316 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 860.0449ms
+2025-05-12 21:17:59.316 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 21:17:59.317 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 1016.9377ms
+2025-05-12 21:17:59.350 +02:00 [INF] Executed DbCommand (16ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 21:17:59.360 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 21:17:59.365 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 908.332ms
+2025-05-12 21:17:59.365 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:17:59.365 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 1062.9127ms
+2025-05-12 21:18:44.784 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 21:18:44.806 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:18:44.813 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - 204 null null 26.7272ms
+2025-05-12 21:18:44.814 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 21:18:44.818 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:18:44.827 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 21:18:44.842 +02:00 [INF] Route matched with {action = "GetClassesWithSchedule", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClassesWithSchedule() on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:18:44.921 +02:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name], (
+    SELECT COUNT(*)
+    FROM [Schedules] AS [s]
+    WHERE [c].[Id] = [s].[ClassId]) AS [EntryCount]
+FROM [Classes] AS [c]
+ORDER BY [c].[Name]
+2025-05-12 21:18:44.922 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.ClassWithScheduleDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 21:18:44.923 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetClassesWithSchedule (backend) in 81.0163ms
+2025-05-12 21:18:44.923 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 21:18:44.923 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - 200 null application/json; charset=utf-8 109.1138ms
+2025-05-12 21:18:48.532 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/5/subjects - null null
+2025-05-12 21:18:48.532 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/5 - null null
+2025-05-12 21:18:48.532 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:18:48.532 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:18:48.532 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/5/subjects - 204 null null 0.796ms
+2025-05-12 21:18:48.532 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/5 - 204 null null 0.8053ms
+2025-05-12 21:18:48.538 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/5/subjects - null null
+2025-05-12 21:18:48.539 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:18:48.540 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/5 - null null
+2025-05-12 21:18:48.541 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:18:48.541 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:18:48.541 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:18:48.542 +02:00 [INF] Route matched with {action = "GetSubjectsForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSubjectsForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:18:48.542 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:18:48.564 +02:00 [INF] Executed DbCommand (18ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[ClassId], [c].[SubjectId], [c].[TeacherId], [s].[Id], [s].[CreatedAt], [s].[Name], [s].[UpdatedAt], [t].[Id], [t].[FirstName], [t].[LastName], [t].[UserId]
+FROM [ClassSubjects] AS [c]
+INNER JOIN [Subjects] AS [s] ON [c].[SubjectId] = [s].[Id]
+INNER JOIN [Teachers] AS [t] ON [c].[TeacherId] = [t].[Id]
+WHERE [c].[ClassId] = @__classId_0
+2025-05-12 21:18:48.564 +02:00 [INF] Executed DbCommand (18ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 21:18:48.566 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 21:18:48.566 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.SubjectWithTeachersDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 21:18:48.566 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 24.4859ms
+2025-05-12 21:18:48.566 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:18:48.566 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetSubjectsForClass (backend) in 24.6251ms
+2025-05-12 21:18:48.566 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:18:48.566 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/5/subjects - 200 null application/json; charset=utf-8 28.7557ms
+2025-05-12 21:18:48.566 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/5 - 200 null application/json; charset=utf-8 26.0294ms
+2025-05-12 21:18:57.329 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 21:18:57.330 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:18:57.331 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - 204 null null 1.768ms
+2025-05-12 21:18:57.333 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 21:18:57.333 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:18:57.334 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 21:18:57.334 +02:00 [INF] Route matched with {action = "GetClassesWithSchedule", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClassesWithSchedule() on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:18:57.370 +02:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name], (
+    SELECT COUNT(*)
+    FROM [Schedules] AS [s]
+    WHERE [c].[Id] = [s].[ClassId]) AS [EntryCount]
+FROM [Classes] AS [c]
+ORDER BY [c].[Name]
+2025-05-12 21:18:57.370 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.ClassWithScheduleDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 21:18:57.370 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetClassesWithSchedule (backend) in 36.1685ms
+2025-05-12 21:18:57.370 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 21:18:57.371 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - 200 null application/json; charset=utf-8 37.56ms
+2025-05-12 21:19:00.248 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/7 - null null
+2025-05-12 21:19:00.248 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:00.249 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/7 - 204 null null 1.8752ms
+2025-05-12 21:19:00.251 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/7/subjects - null null
+2025-05-12 21:19:00.251 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:00.252 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/7/subjects - 204 null null 0.7595ms
+2025-05-12 21:19:00.253 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/7 - null null
+2025-05-12 21:19:00.254 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:00.254 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/7/subjects - null null
+2025-05-12 21:19:00.254 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:19:00.255 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:19:00.255 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:00.255 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:19:00.255 +02:00 [INF] Route matched with {action = "GetSubjectsForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSubjectsForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:19:00.277 +02:00 [INF] Executed DbCommand (21ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[ClassId], [c].[SubjectId], [c].[TeacherId], [s].[Id], [s].[CreatedAt], [s].[Name], [s].[UpdatedAt], [t].[Id], [t].[FirstName], [t].[LastName], [t].[UserId]
+FROM [ClassSubjects] AS [c]
+INNER JOIN [Subjects] AS [s] ON [c].[SubjectId] = [s].[Id]
+INNER JOIN [Teachers] AS [t] ON [c].[TeacherId] = [t].[Id]
+WHERE [c].[ClassId] = @__classId_0
+2025-05-12 21:19:00.277 +02:00 [INF] Executed DbCommand (21ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 21:19:00.278 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 21:19:00.278 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.SubjectWithTeachersDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 21:19:00.278 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 23.5052ms
+2025-05-12 21:19:00.278 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetSubjectsForClass (backend) in 22.9327ms
+2025-05-12 21:19:00.278 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:19:00.278 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:19:00.278 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/7 - 200 null application/json; charset=utf-8 25.032ms
+2025-05-12 21:19:00.278 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/7/subjects - 200 null application/json; charset=utf-8 24.2265ms
+2025-05-12 21:19:08.529 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 21:19:08.530 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:08.531 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - 204 null null 1.7202ms
+2025-05-12 21:19:08.535 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 21:19:08.535 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:08.536 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 21:19:08.536 +02:00 [INF] Route matched with {action = "GetClassesWithSchedule", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClassesWithSchedule() on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:19:08.555 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name], (
+    SELECT COUNT(*)
+    FROM [Schedules] AS [s]
+    WHERE [c].[Id] = [s].[ClassId]) AS [EntryCount]
+FROM [Classes] AS [c]
+ORDER BY [c].[Name]
+2025-05-12 21:19:08.556 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.ClassWithScheduleDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 21:19:08.556 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetClassesWithSchedule (backend) in 19.3429ms
+2025-05-12 21:19:08.556 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 21:19:08.556 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - 200 null application/json; charset=utf-8 20.9965ms
+2025-05-12 21:19:10.558 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/8 - null null
+2025-05-12 21:19:10.559 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:10.559 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/8 - 204 null null 0.9296ms
+2025-05-12 21:19:10.565 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/8 - null null
+2025-05-12 21:19:10.565 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/8/subjects - null null
+2025-05-12 21:19:10.565 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:10.565 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:10.566 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/8/subjects - 204 null null 0.7621ms
+2025-05-12 21:19:10.566 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:19:10.566 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:19:10.567 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/8/subjects - null null
+2025-05-12 21:19:10.567 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:10.567 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:19:10.567 +02:00 [INF] Route matched with {action = "GetSubjectsForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSubjectsForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:19:10.589 +02:00 [INF] Executed DbCommand (20ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[ClassId], [c].[SubjectId], [c].[TeacherId], [s].[Id], [s].[CreatedAt], [s].[Name], [s].[UpdatedAt], [t].[Id], [t].[FirstName], [t].[LastName], [t].[UserId]
+FROM [ClassSubjects] AS [c]
+INNER JOIN [Subjects] AS [s] ON [c].[SubjectId] = [s].[Id]
+INNER JOIN [Teachers] AS [t] ON [c].[TeacherId] = [t].[Id]
+WHERE [c].[ClassId] = @__classId_0
+2025-05-12 21:19:10.589 +02:00 [INF] Executed DbCommand (21ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 21:19:10.589 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 21:19:10.589 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.SubjectWithTeachersDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 21:19:10.590 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 23.5456ms
+2025-05-12 21:19:10.590 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetSubjectsForClass (backend) in 22.131ms
+2025-05-12 21:19:10.590 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:19:10.590 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:19:10.590 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/8 - 200 null application/json; charset=utf-8 25.256ms
+2025-05-12 21:19:10.590 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/8/subjects - 200 null application/json; charset=utf-8 23.1404ms
+2025-05-12 21:19:29.728 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/subject/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - null null
+2025-05-12 21:19:29.729 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:29.729 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/subject/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - 204 null null 0.979ms
+2025-05-12 21:19:29.730 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/subject/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - null null
+2025-05-12 21:19:29.732 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:29.741 +02:00 [INF] Executing endpoint 'backend.Controllers.SubjectController.GetSubjectsPaged (backend)'
+2025-05-12 21:19:29.747 +02:00 [INF] Route matched with {action = "GetSubjectsPaged", controller = "Subject"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSubjectsPaged(backend.Models.PagedRequest) on controller backend.Controllers.SubjectController (backend).
+2025-05-12 21:19:29.805 +02:00 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Subjects] AS [s]
+2025-05-12 21:19:29.830 +02:00 [INF] Executed DbCommand (15ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Name], [t].[CreatedAt], [t].[UpdatedAt], [t0].[ClassName], [t0].[TeacherFullName], [t0].[Id], [t0].[Id0], [t0].[Id1]
+FROM (
+    SELECT [s].[Id], [s].[Name], [s].[CreatedAt], [s].[UpdatedAt]
+    FROM [Subjects] AS [s]
+    ORDER BY [s].[Name]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+LEFT JOIN (
+    SELECT [c0].[Name] AS [ClassName], [t1].[FirstName] + N' ' + [t1].[LastName] AS [TeacherFullName], [c].[Id], [c0].[Id] AS [Id0], [t1].[Id] AS [Id1], [c].[SubjectId]
+    FROM [ClassSubjects] AS [c]
+    INNER JOIN [Classes] AS [c0] ON [c].[ClassId] = [c0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [c].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[SubjectId]
+ORDER BY [t].[Name], [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 21:19:29.833 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.PagedSubjects'.
+2025-05-12 21:19:29.836 +02:00 [INF] Executed action backend.Controllers.SubjectController.GetSubjectsPaged (backend) in 89.5154ms
+2025-05-12 21:19:29.837 +02:00 [INF] Executed endpoint 'backend.Controllers.SubjectController.GetSubjectsPaged (backend)'
+2025-05-12 21:19:29.837 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/subject/paged?pageNumber=1&pageSize=10&sortColumn=name&sortDirection=asc - 200 null application/json; charset=utf-8 106.2173ms
+2025-05-12 21:19:40.494 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 21:19:40.494 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:40.494 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - 204 null null 0.6383ms
+2025-05-12 21:19:40.495 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 21:19:40.496 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:40.497 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 21:19:40.497 +02:00 [INF] Route matched with {action = "GetClassesWithSchedule", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClassesWithSchedule() on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:19:40.518 +02:00 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name], (
+    SELECT COUNT(*)
+    FROM [Schedules] AS [s]
+    WHERE [c].[Id] = [s].[ClassId]) AS [EntryCount]
+FROM [Classes] AS [c]
+ORDER BY [c].[Name]
+2025-05-12 21:19:40.519 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.ClassWithScheduleDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 21:19:40.519 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetClassesWithSchedule (backend) in 21.8714ms
+2025-05-12 21:19:40.519 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 21:19:40.519 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - 200 null application/json; charset=utf-8 23.542ms
+2025-05-12 21:19:44.525 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/8 - null null
+2025-05-12 21:19:44.526 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:44.526 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/8 - 204 null null 2.6093ms
+2025-05-12 21:19:44.528 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/8/subjects - null null
+2025-05-12 21:19:44.529 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:44.531 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/8/subjects - 204 null null 3.1705ms
+2025-05-12 21:19:44.532 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/8 - null null
+2025-05-12 21:19:44.533 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/8/subjects - null null
+2025-05-12 21:19:44.533 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:44.533 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:44.534 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:19:44.534 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:19:44.534 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:19:44.534 +02:00 [INF] Route matched with {action = "GetSubjectsForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSubjectsForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:19:44.557 +02:00 [INF] Executed DbCommand (21ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[ClassId], [c].[SubjectId], [c].[TeacherId], [s].[Id], [s].[CreatedAt], [s].[Name], [s].[UpdatedAt], [t].[Id], [t].[FirstName], [t].[LastName], [t].[UserId]
+FROM [ClassSubjects] AS [c]
+INNER JOIN [Subjects] AS [s] ON [c].[SubjectId] = [s].[Id]
+INNER JOIN [Teachers] AS [t] ON [c].[TeacherId] = [t].[Id]
+WHERE [c].[ClassId] = @__classId_0
+2025-05-12 21:19:44.557 +02:00 [INF] Executed DbCommand (21ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 21:19:44.557 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 21:19:44.557 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.SubjectWithTeachersDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 21:19:44.557 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetSubjectsForClass (backend) in 23.4343ms
+2025-05-12 21:19:44.557 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 23.4844ms
+2025-05-12 21:19:44.557 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:19:44.558 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:19:44.558 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/8 - 200 null application/json; charset=utf-8 26.0735ms
+2025-05-12 21:19:44.558 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/8/subjects - 200 null application/json; charset=utf-8 25.1154ms
+2025-05-12 21:19:48.971 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-12 21:19:48.972 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:48.972 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 1.5353ms
+2025-05-12 21:19:48.974 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-12 21:19:48.974 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:48.976 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 21:19:48.980 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-12 21:19:49.001 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/8 - null null
+2025-05-12 21:19:49.001 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:49.002 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/8/subjects - null null
+2025-05-12 21:19:49.002 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:19:49.002 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:19:49.002 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:19:49.002 +02:00 [INF] Route matched with {action = "GetSubjectsForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSubjectsForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:19:49.002 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:19:49.007 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-12 21:19:49.041 +02:00 [INF] Executed DbCommand (35ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 21:19:49.041 +02:00 [INF] Executed DbCommand (36ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[ClassId], [c].[SubjectId], [c].[TeacherId], [s].[Id], [s].[CreatedAt], [s].[Name], [s].[UpdatedAt], [t].[Id], [t].[FirstName], [t].[LastName], [t].[UserId]
+FROM [ClassSubjects] AS [c]
+INNER JOIN [Subjects] AS [s] ON [c].[SubjectId] = [s].[Id]
+INNER JOIN [Teachers] AS [t] ON [c].[TeacherId] = [t].[Id]
+WHERE [c].[ClassId] = @__classId_0
+2025-05-12 21:19:49.059 +02:00 [INF] Executed DbCommand (26ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 21:19:49.063 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.SubjectWithTeachersDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 21:19:49.063 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetSubjectsForClass (backend) in 61.034ms
+2025-05-12 21:19:49.063 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:19:49.063 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/8/subjects - 200 null application/json; charset=utf-8 61.6897ms
+2025-05-12 21:19:49.064 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 21:19:49.069 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 66.1584ms
+2025-05-12 21:19:49.070 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:19:49.070 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/8 - 200 null application/json; charset=utf-8 68.799ms
+2025-05-12 21:19:49.077 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 21:19:49.078 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-12 21:19:49.078 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 97.7172ms
+2025-05-12 21:19:49.079 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 21:19:49.079 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 105.1457ms
+2025-05-12 21:27:50.860 +02:00 [INF] Application is starting
+2025-05-12 21:27:50.894 +02:00 [INF] User profile is available. Using '/Users/pawelstaniul/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-05-12 21:27:50.919 +02:00 [WRN] The WebRootPath was not found: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/wwwroot. Static files may be unavailable.
+2025-05-12 21:27:50.925 +02:00 [INF] Now listening on: http://localhost:5234
+2025-05-12 21:27:50.926 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-12 21:27:50.926 +02:00 [INF] Hosting environment: Development
+2025-05-12 21:27:50.927 +02:00 [INF] Content root path: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend
+2025-05-12 21:32:24.617 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/8 - null null
+2025-05-12 21:32:24.617 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/8/subjects - null null
+2025-05-12 21:32:24.617 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - null null
+2025-05-12 21:32:24.678 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-05-12 21:32:24.694 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:32:24.694 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:32:24.694 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:32:24.698 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/8/subjects - 204 null null 84.3348ms
+2025-05-12 21:32:24.698 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/user/logged-user - 204 null null 84.3102ms
+2025-05-12 21:32:24.698 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/8 - 204 null null 84.3094ms
+2025-05-12 21:32:24.704 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/8/subjects - null null
+2025-05-12 21:32:24.704 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/user/logged-user - null null
+2025-05-12 21:32:24.704 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/8 - null null
+2025-05-12 21:32:24.726 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:32:24.726 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:32:24.726 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:32:24.807 +02:00 [INF] Executing endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 21:32:24.807 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:32:24.807 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:32:24.827 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:32:24.827 +02:00 [INF] Route matched with {action = "GetLoggedUser", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLoggedUser() on controller backend.Controllers.UserController (backend).
+2025-05-12 21:32:24.827 +02:00 [INF] Route matched with {action = "GetSubjectsForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSubjectsForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:32:25.591 +02:00 [INF] Executed DbCommand (35ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 21:32:25.632 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 21:32:25.637 +02:00 [INF] Executed DbCommand (15ms) [Parameters=[@__id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdminId], [a].[ConcurrencyStamp], [a].[DateAdded], [a].[Email], [a].[EmailConfirmed], [a].[IsActive], [a].[LastSuccessfulLogin], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[StudentId], [a].[TeacherId], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__id_0
+2025-05-12 21:32:25.647 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 818.4999ms
+2025-05-12 21:32:25.647 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:32:25.652 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/8 - 200 null application/json; charset=utf-8 947.7272ms
+2025-05-12 21:32:25.659 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2025-05-12 21:32:25.679 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[FirstName], [a].[LastName], [a].[UserId]
+FROM [Admins] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2025-05-12 21:32:25.680 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.UserDto'.
+2025-05-12 21:32:25.685 +02:00 [INF] Executed action backend.Controllers.UserController.GetLoggedUser (backend) in 857.9157ms
+2025-05-12 21:32:25.686 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetLoggedUser (backend)'
+2025-05-12 21:32:25.687 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/logged-user - 200 null application/json; charset=utf-8 982.6376ms
+2025-05-12 21:32:25.713 +02:00 [INF] Executed DbCommand (15ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[ClassId], [c].[SubjectId], [c].[TeacherId], [s].[Id], [s].[CreatedAt], [s].[Name], [s].[UpdatedAt], [t].[Id], [t].[FirstName], [t].[LastName], [t].[UserId]
+FROM [ClassSubjects] AS [c]
+INNER JOIN [Subjects] AS [s] ON [c].[SubjectId] = [s].[Id]
+INNER JOIN [Teachers] AS [t] ON [c].[TeacherId] = [t].[Id]
+WHERE [c].[ClassId] = @__classId_0
+2025-05-12 21:32:25.734 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.SubjectWithTeachersDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 21:32:25.735 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetSubjectsForClass (backend) in 907.8019ms
+2025-05-12 21:32:25.735 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:32:25.735 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/8/subjects - 200 null application/json; charset=utf-8 1031.3668ms
+2025-05-12 21:32:33.849 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 21:32:33.850 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:32:33.851 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/classes-with-schedule - 204 null null 1.1893ms
+2025-05-12 21:32:33.852 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - null null
+2025-05-12 21:32:33.852 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:32:33.855 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 21:32:33.862 +02:00 [INF] Route matched with {action = "GetClassesWithSchedule", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClassesWithSchedule() on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:32:33.954 +02:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name], (
+    SELECT COUNT(*)
+    FROM [Schedules] AS [s]
+    WHERE [c].[Id] = [s].[ClassId]) AS [EntryCount]
+FROM [Classes] AS [c]
+ORDER BY [c].[Name]
+2025-05-12 21:32:33.955 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.ClassWithScheduleDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 21:32:33.958 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetClassesWithSchedule (backend) in 95.7181ms
+2025-05-12 21:32:33.958 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetClassesWithSchedule (backend)'
+2025-05-12 21:32:33.958 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/classes-with-schedule - 200 null application/json; charset=utf-8 106.6458ms
+2025-05-12 21:32:35.627 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4/subjects - null null
+2025-05-12 21:32:35.627 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 21:32:35.628 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:32:35.628 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:32:35.628 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4 - 204 null null 1.2729ms
+2025-05-12 21:32:35.628 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5234/api/schedule/class/4/subjects - 204 null null 0.9954ms
+2025-05-12 21:32:35.633 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4/subjects - null null
+2025-05-12 21:32:35.633 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:32:35.633 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - null null
+2025-05-12 21:32:35.634 +02:00 [INF] CORS policy execution successful.
+2025-05-12 21:32:35.634 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:32:35.634 +02:00 [INF] Route matched with {action = "GetSubjectsForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSubjectsForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:32:35.634 +02:00 [INF] Executing endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:32:35.634 +02:00 [INF] Route matched with {action = "GetScheduleForClass", controller = "Schedule"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetScheduleForClass(Int32) on controller backend.Controllers.ScheduleController (backend).
+2025-05-12 21:32:35.656 +02:00 [INF] Executed DbCommand (17ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[ClassId], [c].[SubjectId], [c].[TeacherId], [s].[Id], [s].[CreatedAt], [s].[Name], [s].[UpdatedAt], [t].[Id], [t].[FirstName], [t].[LastName], [t].[UserId]
+FROM [ClassSubjects] AS [c]
+INNER JOIN [Subjects] AS [s] ON [c].[SubjectId] = [s].[Id]
+INNER JOIN [Teachers] AS [t] ON [c].[TeacherId] = [t].[Id]
+WHERE [c].[ClassId] = @__classId_0
+2025-05-12 21:32:35.656 +02:00 [INF] Executed DbCommand (17ms) [Parameters=[@__classId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[HomeroomTeacherId], [t].[Name], [t].[UpdatedAt], [t0].[Id], [t0].[ClassId], [t0].[CreatedAt], [t0].[DayOfWeek], [t0].[StartTime], [t0].[SubjectId], [t0].[TeacherId], [t0].[UpdatedAt], [t0].[Id0], [t0].[CreatedAt0], [t0].[Name], [t0].[UpdatedAt0], [t0].[Id1], [t0].[FirstName], [t0].[LastName], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [c].[Id], [c].[CreatedAt], [c].[HomeroomTeacherId], [c].[Name], [c].[UpdatedAt]
+    FROM [Classes] AS [c]
+    WHERE [c].[Id] = @__classId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [s].[Id], [s].[ClassId], [s].[CreatedAt], [s].[DayOfWeek], [s].[StartTime], [s].[SubjectId], [s].[TeacherId], [s].[UpdatedAt], [s0].[Id] AS [Id0], [s0].[CreatedAt] AS [CreatedAt0], [s0].[Name], [s0].[UpdatedAt] AS [UpdatedAt0], [t1].[Id] AS [Id1], [t1].[FirstName], [t1].[LastName], [t1].[UserId]
+    FROM [Schedules] AS [s]
+    INNER JOIN [Subjects] AS [s0] ON [s].[SubjectId] = [s0].[Id]
+    INNER JOIN [Teachers] AS [t1] ON [s].[TeacherId] = [t1].[Id]
+) AS [t0] ON [t].[Id] = [t0].[ClassId]
+ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+2025-05-12 21:32:35.657 +02:00 [INF] Executing OkObjectResult, writing value of type 'backend.DTOs.ScheduleForClassDto'.
+2025-05-12 21:32:35.657 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetScheduleForClass (backend) in 22.8877ms
+2025-05-12 21:32:35.657 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetScheduleForClass (backend)'
+2025-05-12 21:32:35.658 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4 - 200 null application/json; charset=utf-8 24.1077ms
+2025-05-12 21:32:35.658 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[backend.DTOs.SubjectWithTeachersDto, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-12 21:32:35.659 +02:00 [INF] Executed action backend.Controllers.ScheduleController.GetSubjectsForClass (backend) in 24.7182ms
+2025-05-12 21:32:35.659 +02:00 [INF] Executed endpoint 'backend.Controllers.ScheduleController.GetSubjectsForClass (backend)'
+2025-05-12 21:32:35.659 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/schedule/class/4/subjects - 200 null application/json; charset=utf-8 26.4585ms

@@ -15,7 +15,7 @@ import { StudentService } from '../../../core/services/student.service';
 import { TeacherService } from '../../../core/services/teacher.service';
 import { ToastrService } from 'ngx-toastr';
 
-import { ClassAddModel, ClassModel } from '../../../core/models/class-model';
+import { ClassModel } from '../../../core/models/class-model';
 import { Teacher } from '../../../core/models/teacher-model';
 import { Student } from '../../../core/models/student-model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';

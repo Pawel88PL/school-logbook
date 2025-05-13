@@ -7,40 +7,41 @@
     <h1>Plan lekcji – {{ schedule.className }}</h1>
     <hr class="my-5" />
 
-    <div *ngFor="let day of daysOfWeek" class="mb-6">
-        <h3>{{ day.label }}</h3>
+    <div *ngFor="let day of daysOfWeek" class="mb-4">
 
-        <table class="table table-bordered w-full">
-            <thead>
-                <tr>
-                    <th>Godzina</th>
-                    <th>Przedmiot</th>
-                    <th>Nauczyciel</th>
-                    <th>Akcje</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let entry of getEntriesForDay(day.value)">
-                    <td>{{ entry.startTime }}</td>
-                    <td>{{ entry.subjectName }}</td>
-                    <td>{{ entry.teacherFullName }}</td>
-                    <td>
-                        <button mat-icon-button color="primary" (click)="editEntry(entry)">
-                            edit
-                        </button>
-                        <button mat-icon-button color="warn" (click)="deleteEntry(entry.id)">
-                            delete
-                        </button>
-                    </td>
-                </tr>
-                <tr *ngIf="!getEntriesForDay(day.value)?.length">
-                    <td colspan="4" class="text-center text-muted">Brak wpisów</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h3>{{ day.label }}</h3>
+            <img src="./images/add.png" alt="Dodaj" class="add-icon" matTooltip="Dodaj wpis" matTooltipPosition="above"
+                (click)="openAddEntryDialog(day.value)">
+        </div>
 
-        <button mat-stroked-button color="primary" (click)="addEntry(day.value)">
-            + Dodaj wpis
-        </button>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th class="col-2">Godzina</th>
+                        <th class="col-4">Przedmiot</th>
+                        <th class="col-4">Nauczyciel</th>
+                        <th class="col-2 text-center">Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let entry of getEntriesForDay(day.value); trackBy: trackById">
+                        <td class="align-content-center">{{ entry.startTime }}</td>
+                        <td class="align-content-center">{{ entry.subjectName }}</td>
+                        <td class="align-content-center">{{ entry.teacherFullName }}</td>
+                        <td class="text-center">
+                            <img src="./images/edit.png" alt="Edytuj" class="edit-icon" matTooltip="Edytuj"
+                                matTooltipPosition="above" (click)="editEntry(entry)">
+                            <img src="./images/delete.png" alt="Usuń" class="delete-icon" matTooltip="Usuń"
+                                matTooltipPosition="above" (click)="deleteEntry(entry.id)">
+                        </td>
+                    </tr>
+                    <tr *ngIf="!getEntriesForDay(day.value)?.length">
+                        <td colspan="4" class="text-center text-muted">Brak wpisów</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
