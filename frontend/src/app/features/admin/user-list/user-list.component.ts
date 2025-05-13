@@ -104,7 +104,7 @@ export class UserListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.userService.deleteUser(userId).subscribe({
       next: () => {
         this.toastr.success('Użytkownik został usunięty', 'Sukces');
-        this.isLoadingResults = false;
+        this.refreshTable();
       },
       error: (error) => {
         this.toastr.error('Wystąpił błąd podczas usuwania użytkownika', 'Błąd');
@@ -199,6 +199,30 @@ export class UserListComponent implements OnInit, AfterViewInit, OnDestroy {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.deleteUser(userId);
+      }
+    });
+  }
+
+  private refreshTable(): void {
+    const query = this.searchForm.get('query')!.value || '';
+    this.isLoadingResults = true;
+
+    this.userService.getUsersPaged({
+      pageNumber: this.paginator.pageIndex + 1,
+      pageSize: this.paginator.pageSize,
+      sortColumn: this.sort.active || 'role',
+      sortDirection: this.sort.direction || 'asc',
+      searchQuery: query
+    }).subscribe({
+      next: (response) => {
+        this.data = response.data;
+        this.totalRecords = response.totalRecords;
+        this.isLoadingResults = false;
+      },
+      error: (error) => {
+        this.toastr.error('Wystąpił problem podczas odświeżania danych', 'Błąd');
+        console.error(error);
+        this.isLoadingResults = false;
       }
     });
   }
