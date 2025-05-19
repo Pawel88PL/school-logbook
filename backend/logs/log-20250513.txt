@@ -7136,3 +7136,16 @@ OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
 2025-05-13 22:27:00.370 +02:00 [INF] Executed action backend.Controllers.UserController.GetUsersPaged (backend) in 169.2139ms
 2025-05-13 22:27:00.371 +02:00 [INF] Executed endpoint 'backend.Controllers.UserController.GetUsersPaged (backend)'
 2025-05-13 22:27:00.371 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/api/user/paged?pageNumber=1&pageSize=10&sortColumn=role&sortDirection=asc&searchQuery= - 200 null application/json; charset=utf-8 170.9995ms
+2025-05-13 22:27:59.018 +02:00 [INF] Application is starting
+2025-05-13 22:27:59.056 +02:00 [INF] User profile is available. Using '/Users/pawelstaniul/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-05-13 22:27:59.081 +02:00 [WRN] The WebRootPath was not found: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend/wwwroot. Static files may be unavailable.
+2025-05-13 22:27:59.087 +02:00 [INF] Now listening on: http://localhost:5234
+2025-05-13 22:27:59.088 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-13 22:27:59.088 +02:00 [INF] Hosting environment: Development
+2025-05-13 22:27:59.089 +02:00 [INF] Content root path: /Users/pawelstaniul/Desktop/Programy/school-logbook/backend
+2025-05-13 22:27:59.580 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/swagger/index.html - null null
+2025-05-13 22:27:59.617 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/swagger/index.html - 200 null text/html;charset=utf-8 38.2046ms
+2025-05-13 22:27:59.865 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-13 22:27:59.872 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/_framework/aspnetcore-browser-refresh.js - 200 13732 application/javascript; charset=utf-8 7.1995ms
+2025-05-13 22:27:59.929 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5234/swagger/v1/swagger.json - null null
+2025-05-13 22:27:59.983 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5234/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 53.9693ms

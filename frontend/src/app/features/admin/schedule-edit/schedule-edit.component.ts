@@ -124,6 +124,10 @@ export class ScheduleEditComponent implements OnInit {
         dayOfWeek: day,
         classId: this.classId,
         availableSubjects: this.subjectOptions
+      },
+      position: {
+        top: '60px',
+        right: '60px'
       }
     });
 
