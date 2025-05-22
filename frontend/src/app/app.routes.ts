@@ -20,6 +20,7 @@ import { UserListComponent } from './features/admin/user-list/user-list.componen
 
 import { TeacherLayoutComponent } from './layout/teacher-layout/teacher-layout.component';
 import { AttendanceComponent } from './features/teacher/attendance/attendance.component';
+import { TeacherScheduleComponent } from './features/teacher/teacher-schedule/teacher-schedule.component';
 import { TeacherClassesComponent } from './features/teacher/teacher-classes/teacher-classes.component';
 
 import { StudentLayoutComponent } from './layout/student-layout/student-layout.component';
@@ -56,7 +57,8 @@ export const routes: Routes = [
         children: [
             { path: 'attendance', component: AttendanceComponent, data: { title: 'Dziennik - frekwencja' } },
             { path: 'classes', component: TeacherClassesComponent, data: { title: 'Dziennik - klasy' } },
-            { path: '', redirectTo: 'classes', pathMatch: 'full' }
+            { path: 'schedule', component: TeacherScheduleComponent, data: { title: 'Dziennik - plan lekcji' } },
+            { path: '', redirectTo: 'schedule', pathMatch: 'full' }
         ]
     },
     {
