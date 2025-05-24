@@ -19,7 +19,7 @@ import { UserEditComponent } from './features/admin/user-edit/user-edit.componen
 import { UserListComponent } from './features/admin/user-list/user-list.component';
 
 import { TeacherLayoutComponent } from './layout/teacher-layout/teacher-layout.component';
-import { AttendanceComponent } from './features/teacher/attendance/attendance.component';
+import { TeacherAttendanceComponent } from './features/teacher/teacher-attendance/teacher-attendance.component';
 import { TeacherScheduleComponent } from './features/teacher/teacher-schedule/teacher-schedule.component';
 import { TeacherClassesComponent } from './features/teacher/teacher-classes/teacher-classes.component';
 
@@ -55,7 +55,7 @@ export const routes: Routes = [
         component: TeacherLayoutComponent,
         canActivate: [teacherGuard],
         children: [
-            { path: 'attendance', component: AttendanceComponent, data: { title: 'Dziennik - frekwencja' } },
+            { path: 'attendance', component: TeacherAttendanceComponent, data: { title: 'Dziennik - frekwencja' } },
             { path: 'classes', component: TeacherClassesComponent, data: { title: 'Dziennik - klasy' } },
             { path: 'schedule', component: TeacherScheduleComponent, data: { title: 'Dziennik - plan lekcji' } },
             { path: '', redirectTo: 'schedule', pathMatch: 'full' }
