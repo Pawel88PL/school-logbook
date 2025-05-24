@@ -1,0 +1,9 @@
+.custom-container {
+    margin: 20px 40px;
+    max-width: 1000px;
+}
+
+mat-card {
+    border-radius: 5px;
+    background-color: white;
+}

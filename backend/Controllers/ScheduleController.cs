@@ -62,6 +62,22 @@ public class ScheduleController(IScheduleService schedule) : ControllerBase
         }
     }
 
+    [HttpGet("teacher/{userId}")]
+    public async Task<IActionResult> GetScheduleForTeacher(string userId)
+    {
+        try
+        {
+            var schedule = await _schedule.GetScheduleForTeacherAsync(userId);
+            return Ok(schedule);
+        }
+        catch (Exception ex)
+        {
+            var message = $"Wystąpił błąd podczas pobierania harmonogramu dla nauczyciela o ID {userId}: {ex.Message}";
+            Log.Error(message);
+            return BadRequest(new { message });
+        }
+    }
+
     [HttpGet("class/{classId}/subjects")]
     public async Task<IActionResult> GetSubjectsForClass(int classId)
     {

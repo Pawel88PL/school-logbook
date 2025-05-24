@@ -6,6 +6,7 @@ import { JwtService } from '../auth/jwt.service';
 import { ScheduleForClassModel } from '../models/class-schedule-model';
 import { SubjectWithTeachersModel } from '../models/subject-teacher.model';
 import { ScheduleEntryModel } from '../models/schedule-model';
+import { TeacherScheduleEntry } from '../models/teacher-schedule-model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,12 @@ export class ScheduleService {
     const token = this.jwtService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<ScheduleForClassModel>(`${this.apiUrl}/class/${classId}`, { headers });
+  }
+
+  getScheduleForTeacher(teacherId: string): Observable<TeacherScheduleEntry[]> {
+    const token = this.jwtService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<TeacherScheduleEntry[]>(`${this.apiUrl}/teacher/${teacherId}`, { headers });
   }
 
   getSubjectsForClass(classId: number): Observable<SubjectWithTeachersModel[]> {

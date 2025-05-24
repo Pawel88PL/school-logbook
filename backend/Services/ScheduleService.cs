@@ -105,6 +105,35 @@ public class ScheduleService(AppDbContext context) : IScheduleService
         };
     }
 
+    public async Task<List<TeacherScheduleEntryDto>> GetScheduleForTeacherAsync(string userId)
+    {
+        var teacher = await _context.Teachers
+            .AsNoTracking()
+            .FirstOrDefaultAsync(t => t.UserId == userId);
+
+        if (teacher == null)
+        {
+            throw new Exception("Nie znaleziono nauczyciela powiązanego z tym kontem użytkownika.");
+        }
+
+        var schedule = await _context.Schedules
+            .Where(s => s.TeacherId == teacher.Id)
+            .Include(s => s.Class)
+            .Include(s => s.Subject)
+            .OrderBy(s => s.DayOfWeek)
+            .ThenBy(s => s.StartTime)
+            .Select(s => new TeacherScheduleEntryDto
+            {
+                DayOfWeek = s.DayOfWeek,
+                StartTime = s.StartTime,
+                ClassName = s.Class.Name,
+                SubjectName = s.Subject.Name
+            })
+            .ToListAsync();
+
+        return schedule;
+    }
+
     public async Task<List<SubjectWithTeachersDto>> GetSubjectsForClassAsync(int classId)
     {
         var assignments = await _context.ClassSubjects
