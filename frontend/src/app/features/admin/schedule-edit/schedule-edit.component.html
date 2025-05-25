@@ -22,7 +22,7 @@
                         <th class="col-2">Godzina</th>
                         <th class="col-4">Przedmiot</th>
                         <th class="col-4">Nauczyciel</th>
-                        <th class="col-2 text-center">Akcje</th>
+                        <th class="col-1 text-end">Usuń</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,9 +30,7 @@
                         <td class="align-content-center">{{ entry.startTime }}</td>
                         <td class="align-content-center">{{ entry.subjectName }}</td>
                         <td class="align-content-center">{{ entry.teacherFullName }}</td>
-                        <td class="text-center">
-                            <img src="./images/edit.png" alt="Edytuj" class="edit-icon" matTooltip="Edytuj"
-                                matTooltipPosition="above" (click)="editEntry(entry)">
+                        <td class="text-end">
                             <img src="./images/delete.png" alt="Usuń" class="delete-icon" matTooltip="Usuń"
                                 matTooltipPosition="above" (click)="deleteEntry(entry.id)">
                         </td>

@@ -26,7 +26,7 @@ public class ScheduleService(AppDbContext context) : IScheduleService
         var exists = await _context.Schedules.AnyAsync(s =>
             s.ClassId == dto.ClassId &&
             s.DayOfWeek == dto.DayOfWeek &&
-            s.StartTime == dto.StartTime);
+            s.StartTime == TimeSpan.Parse(dto.StartTime));
 
         if (exists)
             throw new Exception("W tym dniu i o tej godzinie już istnieje wpis dla tej klasy.");
@@ -38,7 +38,7 @@ public class ScheduleService(AppDbContext context) : IScheduleService
             SubjectId = dto.SubjectId,
             TeacherId = dto.TeacherId,
             DayOfWeek = dto.DayOfWeek,
-            StartTime = dto.StartTime
+            StartTime = TimeSpan.Parse(dto.StartTime)
         };
 
         await _context.Schedules.AddAsync(entry);
@@ -53,7 +53,7 @@ public class ScheduleService(AppDbContext context) : IScheduleService
             SubjectName = subject.Name,
             TeacherFullName = $"{teacher.FirstName} {teacher.LastName}",
             DayOfWeek = entry.DayOfWeek,
-            StartTime = entry.StartTime
+            StartTime = entry.StartTime.ToString(@"hh\:mm"),
         };
     }
 
@@ -91,7 +91,7 @@ public class ScheduleService(AppDbContext context) : IScheduleService
             {
                 Id = e.Id,
                 DayOfWeek = e.DayOfWeek,
-                StartTime = e.StartTime,
+                StartTime = e.StartTime.ToString(@"hh\:mm"),
                 SubjectName = e.Subject.Name,
                 TeacherFullName = $"{e.Teacher.FirstName} {e.Teacher.LastName}"
             })
@@ -125,7 +125,7 @@ public class ScheduleService(AppDbContext context) : IScheduleService
             .Select(s => new TeacherScheduleEntryDto
             {
                 DayOfWeek = s.DayOfWeek,
-                StartTime = s.StartTime,
+                StartTime = s.StartTime.ToString(@"hh\:mm"),
                 ClassName = s.Class.Name,
                 SubjectName = s.Subject.Name
             })

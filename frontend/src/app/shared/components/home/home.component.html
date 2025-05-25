@@ -7,31 +7,32 @@
     <hr class="my-5" />
 
     <div class="main-card">
-        <div *ngIf="!authService.isLoggedIn()">
 
-            <h2 class="mb-5">Witaj w aplikacji dziennik lekcyjny</h2>
-
-            <h5 class="mb-5">
-                Opis aplikacji do zrobienia...
-            </h5>
-
-            <mat-card routerLink="/login">
-                <mat-card-content>
-                    <h4 class="text-center">Zaloguj się, aby kontynuować</h4>
-                </mat-card-content>
-            </mat-card>
+        <div class="alert alert-light mb-5">
+            <h2>
+                Witaj w aplikacji dziennik lekcyjny
+            </h2>
         </div>
 
-        <div class="row" *ngIf="authService.isLoggedIn()">
+        <div class="alert alert-light mb-5">
+            <h3 class="mb-4">
+                Elektroniczny dziennik lekcyjny to aplikacja przeznaczona dla nauczycieli i uczniów Szkoły podstawowej
+                nr 7 w Poznaniu. <br>
+            </h3>
 
-            <h2 class="mb-5">Witaj w aplikacji dziennik lekcyjny</h2>
+            <h4 class="mb-4">
+                Jeżeli jesteś uczniem możesz sprawdzić swoje oceny, frekwencję i zweryfikować plan lekcji. <br>
+            </h4>
 
-            <h5 class="mb-5">
-                Aplikacja Cyfrowy dziennik lekcyjny jest narzędziem do zarządzania informacjami o uczniach,
-                nauczycielach i
-                przedmiotach. Umożliwia nauczycielom i uczniom łatwe przeglądanie i aktualizowanie danych, co ułatwia
-                zarządzanie informacjami o postępach uczniów i organizacji zajęć.
-            </h5>
+            <h4 class="mb-4">
+                Jeżeli jesteś nauczycielem możesz zarządzać swoją klasą, wpisywać oceny i podejrzeć plan lekcji.
+            </h4>
         </div>
+
+        <mat-card routerLink="/login">
+            <mat-card-content>
+                <h4 class="text-center">Zaloguj się, aby kontynuować</h4>
+            </mat-card-content>
+        </mat-card>
     </div>
 </div>

@@ -13,6 +13,7 @@ import { ScheduleForClassModel } from '../../../core/models/class-schedule-model
 import { ScheduleEntryModel } from '../../../core/models/schedule-model';
 import { SubjectWithTeachersModel } from '../../../core/models/subject-teacher.model';
 import { ScheduleEntryDialogComponent } from '../schedule-entry-dialog/schedule-entry-dialog.component';
+import { daysOfWeek, DaysOfWeek } from '../../../core/models/day-of-week-model';
 
 @Component({
   selector: 'app-schedule-edit',
@@ -35,13 +36,7 @@ export class ScheduleEditComponent implements OnInit {
 
   subjectOptions: SubjectWithTeachersModel[] = [];
 
-  daysOfWeek = [
-    { label: 'Poniedziałek', value: 1 },
-    { label: 'Wtorek', value: 2 },
-    { label: 'Środa', value: 3 },
-    { label: 'Czwartek', value: 4 },
-    { label: 'Piątek', value: 5 },
-  ];
+  daysOfWeek: DaysOfWeek[] = daysOfWeek;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -76,12 +71,6 @@ export class ScheduleEditComponent implements OnInit {
       this.toastr.info('Wpis został usunięty (lokalnie)');
     }
   }
-
-  editEntry(entry: ScheduleEntryModel): void {
-    this.toastr.info(`Edytuj wpis: ${entry.subjectName} - ${entry.teacherFullName}`);
-    // Tu w przyszłości otwierasz modal lub formularz
-  }
-
 
   getEntriesForDay(day: number): ScheduleEntryModel[] {
     return this.schedule?.entries.filter(e => e.dayOfWeek === day) || [];
@@ -145,7 +134,11 @@ export class ScheduleEditComponent implements OnInit {
         this.scheduleService.addScheduleEntry(entryToSend).subscribe({
           next: (createdEntry) => {
             this.toastr.success('Dodano wpis do planu lekcji', 'Sukces');
-            this.schedule.entries.push(createdEntry); // backend dostarczył wszystko
+            this.schedule.entries = [...this.schedule.entries, createdEntry]
+              .sort((a, b) => {
+                if (a.dayOfWeek !== b.dayOfWeek) return a.dayOfWeek - b.dayOfWeek;
+                return a.startTime.localeCompare(b.startTime);
+              });
           },
           error: () => {
             this.toastr.error('Błąd podczas dodawania wpisu do planu', 'Błąd');

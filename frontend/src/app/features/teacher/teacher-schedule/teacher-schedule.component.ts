@@ -2,18 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { JwtService } from '../../../core/auth/jwt.service';
 import { ScheduleService } from '../../../core/services/schedule.service';
 import { ToastrService } from 'ngx-toastr';
 
 import { TeacherScheduleEntry } from '../../../core/models/teacher-schedule-model';
+import { daysOfWeek, DaysOfWeek } from '../../../core/models/day-of-week-model';
 
 @Component({
   selector: 'app-teacher-schedule',
   imports: [
     CommonModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './teacher-schedule.component.html',
   styleUrl: './teacher-schedule.component.css'
@@ -26,13 +29,7 @@ export class TeacherScheduleComponent implements OnInit {
   schedule: TeacherScheduleEntry[] = [];
   userId: string | null = null;
 
-  daysOfWeek = [
-    { label: 'Poniedziałek', value: 1 },
-    { label: 'Wtorek', value: 2 },
-    { label: 'Środa', value: 3 },
-    { label: 'Czwartek', value: 4 },
-    { label: 'Piątek', value: 5 },
-  ];
+  daysOfWeek: DaysOfWeek[] = daysOfWeek;
 
   constructor(
     private jwtService: JwtService,
