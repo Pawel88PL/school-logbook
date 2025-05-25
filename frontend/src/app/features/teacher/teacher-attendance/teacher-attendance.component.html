@@ -3,9 +3,9 @@
 </div>
 
 <div class="custom-container">
-    
+
     <h1>Rejestrowanie obecności</h1>
-    
+
     <hr class="my-5" />
 
     <div *ngIf="!isLoading && todayLessons.length === 0">
@@ -13,14 +13,20 @@
     </div>
 
     <div *ngIf="todayLessons.length > 0">
-        <h2>Dzisiejsze lekcje:</h2>
+        <h2>Twoje dzisiejsze lekcje:</h2>
 
         <mat-card *ngFor="let lesson of todayLessons" class="my-3"
             (click)="onLessonClick(lesson.scheduleId, lesson.subjectName, lesson.className)">
             <mat-card-content>
-                <h5>
-                    {{ lesson.startTime }} – {{ lesson.subjectName }} ({{ lesson.className }})
-                </h5>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5>
+                        {{ lesson.startTime }} – {{ lesson.subjectName }} ({{ lesson.className }})
+                    </h5>
+                    <img *ngIf="lesson.hasAttendance" src="./images/success.png" alt="Zarejestrowano obecność"
+                        class="done-icon" matTooltip="Zarejestrowano obecność" matTooltipPosition="above">
+                    <img *ngIf="!lesson.hasAttendance" src="./images/edit.png" alt="Dodaj obecność" class="done-icon"
+                        matTooltip="Dodaj obecność" matTooltipPosition="above">
+                </div>
             </mat-card-content>
         </mat-card>
     </div>

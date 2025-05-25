@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltip } from '@angular/material/tooltip';
 
 import { AttendanceService } from '../../../core/services/attendance.service';
 import { LessonForAttendanceModel, StudentForAttendanceModel } from '../../../core/models/attendance-model';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AttendanceDialogComponent } from '../attendance-dialog/attendance-dialog.component';
 
 @Component({
@@ -14,7 +15,8 @@ import { AttendanceDialogComponent } from '../attendance-dialog/attendance-dialo
   imports: [
     CommonModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltip,
   ],
   templateUrl: './teacher-attendance.component.html',
   styleUrl: './teacher-attendance.component.css'

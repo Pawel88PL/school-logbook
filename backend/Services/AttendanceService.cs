@@ -59,7 +59,9 @@ public class AttendanceService : IAttendanceService
                 ScheduleId = s.Id,
                 SubjectName = s.Subject.Name,
                 ClassName = s.Class.Name,
-                StartTime = s.StartTime
+                StartTime = s.StartTime.ToString(@"hh\:mm"),
+                HasAttendance = _context.Attendances
+                    .Any(a => a.ScheduleId == s.Id && a.Date.Date == DateTime.Today)
             })
             .ToListAsync();
 

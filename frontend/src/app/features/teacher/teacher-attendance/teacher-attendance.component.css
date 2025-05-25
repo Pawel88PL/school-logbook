@@ -3,14 +3,20 @@
     max-width: 1000px;
 }
 
+.done-icon {
+    width: 24px;
+    height: 24px;
+}
+
 mat-card {
     border-radius: 5px;
-    background-color: white;
+    background-color: rgb(246, 218, 218);
     max-width: 400px;
 }
 
 mat-card:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgb(255, 235, 235);
     cursor: pointer;
 }
 

@@ -5,5 +5,6 @@ public class LessonForAttendanceDto
     public int ScheduleId { get; set; }
     public string SubjectName { get; set; } = null!;
     public string ClassName { get; set; } = null!;
-    public TimeSpan StartTime { get; set; }
+    public string StartTime { get; set; } = null!;
+    public bool HasAttendance { get; set; }
 }
