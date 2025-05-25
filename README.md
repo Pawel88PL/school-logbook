@@ -146,12 +146,15 @@ Authorization: Bearer <token>
 | Oceny              | 🔧 W trakcie          |
 
 ---
-
 ## 👨‍💻 Autorzy:
 
-**Anna Sroka**
-**Barbara Sławińska**
-**Justyna Szofińska**
-**Paweł Staniul**
-Uniwersytet WSB Merito w Poznaniu  
-Kierunek Informatyka
+- **Anna Sroka**  
+- **Barbara Sławińska**  
+- **Justyna Szofińska**  
+- **Paweł Staniul**  
+
+---
+
+### 🎓 Uniwersytet:
+**Uniwersytet WSB Merito w Poznaniu**  
+**Kierunek:** Informatyka
