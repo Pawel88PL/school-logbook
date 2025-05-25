@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Obecność – {{ data.lessonInfo }}</h2>
+<mat-dialog-content>
+
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Uczeń</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of data.students">
+                <td>{{ student.fullName }}</td>
+                <td>{{ student.status || 'Brak danych' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="close()">Zamknij</button>
+</mat-dialog-actions>

@@ -1,40 +1,27 @@
+<div *ngIf="isLoading" class="mat-spinner">
+    <mat-spinner></mat-spinner>
+</div>
+
 <div class="custom-container">
+    
     <h1>Rejestrowanie obecności</h1>
+    
     <hr class="my-5" />
 
-    <div *ngIf="todayLessons.length === 0">
+    <div *ngIf="!isLoading && todayLessons.length === 0">
         <p>Brak zaplanowanych lekcji na dzisiaj.</p>
     </div>
 
     <div *ngIf="todayLessons.length > 0">
-        <h3>Dzisiejsze lekcje</h3>
-        <ul class="lesson-list">
-            <li *ngFor="let lesson of todayLessons">
-                <button mat-button (click)="onLessonClick(lesson.scheduleId, lesson.subjectName, lesson.className)">
-                    {{ lesson.startTime }} – {{ lesson.subjectName }} ({{ lesson.className }})
-                </button>
-            </li>
-        </ul>
-    </div>
+        <h2>Dzisiejsze lekcje:</h2>
 
-    <div *ngIf="students.length > 0">
-        <h3>Obecność – {{ selectedLessonInfo }}</h3>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Uczeń</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let student of students">
-                    <td>{{ student.fullName }}</td>
-                    <td>
-                        {{ student.status ? student.status : 'Brak danych' }}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <mat-card *ngFor="let lesson of todayLessons" class="my-3"
+            (click)="onLessonClick(lesson.scheduleId, lesson.subjectName, lesson.className)">
+            <mat-card-content>
+                <h5>
+                    {{ lesson.startTime }} – {{ lesson.subjectName }} ({{ lesson.className }})
+                </h5>
+            </mat-card-content>
+        </mat-card>
     </div>
 </div>
-  
