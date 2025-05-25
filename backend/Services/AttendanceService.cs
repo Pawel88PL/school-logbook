@@ -1,31 +1,37 @@
-using AutoMapper;
+using backend.Data;
 using backend.DTOs;
-using backend.Interfaces.Repositories;
 using backend.Interfaces.Services;
-using backend.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace backend.Services.Implementations;
+namespace backend.Services;
 
 public class AttendanceService : IAttendanceService
 {
-    private readonly IAttendanceRepository _repository;
-    private readonly IMapper _mapper;
+    private readonly AppDbContext _context;
 
-    public AttendanceService(IAttendanceRepository repository, IMapper mapper)
+    public AttendanceService(AppDbContext context)
     {
-        _repository = repository;
-        _mapper = mapper;
+        _context = context;
     }
 
-    public async Task AddAttendanceAsync(AttendanceDto dto)
+    public async Task<List<LessonForAttendanceDto>> GetTodayLessonsForTeacherAsync(int teacherId)
     {
-        var attendance = _mapper.Map<Attendance>(dto);
-        await _repository.AddAsync(attendance);
-    }
+        var today = DateTime.Now.DayOfWeek;
 
-    public async Task<List<AttendanceDto>> GetAttendanceForStudentAsync(int studentId)
-    {
-        var list = await _repository.GetByStudentIdAsync(studentId);
-        return _mapper.Map<List<AttendanceDto>>(list);
+        var lessons = await _context.Schedules
+            .Include(s => s.Subject)
+            .Include(s => s.Class)
+            .Where(s => s.TeacherId == teacherId && s.DayOfWeek == today)
+            .OrderBy(s => s.StartTime)
+            .Select(s => new LessonForAttendanceDto
+            {
+                ScheduleId = s.Id,
+                SubjectName = s.Subject.Name,
+                ClassName = s.Class.Name,
+                StartTime = s.StartTime
+            })
+            .ToListAsync();
+
+        return lessons;
     }
 }

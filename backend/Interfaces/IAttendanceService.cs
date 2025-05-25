@@ -4,6 +4,5 @@ namespace backend.Interfaces.Services;
 
 public interface IAttendanceService
 {
-    Task AddAttendanceAsync(AttendanceDto dto);
-    Task<List<AttendanceDto>> GetAttendanceForStudentAsync(int studentId);
+    Task<List<LessonForAttendanceDto>> GetTodayLessonsForTeacherAsync(int teacherId);
 }

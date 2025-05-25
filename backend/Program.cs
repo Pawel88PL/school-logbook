@@ -201,6 +201,7 @@ namespace backend
         // Dodanie serwisów
         private static void RegisterServices(IServiceCollection services)
         {
+            services.AddScoped<IAttendanceService, AttendanceService>();
             services.AddScoped<IClassService, ClassService>();
             services.AddScoped<IScheduleService, ScheduleService>();
             services.AddScoped<IStudentService, StudentService>();
