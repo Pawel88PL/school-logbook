@@ -6,6 +6,8 @@ export interface LessonForAttendanceModel {
 }
 
 export interface StudentForAttendanceModel {
+    studentId: number;
     fullName: string;
-    status?: string;
+    status?: number
 }
+  

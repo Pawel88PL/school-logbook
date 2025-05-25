@@ -59,8 +59,10 @@ export class TeacherAttendanceComponent implements OnInit {
           width: '600px',
           data: {
             lessonInfo,
-            students
-          }
+            students,
+            scheduleId
+          },
+          disableClose: true
         });
       },
       error: (err) => {

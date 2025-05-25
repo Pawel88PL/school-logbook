@@ -36,7 +36,7 @@ public class AttendanceService : IAttendanceService
                 FullName = s.FirstName + " " + s.LastName,
                 // Pobierz status obecności jeśli istnieje
                 Status = _context.Attendances
-                    .Where(a => a.ScheduleId == scheduleId && a.StudentId == s.Id && a.Date == today)
+                    .Where(a => a.ScheduleId == scheduleId && a.StudentId == s.Id && a.Date.Date == today)
                     .Select(a => a.Status)
                     .FirstOrDefault()
             })
@@ -65,4 +65,34 @@ public class AttendanceService : IAttendanceService
 
         return lessons;
     }
+
+    public async Task SaveAttendanceAsync(int scheduleId, List<AttendanceCreateDto> attendanceList)
+    {
+        if (!attendanceList.Any())
+            throw new ArgumentException("Lista obecności jest pusta");
+
+        var today = DateOnly.FromDateTime(DateTime.Today);
+
+        var existingAttendances = await _context.Attendances
+            .Where(a => a.ScheduleId == scheduleId && DateOnly.FromDateTime(a.Date) == today)
+            .ToListAsync();
+
+        if (existingAttendances.Any())
+        {
+            _context.Attendances.RemoveRange(existingAttendances);
+            await _context.SaveChangesAsync();
+        }
+
+        var newAttendances = attendanceList.Select(a => new Attendance
+        {
+            ScheduleId = scheduleId,
+            StudentId = a.StudentId,
+            Date = DateTime.Now,
+            Status = a.Status
+        }).ToList();
+
+        await _context.Attendances.AddRangeAsync(newAttendances);
+        await _context.SaveChangesAsync();
+    }
+
 }

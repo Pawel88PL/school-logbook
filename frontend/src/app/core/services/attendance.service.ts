@@ -29,4 +29,10 @@ export class AttendanceService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<LessonForAttendanceModel[]>(`${this.apiUrl}/today-lessons`, { headers });
   }
+
+  saveAttendance(scheduleId: number, attendanceList: { studentId: number, status: number }[]): Observable<any> {
+    const token = this.jwtService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post(`${this.apiUrl}/save/${scheduleId}`, attendanceList, { headers });
+  }
 }

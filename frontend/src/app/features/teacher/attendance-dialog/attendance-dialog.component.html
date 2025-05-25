@@ -2,16 +2,23 @@
 <mat-dialog-content>
 
     <table class="table table-bordered mt-3">
-        <thead>
+        <thead class="table-light">
             <tr>
-                <th>Uczeń</th>
-                <th>Status</th>
+                <th class="col-7">Uczeń</th>
+                <th class="col-5">Status</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let student of data.students">
-                <td>{{ student.fullName }}</td>
-                <td>{{ student.status || 'Brak danych' }}</td>
+                <td class="align-content-center">{{ student.fullName }}</td>
+                <td>
+                    <mat-select [(ngModel)]="student.status" placeholder="Wybierz status">
+                        <mat-option [value]="1">Obecny</mat-option>
+                        <mat-option [value]=2>Nieobecny</mat-option>
+                        <mat-option [value]=3>Spóźniony</mat-option>
+                        <mat-option [value]=4>Usprawiedliwiony</mat-option>
+                    </mat-select>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -19,5 +26,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-    <button mat-button (click)="close()">Zamknij</button>
+    <button class="reject" (click)="close()">Anuluj</button>
+    <button class="proceed" (click)="saveAttendance()">Zapisz obecność</button>
 </mat-dialog-actions>

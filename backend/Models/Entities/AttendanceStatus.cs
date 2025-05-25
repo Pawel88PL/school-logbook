@@ -2,8 +2,8 @@ namespace backend.Models.Entities;
 
 public enum AttendanceStatus
 {
-    Present,
-    Absent,
-    Excused,
-    Late
+    Obecny,
+    Nieobecny,
+    Spóźniony,
+    Usprawiedliwiony,
 }

@@ -1,8 +1,10 @@
 using System.Security.Claims;
+using backend.DTOs;
 using backend.Interfaces;
 using backend.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace backend.Controllers;
 
@@ -50,4 +52,21 @@ public class AttendanceController : ControllerBase
         var result = await _attendanceService.GetTodayLessonsForTeacherAsync(teacher.Id);
         return Ok(result);
     }
+
+    [HttpPost("save/{scheduleId}")]
+    [Authorize(Roles = "Teacher")]
+    public async Task<IActionResult> SaveAttendance(int scheduleId, [FromBody] List<AttendanceCreateDto> attendanceList)
+    {
+        try
+        {
+            await _attendanceService.SaveAttendanceAsync(scheduleId, attendanceList);
+            return Ok(new { message = "Obecność została zapisana." });
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Błąd podczas zapisu obecności");
+            return BadRequest(new { message = "Wystąpił błąd podczas zapisu obecności." });
+        }
+    }
+
 }
