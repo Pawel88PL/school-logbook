@@ -88,11 +88,7 @@ school-logbook/
     ```bash
     dotnet restore
     ```
-3. Utwórz bazę danych i zastosuj migracje:
-    ```bash
-    dotnet ef database update
-    ```
-4. Uruchom API:
+3. Uruchom API:
     ```bash
     dotnet run
     ```
