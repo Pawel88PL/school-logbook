@@ -19,6 +19,21 @@ public class AttendanceController : ControllerBase
         _teacherService = teacherService;
     }
 
+    [HttpGet("students/{scheduleId}")]
+    [Authorize(Roles = "Teacher")]
+    public async Task<IActionResult> GetStudentsForSchedule(int scheduleId)
+    {
+        try
+        {
+            var result = await _attendanceService.GetStudentsForScheduleAsync(scheduleId);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
+    }
+
     [HttpGet("today-lessons")]
     [Authorize(Roles = "Teacher")]
     public async Task<IActionResult> GetTodayLessons()
