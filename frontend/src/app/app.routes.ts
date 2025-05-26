@@ -19,6 +19,8 @@ import { UserEditComponent } from './features/admin/user-edit/user-edit.componen
 import { UserListComponent } from './features/admin/user-list/user-list.component';
 
 import { TeacherLayoutComponent } from './layout/teacher-layout/teacher-layout.component';
+import { GradeAssignComponent } from './features/teacher/grade-assign/grade-assign.component';
+import { GradePreviewComponent } from './features/teacher/grade-preview/grade-preview.component';
 import { TeacherAttendanceComponent } from './features/teacher/teacher-attendance/teacher-attendance.component';
 import { TeacherScheduleComponent } from './features/teacher/teacher-schedule/teacher-schedule.component';
 import { TeacherClassesComponent } from './features/teacher/teacher-classes/teacher-classes.component';
@@ -57,6 +59,8 @@ export const routes: Routes = [
         children: [
             { path: 'attendance', component: TeacherAttendanceComponent, data: { title: 'Dziennik - frekwencja' } },
             { path: 'classes', component: TeacherClassesComponent, data: { title: 'Dziennik - klasy' } },
+            { path: 'grade-assign', component: GradeAssignComponent, data: { title: 'Dziennik - przypisz ocenę' } },
+            { path: 'grade-preview', component: GradePreviewComponent, data: { title: 'Dziennik - podgląd ocen' } },
             { path: 'schedule', component: TeacherScheduleComponent, data: { title: 'Dziennik - plan lekcji' } },
             { path: '', redirectTo: 'schedule', pathMatch: 'full' }
         ]
