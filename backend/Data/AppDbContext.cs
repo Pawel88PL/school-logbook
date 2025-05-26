@@ -11,13 +11,14 @@ public class AppDbContext : IdentityDbContext<User>
     }
 
     public DbSet<Admin> Admins { get; private set; } = default!;
-    public DbSet<Student> Students { get; private set; } = default!;
-    public DbSet<Teacher> Teachers { get; private set; } = default!;
+    public DbSet<Attendance> Attendances { get; private set; } = default!;
     public DbSet<Class> Classes { get; private set; } = default!;
     public DbSet<ClassSubject> ClassSubjects { get; private set; } = default!;
-    public DbSet<Subject> Subjects { get; private set; } = default!;
+    public DbSet<Grade> Grades { get; private set; } = default!;
+    public DbSet<Student> Students { get; private set; } = default!;
+    public DbSet<Teacher> Teachers { get; private set; } = default!;
     public DbSet<Schedule> Schedules { get; private set; } = default!;
-    public DbSet<Attendance> Attendances { get; private set; } = default!;
+    public DbSet<Subject> Subjects { get; private set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
