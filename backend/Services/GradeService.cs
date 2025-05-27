@@ -2,6 +2,7 @@ using backend.Data;
 using backend.DTOs;
 using backend.Interfaces;
 using backend.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services;
 
@@ -40,4 +41,25 @@ public class GradeService : IGradeService
             CreatedAt = grade.CreatedAt,
         };
     }
+
+    public async Task<List<SubjectWithTeachersDto>> GetSubjectsForCurrentTeacherAsync(int teacherId)
+    {
+        var assignments = await _context.ClassSubjects
+            .Where(cs => cs.TeacherId == teacherId)
+            .Include(cs => cs.Subject)
+            .Include(cs => cs.Class)
+            .ToListAsync();
+
+        var grouped = assignments
+            .GroupBy(cs => cs.SubjectId)
+            .Select(g => new SubjectWithTeachersDto
+            {
+                SubjectId = g.Key,
+                SubjectName = g.First().Subject.Name
+            })
+            .ToList();
+
+        return grouped;
+    }
+
 }

@@ -1,1 +1,37 @@
-<p>grade-assign works!</p>
+<div class="custom-container">
+    <h1>Wystaw ocenę</h1>
+    <form [formGroup]="form" (ngSubmit)="assignGrade()">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Przedmiot</mat-label>
+            <mat-select formControlName="subjectId" (selectionChange)="onSubjectChange()">
+                <mat-option *ngFor="let subject of subjects" [value]="subject.subjectId">
+                    {{ subject.subjectName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Uczeń</mat-label>
+            <mat-select formControlName="studentId">
+                <mat-option *ngFor="let student of students" [value]="student.id">
+                    {{ student.fullName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Ocena</mat-label>
+            <input matInput type="number" formControlName="gradeValue" min="1" max="6">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Opis</mat-label>
+            <input matInput type="text" formControlName="description">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || isLoading">
+            Zapisz ocenę
+        </button>
+    </form>
+
+</div>
