@@ -96,6 +96,7 @@ public class ClassService(AppDbContext context) : IClassService
                 Id = c.Id,
                 Name = c.Name,
             })
+            .OrderBy(c => c.Name)
             .ToListAsync();
 
         return classes;

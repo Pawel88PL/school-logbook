@@ -3,10 +3,10 @@
     <form [formGroup]="form" (ngSubmit)="assignGrade()">
         <mat-form-field appearance="outline" class="w-100">
             <mat-label>Przedmiot</mat-label>
-            <mat-select formControlName="subjectId" (selectionChange)="onSubjectChange()">
-                <mat-option *ngFor="let subject of subjects" [value]="subject.subjectId">
-                    {{ subject.subjectName }}
-                </mat-option>
+            <mat-select formControlName="selectedSubject" (selectionChange)="onSubjectChange()">
+                <mat-option *ngFor="let subject of subjects" [value]="subject">
+                    {{ subject.subjectName }} – {{ subject.className }}
+                </mat-option>                  
             </mat-select>
         </mat-form-field>
 
@@ -26,7 +26,7 @@
 
         <mat-form-field appearance="outline" class="w-100">
             <mat-label>Opis</mat-label>
-            <input matInput type="text" formControlName="description">
+            <input matInput type="text" formControlName="comment">
         </mat-form-field>
 
         <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || isLoading">

@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { Student } from '../../../core/models/student-model';
 import { SubjectWithTeachersModel } from '../../../core/models/subject-teacher.model';
+import { SubjectWithClass } from '../../../core/models/subject-class-model';
 
 @Component({
   selector: 'app-grade-assign',
@@ -29,7 +30,7 @@ import { SubjectWithTeachersModel } from '../../../core/models/subject-teacher.m
 
 export class GradeAssignComponent implements OnInit {
 
-  subjects: SubjectWithTeachersModel[] = [];
+  subjects: SubjectWithClass[] = [];
   students: Student[] = [];
 
   form: FormGroup;
@@ -41,10 +42,10 @@ export class GradeAssignComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.form = this.fb.group({
-      subjectId: ['', Validators.required],
+      selectedSubject: [null, Validators.required], // ← zamiast subjectId
       studentId: ['', Validators.required],
       gradeValue: ['', [Validators.required, Validators.min(1), Validators.max(6)]],
-      description: ['']
+      comment: ['']
     });
   }
 
@@ -60,10 +61,14 @@ export class GradeAssignComponent implements OnInit {
   }
 
   onSubjectChange(): void {
-    const subjectId = this.form.value.subjectId;
-    if (!subjectId) return;
+    const selected = this.form.value.selectedSubject;
+    if (!selected) return;
 
-    this.gradeService.getStudentsForSubject(subjectId).subscribe({
+    const { subjectId, classId } = selected;
+
+    this.students = [];
+
+    this.gradeService.getStudentsForSubjectAndClass(subjectId, classId).subscribe({
       next: (students) => this.students = students,
       error: () => this.toastr.error('Błąd podczas pobierania uczniów')
     });
@@ -74,7 +79,17 @@ export class GradeAssignComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.gradeService.addGrade(this.form.value).subscribe({
+    const selected = this.form.value.selectedSubject;
+
+    const payload = {
+      subjectId: selected.subjectId,
+      classId: selected.classId,
+      studentId: this.form.value.studentId,
+      value: this.form.value.gradeValue,
+      comment: this.form.value.comment
+    };
+
+    this.gradeService.addGrade(payload).subscribe({
       next: () => {
         this.toastr.success('Ocena została wystawiona');
         this.form.reset();

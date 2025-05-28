@@ -1,10 +1,10 @@
 export interface GradeCreateModel {
     studentId: number;
     subjectId: number;
-    teacherId: number;
+    teacherId?: number;
     value: number;
-    description: string;
-    createdBy: string;
+    comment: string;
+    createdBy?: string;
 }
 
 export interface GradeModel {

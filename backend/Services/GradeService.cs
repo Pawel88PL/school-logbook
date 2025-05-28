@@ -15,16 +15,16 @@ public class GradeService : IGradeService
         _context = context;
     }
 
-    public async Task<GradeDto> AddGradeAsync(GradeCreateDto dto)
+    public async Task<GradeDto> AddGradeAsync(GradeCreateDto dto, int teacherId)
     {
         var grade = new Grade
         {
             StudentId = dto.StudentId,
             SubjectId = dto.SubjectId,
-            TeacherId = dto.TeacherId,
+            TeacherId = teacherId,
             Value = dto.Value,
             Comment = dto.Comment,
-            CreatedAt = DateTime.Now
+            Date = DateTime.Now
         };
 
         _context.Grades.Add(grade);
@@ -38,28 +38,48 @@ public class GradeService : IGradeService
             TeacherId = grade.TeacherId,
             Value = grade.Value,
             Comment = grade.Comment ?? string.Empty,
-            CreatedAt = grade.CreatedAt,
+            Date = grade.Date,
         };
     }
 
-    public async Task<List<SubjectWithTeachersDto>> GetSubjectsForCurrentTeacherAsync(int teacherId)
+    public async Task<List<StudentDto>> GetStudentsForSubjectAndClassAsync(int teacherId, int subjectId, int classId)
     {
-        var assignments = await _context.ClassSubjects
+        var isAuthorized = await _context.ClassSubjects.AnyAsync(cs =>
+            cs.TeacherId == teacherId && cs.SubjectId == subjectId && cs.ClassId == classId);
+
+        if (!isAuthorized)
+            throw new Exception("Nie masz uprawnień do tej klasy i przedmiotu.");
+
+        var students = await _context.Students
+            .Where(s => s.ClassId == classId)
+            .OrderBy(s => s.LastName)
+            .Select(s => new StudentDto
+            {
+                Id = s.Id,
+                FullName = s.FirstName + " " + s.LastName
+            })
+            .ToListAsync();
+
+        return students;
+    }
+
+    public async Task<List<SubjectWithClassDto>> GetSubjectsForCurrentTeacherAsync(int teacherId)
+    {
+        var subjects = await _context.ClassSubjects
             .Where(cs => cs.TeacherId == teacherId)
             .Include(cs => cs.Subject)
             .Include(cs => cs.Class)
+            .Select(cs => new SubjectWithClassDto
+            {
+                SubjectId = cs.SubjectId,
+                SubjectName = cs.Subject.Name,
+                ClassId = cs.ClassId,
+                ClassName = cs.Class.Name
+            })
+            .Distinct()
+            .OrderBy(cs => cs.SubjectName)
             .ToListAsync();
 
-        var grouped = assignments
-            .GroupBy(cs => cs.SubjectId)
-            .Select(g => new SubjectWithTeachersDto
-            {
-                SubjectId = g.Key,
-                SubjectName = g.First().Subject.Name
-            })
-            .ToList();
-
-        return grouped;
+        return subjects;
     }
-
 }
