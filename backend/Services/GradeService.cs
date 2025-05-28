@@ -17,6 +17,12 @@ public class GradeService : IGradeService
 
     public async Task<GradeDto> AddGradeAsync(GradeCreateDto dto, int teacherId)
     {
+        var student = await _context.Students.FindAsync(dto.StudentId)
+            ?? throw new Exception("Nie znaleziono ucznia.");
+
+        var subject = await _context.Subjects.FindAsync(dto.SubjectId)
+            ?? throw new Exception("Nie znaleziono przedmiotu.");
+
         var grade = new Grade
         {
             StudentId = dto.StudentId,
@@ -32,10 +38,8 @@ public class GradeService : IGradeService
 
         return new GradeDto
         {
-            Id = grade.Id,
-            StudentId = grade.StudentId,
-            SubjectId = grade.SubjectId,
-            TeacherId = grade.TeacherId,
+            StudentName = $"{student.FirstName} {student.LastName}",
+            SubjectName = subject.Name,
             Value = grade.Value,
             Comment = grade.Comment ?? string.Empty,
             Date = grade.Date,

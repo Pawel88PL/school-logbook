@@ -2,3 +2,58 @@
     margin: 20px 40px;
     max-width: 1000px;
 }
+
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.8s linear infinite;
+    vertical-align: middle;
+}
+
+mat-form-field {
+    max-width: 350px;
+    width: 100%;
+    margin: 10px 20px 0 0;
+}
+
+.mat-spinner {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.proceed {
+    position: relative;
+    max-width: 350px;
+    width: 100%;
+    padding: 10px;
+    background: #000000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.proceed:disabled {
+    background: #a0a0a0;
+    cursor: not-allowed;
+}
+
+.proceed:hover:not(:disabled) {
+    background: #383838;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 
 import { GradeService } from '../../../core/services/grade.service';
 import { ToastrService } from 'ngx-toastr';
 
 import { Student } from '../../../core/models/student-model';
-import { SubjectWithTeachersModel } from '../../../core/models/subject-teacher.model';
 import { SubjectWithClass } from '../../../core/models/subject-class-model';
 
 @Component({
@@ -21,6 +22,7 @@ import { SubjectWithClass } from '../../../core/models/subject-class-model';
 
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     MatSelectModule,
     ReactiveFormsModule
   ],
@@ -34,11 +36,12 @@ export class GradeAssignComponent implements OnInit {
   students: Student[] = [];
 
   form: FormGroup;
-  isLoading = false;
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private gradeService: GradeService,
+    private router: Router,
     private toastr: ToastrService
   ) {
     this.form = this.fb.group({
@@ -54,9 +57,16 @@ export class GradeAssignComponent implements OnInit {
   }
 
   loadSubjects(): void {
+    this.isLoading = true;
     this.gradeService.getSubjectsForCurrentTeacher().subscribe({
-      next: (subjects) => this.subjects = subjects,
-      error: () => this.toastr.error('Błąd podczas pobierania przedmiotów')
+      next: (subjects: SubjectWithClass[]) => {
+        this.subjects = subjects;
+        this.isLoading = false;
+      },
+      error: () => {
+        this.toastr.error('Błąd podczas pobierania przedmiotów');
+        this.isLoading = false;
+      }
     });
   }
 
@@ -64,13 +74,19 @@ export class GradeAssignComponent implements OnInit {
     const selected = this.form.value.selectedSubject;
     if (!selected) return;
 
+    this.isLoading = true;
     const { subjectId, classId } = selected;
-
     this.students = [];
 
     this.gradeService.getStudentsForSubjectAndClass(subjectId, classId).subscribe({
-      next: (students) => this.students = students,
-      error: () => this.toastr.error('Błąd podczas pobierania uczniów')
+      next: (students) => {
+        this.students = students,
+          this.isLoading = false;
+      },
+      error: () => {
+        this.toastr.error('Błąd podczas pobierania uczniów')
+        this.isLoading = false;
+      }
     });
   }
 
@@ -90,9 +106,17 @@ export class GradeAssignComponent implements OnInit {
     };
 
     this.gradeService.addGrade(payload).subscribe({
-      next: () => {
-        this.toastr.success('Ocena została wystawiona');
-        this.form.reset();
+      next: (response) => {
+        const formattedDate = new Date(response.date).toLocaleDateString('pl-PL');
+        const commentPart = response.comment ? ` – ${response.comment}` : '';
+
+        this.toastr.success(
+          `Wystawiono ocenę: ${response.value}${commentPart} (${formattedDate}), przedmiot: ${response.subjectName}, uczeń: ${response.studentName}.`,
+          'Sukces',
+          { timeOut: 5000 }
+        );
+
+        this.router.navigate(['/teacher/grade-preview']);
         this.isLoading = false;
       },
       error: () => {
