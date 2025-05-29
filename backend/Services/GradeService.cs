@@ -56,7 +56,7 @@ public class GradeService : IGradeService
             .Include(g => g.Subject)
             .Select(g => new GradeDto
             {
-                StudentName = g.Student.FirstName + " " + g.Student.LastName,
+                StudentName = g.Student.LastName + " " + g.Student.FirstName,
                 ClassName = g.Student.Class != null ? g.Student.Class.Name : "Brak klasy",
                 SubjectName = g.Subject.Name,
                 Value = g.Value,
@@ -81,6 +81,10 @@ public class GradeService : IGradeService
                 "className" => request.SortDirection == "desc"
                     ? query.OrderByDescending(c => c.ClassName)
                     : query.OrderBy(c => c.ClassName),
+
+                "subjectName" => request.SortDirection == "desc"
+                    ? query.OrderByDescending(c => c.SubjectName)
+                    : query.OrderBy(c => c.SubjectName),
 
                 "value" => request.SortDirection == "desc"
                     ? query.OrderByDescending(c => c.Value)

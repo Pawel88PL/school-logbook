@@ -39,7 +39,11 @@
             <!-- Ocena -->
             <ng-container matColumnDef="value">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Ocena </th>
-                <td mat-cell *matCellDef="let row" class="text-center font-bold">{{ row.value }}</td>
+                <td mat-cell *matCellDef="let row" class="text-center">
+                    <span class="badge" [ngClass]="getBadgeClass(row.value)">
+                        {{ row.value }}
+                    </span>
+                </td>
             </ng-container>
 
             <!-- Komentarz -->

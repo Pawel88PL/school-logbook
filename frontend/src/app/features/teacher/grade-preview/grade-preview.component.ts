@@ -84,6 +84,23 @@ export class GradePreviewComponent implements AfterViewInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  getBadgeClass(value: number): string {
+    switch (value) {
+      case 1:
+        return 'bg-danger';
+      case 2:
+        return 'bg-warning text-dark';
+      case 3:
+        return 'bg-info text-dark';
+      case 4:
+        return 'bg-primary';
+      case 5:
+        return 'bg-success';
+      default:
+        return 'bg-secondary';
+    }
+  }  
+
   getRowNumber(index: number): number {
     return (this.paginator?.pageIndex || 0) * this.paginator.pageSize + index + 1;
   }
