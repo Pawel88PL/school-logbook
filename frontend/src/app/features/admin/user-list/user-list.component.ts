@@ -64,7 +64,6 @@ export class UserListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   errorMessage: string | null = null;
   isLoadingResults: boolean = true;
-  isSortInitialized: boolean = false;
 
   roles: Role[] = [];
 

@@ -1,6 +1,7 @@
 using backend.Data;
 using backend.DTOs;
 using backend.Interfaces;
+using backend.Models;
 using backend.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -43,6 +44,81 @@ public class GradeService : IGradeService
             Value = grade.Value,
             Comment = grade.Comment ?? string.Empty,
             Date = grade.Date,
+        };
+    }
+
+    public async Task<PagedGrades> GetGradesForTeacherPaged(PagedRequest request, int teacherId)
+    {
+        var query = _context.Grades
+            .AsNoTracking()
+            .Where(g => g.TeacherId == teacherId)
+            .Include(g => g.Student).ThenInclude(s => s.Class)
+            .Include(g => g.Subject)
+            .Select(g => new GradeDto
+            {
+                StudentName = g.Student.FirstName + " " + g.Student.LastName,
+                ClassName = g.Student.Class != null ? g.Student.Class.Name : "Brak klasy",
+                SubjectName = g.Subject.Name,
+                Value = g.Value,
+                Comment = g.Comment ?? string.Empty,
+                Date = g.Date
+            });
+
+        if (!string.IsNullOrEmpty(request.SearchQuery))
+        {
+            query = query.Where(c => c.SubjectName!.Contains(request.SearchQuery));
+        }
+
+        // Dynamiczne sortowanie
+        if (!string.IsNullOrEmpty(request.SortColumn))
+        {
+            query = request.SortColumn switch
+            {
+                "studentName" => request.SortDirection == "desc"
+                    ? query.OrderByDescending(c => c.StudentName)
+                    : query.OrderBy(c => c.StudentName),
+
+                "className" => request.SortDirection == "desc"
+                    ? query.OrderByDescending(c => c.ClassName)
+                    : query.OrderBy(c => c.ClassName),
+
+                "value" => request.SortDirection == "desc"
+                    ? query.OrderByDescending(c => c.Value)
+                    : query.OrderBy(c => c.Value),
+
+                "date" => request.SortDirection == "desc"
+                    ? query.OrderByDescending(c => c.Date)
+                    : query.OrderBy(c => c.Date),
+
+                _ => throw new ArgumentException($"Nieprawidłowa kolumna sortowania: {request.SortColumn}")
+            };
+        }
+        else
+        {
+            query = query.OrderBy(c => c.Date);
+        }
+
+        int totalRecords = await query.CountAsync();
+
+        var result = await query
+            .Skip((request.PageNumber - 1) * request.PageSize)
+            .Take(request.PageSize)
+            .ToListAsync();
+
+        var grades = result.Select(g => new GradeDto
+        {
+            StudentName = g.StudentName,
+            ClassName = g.ClassName,
+            SubjectName = g.SubjectName,
+            Value = g.Value,
+            Comment = g.Comment ?? string.Empty,
+            Date = g.Date
+        }).ToList();
+
+        return new PagedGrades
+        {
+            TotalRecords = totalRecords,
+            Data = grades
         };
     }
 

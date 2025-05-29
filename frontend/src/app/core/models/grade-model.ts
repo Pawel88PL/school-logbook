@@ -9,6 +9,7 @@ export interface GradeCreateModel {
 
 export interface GradeModel {
     id: number;
+    className: string;
     studentId: number;
     studentName: string;
     subjectId: number;

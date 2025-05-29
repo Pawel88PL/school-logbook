@@ -2,14 +2,16 @@ namespace backend.DTOs;
 
 public class GradeDto
 {
-    public int Id { get; set; }
-    public int StudentId { get; set; }
     public string StudentName { get; set; } = string.Empty;
-    public int SubjectId { get; set; }
+    public string ClassName { get; set; } = string.Empty;
     public string SubjectName { get; set; } = string.Empty;
-    public int TeacherId { get; set; }
-    public double Value { get; set; }
+    public int Value { get; set; }
     public string Comment { get; set; } = string.Empty;
     public DateTime Date { get; set; }
-    public string CreatedBy { get; set; } = string.Empty;
+}
+
+public class PagedGrades
+{
+    public int TotalRecords { get; set; }
+    public List<GradeDto> Data { get; set; } = new List<GradeDto>();
 }

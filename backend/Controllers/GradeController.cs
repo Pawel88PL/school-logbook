@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using backend.DTOs;
 using backend.Interfaces;
+using backend.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -36,6 +37,31 @@ public class GradeController(IGradeService gradeService, ITeacherService teacher
         {
             Log.Error(ex, "Błąd podczas dodawania oceny.");
             return BadRequest(new { message = "Wystąpił błąd podczas dodawania oceny." });
+        }
+    }
+
+    [Authorize(Roles = "Teacher")]
+    [HttpGet("teacher/paged")]
+    public async Task<IActionResult> GetGradesForTeacherPaged([FromQuery] PagedRequest request)
+    {
+        try
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var teacher = await _teacherService.GetTeacherByIdAsync(userId);
+            if (teacher == null)
+                return NotFound(new { message = "Nie znaleziono nauczyciela." });
+
+            var grades = await _gradeService.GetGradesForTeacherPaged(request, teacher.Id);
+            return Ok(grades);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Błąd podczas pobierania ocen dla nauczyciela.");
+            return BadRequest(new { message = "Wystąpił błąd podczas pobierania ocen." });
         }
     }
 
