@@ -1,7 +1,22 @@
 # 📝 School Logbook
 ## 🌟 Opis projektu
 
-System dziennika elektronicznego to aplikacja webowa, która wspiera zarządzanie procesami edukacyjnymi w szkołach. Projekt został stworzony jako część zaliczenia przedmiotu **Programowanie w zastosowaniach** i umożliwia efektywne zarządzanie planem lekcji, obecnościami oraz ocenami uczniów.
+System dziennika elektronicznego to aplikacja webowa wspierająca zarządzanie procesami edukacyjnymi w szkołach. Projekt powstał jako część zaliczenia przedmiotu **Programowanie w zastosowaniach** i umożliwia efektywne zarządzanie planem lekcji, obecnościami oraz ocenami uczniów.
+
+Aplikacja została zaprojektowana w oparciu o architekturę layoutów przypisanych do ról użytkowników, co zapewnia przejrzystość struktury i separację odpowiedzialności. Dla każdej roli zdefiniowano osobny layout oraz zestaw komponentów i tras:
+
+- **Administrator** (`AdminLayoutComponent`):  
+  Zarządzanie klasami, przedmiotami, użytkownikami oraz planem lekcji.
+- **Nauczyciel** (`TeacherLayoutComponent`):  
+  Wystawianie ocen, przegląd planu lekcji, zaznaczanie obecności.
+- **Uczeń** (`StudentLayoutComponent`):  
+  Przegląd własnego planu lekcji oraz historii obecności.
+
+Każda sekcja posiada własną nawigację, trasowanie i zabezpieczenia (`adminGuard`, `teacherGuard`, `studentGuard`), co pozwala na precyzyjne kontrolowanie dostępu i łatwe rozszerzanie funkcjonalności bez naruszania innych modułów.
+
+Dzięki temu podejściu aplikacja jest skalowalna, łatwa w utrzymaniu i przygotowana na ewentualne dodanie nowych ról użytkowników, np.:
+- rodzic,
+- sekretariat.
 
 ---
 
@@ -14,6 +29,8 @@ System dziennika elektronicznego to aplikacja webowa, która wspiera zarządzani
 - **Zarządzanie użytkownikami**: Administrator może dodawać, edytować i usuwać konta użytkowników.
 - **Przegląd planu lekcji**: Nauczyciele mogą przeglądać swoje zajęcia w przejrzystym widoku.
 - **Wystawianie i przeglądanie ocen**: Funkcjonalność umożliwiająca nauczycielom ocenianie uczniów.
+- **Zaawansowana obsługa sesji JWT**:  
+  Aplikacja monitoruje ważność tokena JWT. Na 2 minuty przed wygaśnięciem sesji użytkownik otrzymuje dynamiczne powiadomienie (toast) z odliczaniem czasu i możliwością ręcznego przedłużenia sesji. W przypadku braku reakcji i wygaśnięcia tokena następuje automatyczne wylogowanie z odpowiednim komunikatem. System wspiera także bezinwazyjne odświeżanie tokena JWT przez zapytanie HTTP z autoryzacją.
 
 ---
 
