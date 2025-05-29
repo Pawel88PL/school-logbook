@@ -9,12 +9,11 @@ System dziennika elektronicznego to aplikacja webowa, która wspiera zarządzani
 
 ### ✅ Gotowe:
 - **Rejestracja obecności**: Nauczyciele mogą oznaczać obecności uczniów na zajęciach.
+- **Dodawanie i edycja klas, przedmiotów**: Administrator dodaje, usuwa i edytuje przedmioty i klasy.
 - **Tworzenie i edycja planu lekcji**: Administrator ma możliwość zarządzania harmonogramem zajęć.
 - **Zarządzanie użytkownikami**: Administrator może dodawać, edytować i usuwać konta użytkowników.
 - **Przegląd planu lekcji**: Nauczyciele mogą przeglądać swoje zajęcia w przejrzystym widoku.
-
-### 🛠️ W trakcie implementacji:
-- **Wystawianie ocen**: Funkcjonalność umożliwiająca nauczycielom ocenianie uczniów.
+- **Wystawianie i przeglądanie ocen**: Funkcjonalność umożliwiająca nauczycielom ocenianie uczniów.
 
 ---
 
@@ -94,7 +93,7 @@ school-logbook/
     ```
     Backend będzie dostępny pod adresem: `http://localhost:5234`
 
-    ⚠️ Upewnij się, że plik `appsettings.json` zawiera poprawny connection string.
+    ⚠️ Upewnij się, że plik `appsettings.json` zawiera poprawny connection string i klucz do tworzenia JWT.
 
 ### ▶️ Uruchomienie frontendu
 
@@ -139,7 +138,7 @@ Authorization: Bearer <token>
 | Użytkownicy        | ✅ Gotowe             |
 | Plan lekcji        | ✅ Gotowe             |
 | Obecności          | ✅ Gotowe             |
-| Oceny              | 🔧 W trakcie          |
+| Oceny              | ✅ Gotowe             |
 
 ---
 ## 👨‍💻 Autorzy:
