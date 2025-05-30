@@ -1,5 +1,7 @@
+using System.Security.Claims;
 using backend.DTOs;
 using backend.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
@@ -11,6 +13,7 @@ public class ScheduleController(IScheduleService schedule) : ControllerBase
 {
     private readonly IScheduleService _schedule = schedule;
 
+    [Authorize(Roles = "Teacher,Admin")]
     [HttpPost("add-entry")]
     public async Task<IActionResult> AddEntry([FromBody] ScheduleEntryDto dto)
     {
@@ -27,6 +30,7 @@ public class ScheduleController(IScheduleService schedule) : ControllerBase
         }
     }
 
+    [Authorize(Roles = "Teacher,Admin")]
     [HttpGet("classes-with-schedule")]
     public async Task<IActionResult> GetClassesWithSchedule()
     {
@@ -43,6 +47,7 @@ public class ScheduleController(IScheduleService schedule) : ControllerBase
         }
     }
 
+    [Authorize(Roles = "Teacher,Admin,Student")]
     [HttpGet("class/{classId}")]
     public async Task<IActionResult> GetScheduleForClass(int classId)
     {
@@ -62,6 +67,29 @@ public class ScheduleController(IScheduleService schedule) : ControllerBase
         }
     }
 
+    [Authorize(Roles = "Student")]
+    [HttpGet("student")]
+    public async Task<IActionResult> GetScheduleForStudent()
+    {
+        try
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var schedule = await _schedule.GetScheduleForStudentAsync(userId);
+            return Ok(schedule);
+        }
+        catch (Exception ex)
+        {
+            var message = $"Wystąpił błąd podczas pobierania harmonogramu dla ucznia: {ex.Message}";
+            Log.Error(message);
+            return BadRequest(new { message });
+        }
+    }
+
+    [Authorize(Roles = "Admin,Teacher,Student")]
     [HttpGet("teacher/{userId}")]
     public async Task<IActionResult> GetScheduleForTeacher(string userId)
     {
@@ -78,6 +106,7 @@ public class ScheduleController(IScheduleService schedule) : ControllerBase
         }
     }
 
+    [Authorize(Roles = "Admin,Teacher,Student")]
     [HttpGet("class/{classId}/subjects")]
     public async Task<IActionResult> GetSubjectsForClass(int classId)
     {

@@ -38,6 +38,12 @@ export class ScheduleService {
     return this.http.get<ScheduleForClassModel>(`${this.apiUrl}/class/${classId}`, { headers });
   }
 
+  getScheduleForStudent(): Observable<ScheduleEntryModel[]> {
+    const token = this.jwtService.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<ScheduleEntryModel[]>(`${this.apiUrl}/student`, { headers });
+  }
+
   getScheduleForTeacher(teacherId: string): Observable<TeacherScheduleEntry[]> {
     const token = this.jwtService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

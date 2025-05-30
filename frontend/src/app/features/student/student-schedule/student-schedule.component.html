@@ -1,1 +1,46 @@
-<p>student-schedule works!</p>
+<div *ngIf="isLoading" class="mat-spinner">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="custom-container" *ngIf="!isLoading">
+    <h1>Twój plan lekcji - klasa {{ className }}</h1>
+    <hr class="my-5" />
+
+    <div *ngFor="let day of daysOfWeek" class="mb-3">
+        <mat-card>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-lg-4 align-content-center">
+                        <h3>{{ day.label }}</h3>
+                    </div>
+                    <div class="col-lg-8 align-content-center">
+                        <div class="table-responsive" *ngIf="getEntriesForDay(day.value).length > 0; else noLessons">
+                            <table class="table table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Godzina</th>
+                                        <th>Przedmiot</th>
+                                        <th>Nauczyciel</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let entry of getEntriesForDay(day.value)">
+                                        <td>{{ entry.startTime }}</td>
+                                        <td>{{ entry.subjectName }}</td>
+                                        <td>{{ entry.teacherFullName }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <ng-template #noLessons>
+                            <div class="alert alert-info">
+                                <p class="text-muted text-center mt-3">Brak zajęć</p>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
