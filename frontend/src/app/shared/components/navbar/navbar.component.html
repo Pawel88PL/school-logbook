@@ -39,6 +39,10 @@
                             class="user-button" [routerLink]="'/teacher'" (click)="isMenuCollapsed = true">
                             PANEL NAUCZYCIELA
                         </button>
+                        <button mat-menu-item *ngIf="authService.isLoggedIn() && authService.isStudent()"
+                            class="user-button" [routerLink]="'/student'" (click)="isMenuCollapsed = true">
+                            PANEL UCZNIA
+                        </button>
                         <button mat-menu-item *ngIf="authService.isLoggedIn()" class="user-button"
                             (click)="isMenuCollapsed = true; logout()">
                             WYLOGUJ

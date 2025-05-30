@@ -1,1 +1,38 @@
-<p>student-layout works!</p>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav [mode]="isSmallScreen ? 'over' : 'side'" [opened]="sidenavOpened" class="sidenav bg-dark">
+        <mat-nav-list role="navigation" aria-label="Panel ucznia">
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h5>Plan lekcji</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <a mat-list-item routerLink="/student/schedule">Pokaż plan lekcji</a>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h5>Obecności</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <a mat-list-item routerLink="/student/attendance">Pokaż moje obecności</a>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h5>Oceny</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <a mat-list-item routerLink="/student/grades">Przegląd ocen</a>
+            </mat-expansion-panel>
+
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

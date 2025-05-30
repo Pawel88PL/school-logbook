@@ -26,13 +26,13 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
   templateUrl: './teacher-layout.component.html',
   styleUrl: './teacher-layout.component.css'
 })
+
 export class TeacherLayoutComponent implements OnInit, OnDestroy {
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
   isSmallScreen: boolean = false;
   sidenavOpened: boolean = false;
-  sessionIndex: string | null = null;
 
   subscriptions: Subscription = new Subscription();
 

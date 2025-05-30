@@ -25,6 +25,7 @@ import { TeacherAttendanceComponent } from './features/teacher/teacher-attendanc
 import { TeacherScheduleComponent } from './features/teacher/teacher-schedule/teacher-schedule.component';
 
 import { StudentLayoutComponent } from './layout/student-layout/student-layout.component';
+import { StudentGradesComponent } from './features/student/student-grades/student-grades.component';
 import { StudentScheduleComponent } from './features/student/student-schedule/student-schedule.component';
 import { StudentAttendanceComponent } from './features/student/student-attendance/student-attendance.component';
 
@@ -68,6 +69,7 @@ export const routes: Routes = [
         component: StudentLayoutComponent,
         canActivate: [studentGuard],
         children: [
+            { path: 'grades', component: StudentGradesComponent, data: { title: 'Dziennik - oceny' } },
             { path: 'schedule', component: StudentScheduleComponent, data: { title: 'Dziennik - plan lekcji' } },
             { path: 'attendance', component: StudentAttendanceComponent, data: { title: 'Dziennik - frekwencja' } },
             { path: '', redirectTo: 'schedule', pathMatch: 'full' }
