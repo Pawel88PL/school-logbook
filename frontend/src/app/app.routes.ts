@@ -23,7 +23,6 @@ import { GradeAssignComponent } from './features/teacher/grade-assign/grade-assi
 import { GradePreviewComponent } from './features/teacher/grade-preview/grade-preview.component';
 import { TeacherAttendanceComponent } from './features/teacher/teacher-attendance/teacher-attendance.component';
 import { TeacherScheduleComponent } from './features/teacher/teacher-schedule/teacher-schedule.component';
-import { TeacherClassesComponent } from './features/teacher/teacher-classes/teacher-classes.component';
 
 import { StudentLayoutComponent } from './layout/student-layout/student-layout.component';
 import { StudentScheduleComponent } from './features/student/student-schedule/student-schedule.component';
@@ -58,7 +57,6 @@ export const routes: Routes = [
         canActivate: [teacherGuard],
         children: [
             { path: 'attendance', component: TeacherAttendanceComponent, data: { title: 'Dziennik - frekwencja' } },
-            { path: 'classes', component: TeacherClassesComponent, data: { title: 'Dziennik - klasy' } },
             { path: 'grade-assign', component: GradeAssignComponent, data: { title: 'Dziennik - przypisz ocenę' } },
             { path: 'grade-preview', component: GradePreviewComponent, data: { title: 'Dziennik - podgląd ocen' } },
             { path: 'schedule', component: TeacherScheduleComponent, data: { title: 'Dziennik - plan lekcji' } },

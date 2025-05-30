@@ -44,7 +44,7 @@ Dzięki temu podejściu aplikacja jest skalowalna, łatwa w utrzymaniu i przygot
 - **Logowanie**: `Serilog`
 
 ### Frontend:
-- **Framework**: `Angular 17+`
+- **Framework**: `Angular v19`
 - **UI**: `Angular Material`
 - **Reaktywność**: `RxJS`
 - **Powiadomienia**: `ngx-toastr`

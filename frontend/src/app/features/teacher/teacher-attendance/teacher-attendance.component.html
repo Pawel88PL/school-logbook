@@ -8,8 +8,8 @@
 
     <hr class="my-5" />
 
-    <div *ngIf="!isLoading && todayLessons.length === 0">
-        <p>Brak zaplanowanych lekcji na dzisiaj.</p>
+    <div *ngIf="!isLoading && todayLessons.length === 0" class="alert alert-info">
+        <h3>Brak zaplanowanych lekcji na dzisiaj.</h3>
     </div>
 
     <div *ngIf="todayLessons.length > 0">
