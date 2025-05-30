@@ -47,6 +47,82 @@ public class GradeService : IGradeService
         };
     }
 
+    public async Task<PagedGrades> GetGradesForStudentPaged(PagedRequest request, int studentId)
+    {
+        var query = _context.Grades
+            .AsNoTracking()
+            .Where(g => g.StudentId == studentId)
+            .Include(g => g.Student).ThenInclude(s => s.Class)
+            .Include(g => g.Teacher)
+            .Include(g => g.Subject)
+            .Select(g => new GradeDto
+            {
+                TeacherName = g.Teacher.LastName + " " + g.Teacher.FirstName,
+                ClassName = g.Student.Class != null ? g.Student.Class.Name : "Brak klasy",
+                SubjectName = g.Subject.Name,
+                Value = g.Value,
+                Comment = g.Comment ?? string.Empty,
+                Date = g.Date
+            });
+
+        if (!string.IsNullOrEmpty(request.SearchQuery))
+        {
+            query = query.Where(c => c.SubjectName!.Contains(request.SearchQuery));
+        }
+
+        // Dynamiczne sortowanie
+        if (!string.IsNullOrEmpty(request.SortColumn))
+        {
+            query = request.SortColumn switch
+            {
+                "teacherName" => request.SortDirection == "desc"
+                    ? query.OrderByDescending(c => c.TeacherName)
+                    : query.OrderBy(c => c.TeacherName),
+
+                "subjectName" => request.SortDirection == "desc"
+                    ? query.OrderByDescending(c => c.SubjectName)
+                    : query.OrderBy(c => c.SubjectName),
+
+                "value" => request.SortDirection == "desc"
+                    ? query.OrderByDescending(c => c.Value)
+                    : query.OrderBy(c => c.Value),
+
+                "date" => request.SortDirection == "desc"
+                    ? query.OrderByDescending(c => c.Date)
+                    : query.OrderBy(c => c.Date),
+
+                _ => throw new ArgumentException($"Nieprawidłowa kolumna sortowania: {request.SortColumn}")
+            };
+        }
+        else
+        {
+            query = query.OrderBy(c => c.Date);
+        }
+
+        int totalRecords = await query.CountAsync();
+
+        var result = await query
+            .Skip((request.PageNumber - 1) * request.PageSize)
+            .Take(request.PageSize)
+            .ToListAsync();
+
+        var grades = result.Select(g => new GradeDto
+        {
+            TeacherName = g.TeacherName,
+            ClassName = g.ClassName,
+            SubjectName = g.SubjectName,
+            Value = g.Value,
+            Comment = g.Comment ?? string.Empty,
+            Date = g.Date
+        }).ToList();
+
+        return new PagedGrades
+        {
+            TotalRecords = totalRecords,
+            Data = grades
+        };
+    }
+
     public async Task<PagedGrades> GetGradesForTeacherPaged(PagedRequest request, int teacherId)
     {
         var query = _context.Grades

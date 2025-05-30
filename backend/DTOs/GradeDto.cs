@@ -3,6 +3,7 @@ namespace backend.DTOs;
 public class GradeDto
 {
     public string StudentName { get; set; } = string.Empty;
+    public string TeacherName { get; set; } = string.Empty;
     public string ClassName { get; set; } = string.Empty;
     public string SubjectName { get; set; } = string.Empty;
     public int Value { get; set; }

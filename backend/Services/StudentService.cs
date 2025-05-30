@@ -9,6 +9,22 @@ public class StudentService(AppDbContext context) : IStudentService
 {
     private readonly AppDbContext _context = context;
 
+    public async Task<StudentDto?> GetStudentByIdAsync(string id)
+    {
+        var student = await _context.Students
+            .AsNoTracking()
+            .Where(t => t.UserId == id)
+            .Select(t => new StudentDto
+            {
+                Id = t.Id,
+                FirstName = t.FirstName,
+                LastName = t.LastName,
+            })
+            .FirstOrDefaultAsync();
+
+        return student;
+    }
+
     public async Task<IEnumerable<StudentDto>> GetStudentsAsync()
     {
         var students = await _context.Students

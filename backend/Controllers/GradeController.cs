@@ -10,9 +10,13 @@ namespace backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class GradeController(IGradeService gradeService, ITeacherService teacherService) : ControllerBase
+public class GradeController(
+    IGradeService gradeService,
+    IStudentService studentService,
+    ITeacherService teacherService) : ControllerBase
 {
     private readonly IGradeService _gradeService = gradeService;
+    private readonly IStudentService _studentService = studentService;
     private readonly ITeacherService _teacherService = teacherService;
 
     [Authorize(Roles = "Teacher")]
@@ -37,6 +41,31 @@ public class GradeController(IGradeService gradeService, ITeacherService teacher
         {
             Log.Error(ex, "Błąd podczas dodawania oceny.");
             return BadRequest(new { message = "Wystąpił błąd podczas dodawania oceny." });
+        }
+    }
+
+    [Authorize(Roles = "Student")]
+    [HttpGet("student/paged")]
+    public async Task<IActionResult> GetGradesForStudentPaged([FromQuery] PagedRequest request)
+    {
+        try
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var student = await _studentService.GetStudentByIdAsync(userId);
+            if (student == null)
+                return NotFound(new { message = "Nie znaleziono ucznia." });
+
+            var grades = await _gradeService.GetGradesForStudentPaged(request, student.Id);
+            return Ok(grades);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Błąd podczas pobierania ocen dla nauczyciela.");
+            return BadRequest(new { message = "Wystąpił błąd podczas pobierania ocen." });
         }
     }
 
