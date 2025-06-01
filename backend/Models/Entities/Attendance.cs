@@ -14,5 +14,5 @@ public class Attendance
     public Schedule Schedule { get; set; } = null!;
 
     public DateTime Date { get; set; }
-    public AttendanceStatus Status { get; set; }
+    public AttendanceStatus? Status { get; set; }
 }

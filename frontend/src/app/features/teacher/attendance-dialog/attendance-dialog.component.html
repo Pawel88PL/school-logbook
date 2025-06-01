@@ -13,10 +13,10 @@
                 <td class="align-content-center">{{ student.fullName }}</td>
                 <td>
                     <mat-select [(ngModel)]="student.status" placeholder="Wybierz status">
-                        <mat-option [value]="1">Obecny</mat-option>
-                        <mat-option [value]=2>Nieobecny</mat-option>
-                        <mat-option [value]=3>Spóźniony</mat-option>
-                        <mat-option [value]=4>Usprawiedliwiony</mat-option>
+                        <mat-option [value]=0>Obecny</mat-option>
+                        <mat-option [value]=1>Nieobecny</mat-option>
+                        <mat-option [value]=2>Spóźniony</mat-option>
+                        <mat-option [value]=3>Usprawiedliwiony</mat-option>
                     </mat-select>
                 </td>
             </tr>

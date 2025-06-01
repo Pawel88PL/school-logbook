@@ -1,6 +1,7 @@
 using backend.Data;
 using backend.DTOs;
 using backend.Interfaces.Services;
+using backend.Models;
 using backend.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,77 @@ public class AttendanceService : IAttendanceService
     public AttendanceService(AppDbContext context)
     {
         _context = context;
+    }
+
+    public async Task<PagedAttendance> GetAttendanceForStudentPaged(PagedRequest request, int studentId)
+    {
+        var query = _context.Attendances
+            .AsNoTracking()
+            .Where(a => a.StudentId == studentId)
+            .Include(a => a.Schedule).ThenInclude(l => l.Subject)
+            .Include(a => a.Schedule).ThenInclude(l => l.Teacher)
+            .Select(a => new AttendancePreviewDto
+            {
+                Date = a.Date,
+                SubjectName = a.Schedule.Subject.Name,
+                TeacherName = a.Schedule.Teacher.FirstName + " " + a.Schedule.Teacher.LastName,
+                Status = a.Status
+            });
+
+        if (!string.IsNullOrEmpty(request.SearchQuery))
+        {
+            query = query.Where(c => c.SubjectName!.Contains(request.SearchQuery));
+        }
+
+        // Dynamiczne sortowanie
+        if (!string.IsNullOrEmpty(request.SortColumn))
+        {
+            query = request.SortColumn switch
+            {
+                "teacherName" => request.SortDirection == "desc"
+                    ? query.OrderByDescending(c => c.TeacherName)
+                    : query.OrderBy(c => c.TeacherName),
+
+                "subjectName" => request.SortDirection == "desc"
+                    ? query.OrderByDescending(c => c.SubjectName)
+                    : query.OrderBy(c => c.SubjectName),
+
+                "status" => request.SortDirection == "desc"
+                    ? query.OrderByDescending(c => c.Status)
+                    : query.OrderBy(c => c.Status),
+
+                "date" => request.SortDirection == "desc"
+                    ? query.OrderByDescending(c => c.Date)
+                    : query.OrderBy(c => c.Date),
+
+                _ => throw new ArgumentException($"Nieprawidłowa kolumna sortowania: {request.SortColumn}")
+            };
+        }
+        else
+        {
+            query = query.OrderBy(c => c.Date);
+        }
+
+        int totalRecords = await query.CountAsync();
+
+        var result = await query
+            .Skip((request.PageNumber - 1) * request.PageSize)
+            .Take(request.PageSize)
+            .ToListAsync();
+
+        var attendance = result.Select(g => new AttendancePreviewDto
+        {
+            TeacherName = g.TeacherName,
+            SubjectName = g.SubjectName,
+            Status = g.Status,
+            Date = g.Date
+        }).ToList();
+
+        return new PagedAttendance
+        {
+            TotalRecords = totalRecords,
+            Data = attendance
+        };
     }
 
     public async Task<List<StudentForAttendanceDto>> GetStudentsForScheduleAsync(int scheduleId)

@@ -1,3 +1,10 @@
+export interface AttendancePreviewModel {
+    date: string;
+    subjectName: string;
+    teacherName: string;
+    status: string;
+}
+  
 export interface LessonForAttendanceModel {
     scheduleId: number;
     subjectName: string;
@@ -9,6 +16,6 @@ export interface LessonForAttendanceModel {
 export interface StudentForAttendanceModel {
     studentId: number;
     fullName: string;
-    status?: number
+    status?: number;
 }
   

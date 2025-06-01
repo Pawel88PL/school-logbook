@@ -46,9 +46,16 @@ export class AttendanceDialogComponent {
   }
 
   saveAttendance(): void {
+    const hasIncomplete = this.students.some(s => s.status === null || s.status === undefined);
+
+    if (hasIncomplete) {
+      this.toastr.warning('Dla wszystkich uczniów musi być wybrany status obecności.', 'Uwaga');
+      return;
+    }
+    
     const payload = this.students.map(s => ({
       studentId: s.studentId,
-      status: s.status ? s.status : 0 // Default to 0 if status is not set
+      status: s.status
     }));
 
     console.log('Saving attendance for schedule ID:', this.data.scheduleId);

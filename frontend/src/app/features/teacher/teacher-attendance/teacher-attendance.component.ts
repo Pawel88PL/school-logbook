@@ -57,14 +57,19 @@ export class TeacherAttendanceComponent implements OnInit {
     const lessonInfo = `${subjectName} – ${className}`;
     this.attendanceService.getStudentsForSchedule(scheduleId).subscribe({
       next: (students) => {
-        this.dialog.open(AttendanceDialogComponent, {
+        const dialogRef = this.dialog.open(AttendanceDialogComponent, {
           width: '600px',
           data: {
             lessonInfo,
             students,
             scheduleId
           },
-          disableClose: true
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.getTodayLessonsForTeacher();
+          }
         });
       },
       error: (err) => {
